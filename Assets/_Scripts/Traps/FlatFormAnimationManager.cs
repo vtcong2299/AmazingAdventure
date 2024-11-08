@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FlatFormAnimationManager : MonoBehaviour
 {
-    public Animator animator;
     public static FlatFormAnimationManager instance;
-    private void Start()
+    private Animator animator;
+    private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
     }

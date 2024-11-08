@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StartPoint : MonoBehaviour
 {
-    public Animator animator;
     public static StartPoint instance;
+    private Animator animator;
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -13,11 +13,7 @@ public class StartPoint : MonoBehaviour
     private void OnEnable()
     {
         instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
+    }    
     public void SetPushIn(Collision2D collision)
     {
         if(collision.gameObject.tag=="Start")

@@ -1,44 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerVsItem : MonoBehaviour
 {
-    public PlayerDameReceiver playerDameReceiver;
-    public static PlayerVsItem instance;
-    public GameObject[] listCoins;
-    public GameObject[] listStars;
-    public GameObject[] listHearts;
-    public GameObject[] listEnemy;
-    public int coins = 0;
-    public int stars = 0;
     public bool isEnd;
-    private void Start()
+    private PlayerDameReceiver playerDameReceiver;
+    [SerializeField]
+    private int coins = 0;
+    [SerializeField]
+    private int stars = 0;
+    private void Awake()
     {
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
-        UIManager.instance.StarsUI(stars);
     }
-    private void OnEnable()
+    private void Start()
     {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
-    public void HeadEnemy(Collider2D collider)
-    {
-        if( collider.gameObject.tag == "HeadEnemy")
-        {
-            AnimationMushroom.instance.MushroomHit();
-            StartCoroutine(ExampleCoroutine());
-        }
-    }
-    IEnumerator ExampleCoroutine()
-    {
-            yield return new WaitForSeconds(0.3f);
-        Destroy(GetComponent<Collider>().gameObject);
+        GameManager.instance.ManagerStarsUI(stars);
     }
     public void Coins(Collider2D collider)
     {
@@ -46,15 +24,14 @@ public class PlayerVsItem : MonoBehaviour
         {
             coins++;
             collider.gameObject.SetActive(false);
-            UIManager.instance.OnChangeCoins(coins);
+            GameManager.instance.ManagerOnChangeCoins(coins);
         }
     }
     public void CoinsEnd(Collider2D collider)
     {
         if(collider.gameObject.tag == "End")
         {
-            UIManager.instance.CheckEndChapter(coins);
-            UIManager.instance.StarsUIEnd(stars);
+            GameManager.instance.ManagerEndChapter(coins, stars);
             isEnd = true;
         }
     }
@@ -64,7 +41,7 @@ public class PlayerVsItem : MonoBehaviour
         {
             stars++;
             collider.gameObject.SetActive(false);
-            UIManager.instance.StarsUI(stars);
+            GameManager.instance.ManagerStarsUI(stars);
         }
     }
     public void Heart(Collider2D collider)
@@ -77,34 +54,15 @@ public class PlayerVsItem : MonoBehaviour
                 playerDameReceiver.hp = 3;
             }
             collider.gameObject.SetActive(false);
-            UIManager.instance.HeartUI(playerDameReceiver.hp);   
+            GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
         }
-    }    
-    public void ResetEnemy()
-    {
-        foreach (GameObject enemy in listEnemy)
-        {
-            enemy.SetActive(true);
-        }
-    }
-    public void ResetItem()
-    {
-        foreach (GameObject coin in listCoins)
-        {
-            coin.SetActive(true);
-        }
-        foreach (GameObject star in listStars)
-        {
-            star.SetActive(true);
-        }
-        foreach (GameObject heart in listHearts)
-        {
-            heart.SetActive(true);
-        }
-        UIManager.instance.HeartUI(playerDameReceiver.hp);
-        ResetPlayerParameter(); 
-        UIManager.instance.OnChangeCoins(coins);
-        UIManager.instance.StarsUI(stars);
+    }     
+    public void ResetItemUI()
+    {          
+        GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
+        ResetPlayerParameter();
+        GameManager.instance.ManagerOnChangeCoins(coins);
+        GameManager.instance.ManagerStarsUI(stars);
     }
     public void ResetPlayerParameter()
     {

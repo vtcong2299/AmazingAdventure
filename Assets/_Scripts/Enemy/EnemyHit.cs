@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
-{    
+{
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.tag == "FootPlayer"))
         {
-            AnimationMushroom.instance.MushroomHit();
-            PlayerMove.instance.HitMoveEnemy(collision);
+            AnimHit();
+            PlayerMove.instance.JumpBackHitEnemy(collision);
             StartCoroutine(DeleyDestroy());
         }
     }
+    public virtual void AnimHit(){}
     IEnumerator DeleyDestroy()
     {
         yield return new WaitForSeconds(0.15f);
-        gameObject.SetActive(false);
-    }    
+        gameObject.SetActive(false);        
+    }
 }

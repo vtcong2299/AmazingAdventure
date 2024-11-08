@@ -19,6 +19,19 @@ TagManager:
   - PlayerBody
   - Start
   - End
+  - FallingFlatform
+  - posMushroom
+  - posCoins
+  - posStars
+  - posHeart
+  - posFallingFlatform
+  - posBlueBird
+  - posBoxRock
+  - posBat
+  - posPlan
+  - posFlatform
+  - posSaw
+  - posBullet
   layers:
   - Default
   - TransparentFX
@@ -29,8 +42,8 @@ TagManager:
   - Wall
   - Item
   - PlayerBody
-  - 
-  - 
+  - Black
+  - NotCollider
   - 
   - 
   - 

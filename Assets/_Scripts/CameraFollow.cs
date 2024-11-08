@@ -1,14 +1,26 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
     public static CameraFollow instance;
-    public float speedFollow = 5f;
-    public Transform target;
-    public Vector3 startPosCamera;     
-    public Vector3 endPosCamera;
+    [SerializeField]
+    private float speedFollow = 5f;
+    [SerializeField]
+    private float lengthRaycast = 1.35f;
+    [SerializeField]
+    private LayerMask blackLayer;
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private Vector3 startPosCamera;
+    [SerializeField]
+    private Vector3 endPosCamera;
+    private void Awake()
+    {
+        startPosCamera.x = target.position.x + 1.85f;
+    }
     private void OnEnable()
     {
         instance = this;
@@ -24,11 +36,11 @@ public class CameraFollow : MonoBehaviour
     void FollowPlayer()
     {   
         Vector3 posCamera = transform.position;
-        if (target.position.x >= -7.7 && target.position.x <= 7.9)
+        if (target.position.x >= startPosCamera.x && target.position.x <= 7.9)
         {
             posCamera.x = target.position.x;
         }
-        else if (target.position.x < -7.7)
+        else if (target.position.x < startPosCamera.x)
         {
             posCamera.x = startPosCamera.x;
         }
@@ -36,18 +48,29 @@ public class CameraFollow : MonoBehaviour
         {
             posCamera.x = endPosCamera.x;   
         }
-        if (target.position.y >= 1.2)
+        RaycastHit2D hit = Physics2D.Raycast(target.position, -target.up, lengthRaycast, blackLayer);
+        if (hit.collider)
         {
-            posCamera.y = target.position.y;
+            posCamera.y = hit.point.y + lengthRaycast;
         }
-        else
+        else if (target.position.y <= startPosCamera.y && target.position.y>= 0)
         {
             posCamera.y = startPosCamera.y;
         }
+        else 
+        {
+            posCamera.y = target.position.y;
+        }
+
         Vector3 newPos = new Vector3(posCamera.x, posCamera.y,-10f);
         transform.position = Vector3.Slerp(transform.position, newPos, speedFollow*Time.deltaTime);
     }
-    public void ResetCamera()
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red; 
+        Gizmos.DrawRay(target.position, -target.up * lengthRaycast); 
+    }
+        public void ResetCamera()
     {
         transform.position = startPosCamera;
     }

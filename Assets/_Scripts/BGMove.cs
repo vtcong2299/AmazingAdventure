@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class BGMove : MonoBehaviour
 {
-    public Vector3 posBG;
-    public float speed=0.5f;
-    public float x=20.79f;
-    private void Start()
+    private Vector3 posBG;
+    [SerializeField]
+    private float speed=0.3f;
+    [SerializeField]
+    private float xSpawn=25.2f;
+    [SerializeField]
+    private float xReset = -12.6f;
+    private void Awake()
     {
         posBG = transform.position;
     }
@@ -19,9 +23,9 @@ public class BGMove : MonoBehaviour
     {
         posBG.x -= speed*Time.deltaTime;
         transform.position = posBG;
-        if (posBG.x <=-0.63)
+        if (posBG.x <=xReset)
         {
-            posBG.x = x;    
+            posBG.x = xSpawn;    
         }
     }
 }

@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class UIMenu : MonoBehaviour
 {
-    public GameObject panelLevel;
-    public GameObject panelStratGame;
-    public GameObject panelCharacter;
-    public void Start()
+    [SerializeField]
+    private GameObject panelStratGame;
+    [SerializeField]
+    private GameObject panelCharacter;
+    public void Awake()
     {
-        PressBack();
+        panelStratGame.SetActive(true);
+        panelCharacter.SetActive(false);
     }
     public void PressPlay()
     {
-        panelLevel.SetActive(true);
-        panelStratGame.SetActive(false);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1.0f;
     }
     public void PressOptions()
     {
@@ -26,13 +28,8 @@ public class UIMenu : MonoBehaviour
     {
         panelStratGame.SetActive(true);
         panelCharacter.SetActive(false);
-        panelLevel.SetActive(false);
     }
-    public void PressLevel1()
-    {
-        SceneManager.LoadScene(1);
-        Time.timeScale = 1.0f;  
-    }
+    
     public void PressExit()
     {
         Application.Quit();

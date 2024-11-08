@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerDameSender : DameSender
 {
-    public PlayerDameReceiver playerDameReceiver;
-    private void Start()
+    private PlayerDameReceiver playerDameReceiver;
+    private void Awake()
     {
         damage = 1;
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
@@ -16,17 +16,16 @@ public class PlayerDameSender : DameSender
         if (collision.gameObject.tag == "Dead")
         {
             base.ColliderSendDame(collision);
-            PlayerAnimatorManager.instance.SetDead();
+            playerDameReceiver.playerAnimatorManager.SetDead();
             playerDameReceiver.Receiver(damage * 3);
         }
         if (collision.gameObject.tag == "Spike"|| collision.gameObject.tag == "Enemy")
         {
-            PlayerAnimatorManager.instance.SetHit();
+            playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);
-            //PlayerMove.instance.HitMove(collision);
+            PlayerMove.instance.JumpBackAfterHit(collision);
         }
-        UIManager.instance.HeartUI(playerDameReceiver.hp);
-       // GameManager.instance.CheckUiHpPlaying(playerDameReceiver.hp);
-    } 
+        GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
+    }
 }

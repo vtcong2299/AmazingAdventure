@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : MonoBehaviour
 {
-    public Animator animator;
-    public static PlayerAnimatorManager instance;
-    public bool inWall;
-
-    private void Start()
+    private Animator animator;
+    [SerializeField] 
+    private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
         animator.SetBool("Dead", false);
-    }
-    private void OnEnable()
-    {
-        instance = this;
-    }    
+    }      
     public void SetHit()
     {
         animator.SetTrigger("isHit");
@@ -53,7 +47,6 @@ public class PlayerAnimatorManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall")
         {
-            inWall = true;
             animator.SetBool("inWall", true);
         }
     }
@@ -62,7 +55,6 @@ public class PlayerAnimatorManager : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             animator.SetBool("inWall", false);
-            inWall=false;
         }
     }
     public void SetIsRun()

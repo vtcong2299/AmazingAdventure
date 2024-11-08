@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SawAnimationManager : MonoBehaviour
 {
-    public Animator animator;
     public static SawAnimationManager instance;
-    private void Start()
+    private Animator animator;
+    private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
     }

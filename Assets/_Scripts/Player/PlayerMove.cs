@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float speed = 1.75f;
     [SerializeField]
-    private float speedAndroid = 5f;
+    private float speedAndroid = 12f;
     [SerializeField]
     private float powerJump = 3.2f;
     [SerializeField]
@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
     public void SetStratPos()
     {
         startPos = GameObject.Find("StartPos");
-        transform.position = new Vector3(startPos.transform.position.x, startPos.transform.position.y + 0.3f, startPos.transform.position.z);   
+        transform.position = new Vector3(startPos.transform.position.x, startPos.transform.position.y + 0.3f, startPos.transform.position.z);
         startTranform = transform.position;
     }
     private void OnEnable()
@@ -73,8 +73,8 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {        
         CheckFace();        
-        PlayOnPC();
-        //PLayOnAndroid();
+        //PlayOnPC();
+        PLayOnAndroid();
         CheckDrop();
     }
     public void PlayOnPC()

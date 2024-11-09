@@ -8,7 +8,7 @@ public class AnimPlan : MonoBehaviour
     private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
-    }    
+    }
     public void PlanHit()
     {
         animator.SetTrigger("isHit");

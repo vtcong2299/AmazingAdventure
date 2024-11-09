@@ -89,7 +89,8 @@ GameObject:
   - component: {fileID: 2884713371350122281}
   - component: {fileID: 6185470027222624305}
   - component: {fileID: 5870156984125017180}
-  - component: {fileID: 8467113892570366109}
+  - component: {fileID: 7814095455620589130}
+  - component: {fileID: 8065327916417251868}
   m_Layer: 0
   m_Name: Plan
   m_TagString: Untagged
@@ -231,7 +232,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26293135, y: 0.29615432}
   m_EdgeRadius: 0
---- !u!114 &8467113892570366109
+--- !u!114 &7814095455620589130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,5 +242,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4ffb57cfe6c28f48aff0e5e2acb2e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8065327916417251868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996808749377573788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ca0373eddf05c41a27d1df4fce2f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

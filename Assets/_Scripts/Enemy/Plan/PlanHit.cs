@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanHit : EnemyHit
 {
-    public AnimPlan animPlan;
+    private AnimPlan animPlan;
     private void Awake()
     {
         animPlan = GetComponent<AnimPlan>();

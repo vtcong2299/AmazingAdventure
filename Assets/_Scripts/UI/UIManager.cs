@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private int fps = 0;
     [SerializeField]
-    private float timeDelayUpdatePfs = 0f;
+    private float timeDelayUpdatePfs = 0f;    
     private void Awake()
     {
         panelLevel.SetActive(true);
@@ -127,50 +127,57 @@ public class UIManager : MonoBehaviour
     {
         GameManager.instance.SetBG();
         GameManager.instance.index = 0;
+        GameManager.instance.curChapter = 0;
         GameManager.instance.UnActiveAllLevel();
         panelHienThiPlayGame.SetActive(true );
         panelLevel.SetActive(false);
         GameManager.instance.player.SetActive(true);
-        PlayerMove.instance.SetStratPos();
-        PlayerMove.instance.BackCheckPoint(); //Cần sưa lại BackCheckPoint
+        PlayerMove.instance.BackCheckPoint();
         Time.timeScale = 1.0f;
         GameManager.instance.curState = GameState.Playing;
+        PlayerMove.instance.SetStratPos();
         GameManager.instance.SpawnObj();
     }
     public void PressLevel2()
     {
         GameManager.instance.SetBG();
         GameManager.instance.index = 1;
+        GameManager.instance.curChapter = 1;
         GameManager.instance.UnActiveAllLevel();
         panelHienThiPlayGame.SetActive(true );
         panelLevel.SetActive(false);
         GameManager.instance.player.SetActive(true);
-        PlayerMove.instance.SetStratPos();
         PlayerMove.instance.BackCheckPoint();
         Time.timeScale = 1.0f;
         GameManager.instance.curState = GameState.Playing;
+        PlayerMove.instance.SetStratPos();
         GameManager.instance.SpawnObj();
     }
     public void PressNextLevel()
     {
-        GameManager.instance.SetBG();
-        GameManager.instance.DestroyObj();
-        GameManager.instance.index++;
-        if (GameManager.instance.index >= GameManager.instance.listChapter.Length)
+        GameManager.instance.curChapter++;
+        if (GameManager.instance.curChapter >= GameManager.instance.maxChapter)
         {
-            GameManager.instance.index = 0;
+            GameManager.instance.curChapter = 0;
         }
-        GameManager.instance.UnActiveAllLevel();
-        panelEndChapter.SetActive(false);
-        GameManager.instance.player.SetActive(true);
-        PlayerMove.instance.SetStratPos();
-        PlayerMove.instance.BackCheckPoint();
-        Time.timeScale = 1.0f;
-        GameManager.instance.SpawnObj();
+        PressLevelMenu();
+        switch (GameManager.instance.curChapter)
+        {
+            case 0:
+                {
+                    Invoke("PressLevel1", 0.01f);
+                    break;
+                }
+            case 1:
+                {
+                    Invoke("PressLevel2", 0.01f);
+                    break;
+                }
+        }          
     }
     public void PressLevelMenu()
     {
-        GameManager.instance.index = 10000;
+        GameManager.instance.index = 1000;
         GameManager.instance.UnActiveAllLevel();
         panelLevel.SetActive(true);
         panelHienThiPlayGame.SetActive(false);

@@ -16,7 +16,7 @@ public class EnemyHit : MonoBehaviour
     public virtual void AnimHit(){}
     IEnumerator DeleyDestroy()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);        
     }
 }

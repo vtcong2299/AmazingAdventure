@@ -13,13 +13,16 @@ public class GameManager : MonoBehaviour
 {
     public GameState curState;
     public static GameManager instance;
-    public GameObject[] listChapter;
-    public int index = 10000;
-    public int count = 0;
+    public int index = 1000;
+    public GameObject map1Prefab;
+    public GameObject map2Prefab;
+    public GameObject currentMap;    
     public GameObject player;
     private GameObject mainPlayer;
     private GameObject enemy;
     private GameObject enemyManager;
+    public int curChapter = 0;
+    public int maxChapter = 2;
     private void OnEnable()
     {
         instance = this;
@@ -27,6 +30,11 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         instance = null;
+    }
+    private void Awake()
+    {
+        map1Prefab = Resources.Load<GameObject>("Map1"); 
+        map2Prefab = Resources.Load<GameObject>("Map2");
     }
     private void Start()
     {
@@ -132,17 +140,48 @@ public class GameManager : MonoBehaviour
         BGManager.instance.RandomBG();
     }
     public void SetActiveChapter()
-    {
-        for (int i = 0; i < listChapter.Length; i++)
+    {       
+        switch (index)
         {
-            if (i == index)
-            {
-                listChapter[i].SetActive(true);
-            }
-            else
-            {
-                listChapter[i].SetActive(false);
-            }
+            case 0:
+                {
+                    if (map1Prefab == null)
+                    {
+                        Debug.LogError("Map1 Prefab is null. Please check if the resource exists.");
+                        return;
+                    }
+                    if (currentMap != null)
+                    {
+                        Destroy(currentMap);
+                        Resources.UnloadUnusedAssets();
+                    }
+                    currentMap = Instantiate(map1Prefab, transform.position, transform.rotation);
+                    break;
+                }
+            case 1:
+                {
+                    if (map2Prefab == null)
+                    {
+                        Debug.LogError("Map1 Prefab is null. Please check if the resource exists.");
+                        return;
+                    }
+                    if (currentMap != null)
+                    {
+                        Destroy(currentMap);
+                        Resources.UnloadUnusedAssets();
+                    }
+                    currentMap = Instantiate(map2Prefab, transform.position, transform.rotation);
+                    break;
+                }
+            case 1000:
+                {
+                    if (currentMap != null)
+                    {
+                        Destroy(currentMap);
+                        Resources.UnloadUnusedAssets();
+                    }
+                    break;
+                }
         }
     }
     public void SetParentOfPlayer()

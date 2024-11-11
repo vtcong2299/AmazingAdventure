@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private int fps = 0;
     [SerializeField]
-    private float timeDelayUpdatePfs = 0f;    
+    private float timeDelayUpdatePfs = 0f; 
     private void Awake()
     {
         panelLevel.SetActive(true);
@@ -64,12 +64,8 @@ public class UIManager : MonoBehaviour
     public void CaculateFPS()
     {
         fps = (int)(1 / Time.unscaledDeltaTime);
-        timeDelayUpdatePfs += Time.unscaledDeltaTime;
-        if (fps >= 120)
-        {
-            fps = 120;
-        }
-        if (timeDelayUpdatePfs >= 0.5f)
+        timeDelayUpdatePfs += Time.unscaledDeltaTime;        
+        if (timeDelayUpdatePfs >= 0.3f)
         {
             OnFPS(fps);
             timeDelayUpdatePfs = 0f;

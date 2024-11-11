@@ -9,8 +9,13 @@ public class UIMenu : MonoBehaviour
     private GameObject panelStratGame;
     [SerializeField]
     private GameObject panelCharacter;
+    public AudioSource audioSource;
+    public AudioClip clipBG;
     public void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clipBG;
+        audioSource.Play();
         panelStratGame.SetActive(true);
         panelCharacter.SetActive(false);
     }

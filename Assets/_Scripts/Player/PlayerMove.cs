@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public static PlayerMove instance;
     private Rigidbody2D rb2D;
+    [SerializeField]
     private GameObject Player;
     private GameObject startPos;
     private PlayerDameReceiver playerDameReceiver;
@@ -49,7 +50,6 @@ public class PlayerMove : MonoBehaviour
     private LayerMask layerWall;
     private void Awake()
     {
-        Player = GameObject.Find("Player");
         rb2D = GetComponent<Rigidbody2D>();
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
@@ -73,8 +73,8 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {        
         CheckFace();        
-        //PlayOnPC();
-        PLayOnAndroid();
+        PlayOnPC();
+        //PLayOnAndroid();
         CheckDrop();
     }
     public void PlayOnPC()

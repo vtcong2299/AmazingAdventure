@@ -18,9 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject map2Prefab;
     public GameObject currentMap;    
     public GameObject player;
+    public AudioSource audioSource;
+    public AudioClip clipBG;
+    [SerializeField]
     private GameObject mainPlayer;
-    private GameObject enemy;
-    private GameObject enemyManager;
     public int curChapter = 0;
     public int maxChapter = 2;
     private void OnEnable()
@@ -33,18 +34,26 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clipBG;
         map1Prefab = Resources.Load<GameObject>("Map1"); 
         map2Prefab = Resources.Load<GameObject>("Map2");
     }
     private void Start()
     {
         SetBG();
-        player = GameObject.Find("Player");
-        mainPlayer = GameObject.Find("MainPlayer");
-        enemy = GameObject.Find("Enemy");
-        enemyManager = GameObject.Find("EnemyManager");
         UnActiveAllLevel();
-    }       
+        audioSource.Play();
+        StartCoroutine(Music());
+    }  
+    IEnumerator Music()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(48f);
+            audioSource.Play();
+        }
+    }
     private void Update()
     {
         SetParentOfPlayer();

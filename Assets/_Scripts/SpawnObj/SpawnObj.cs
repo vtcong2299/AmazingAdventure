@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnObj : MonoBehaviour
 {
     [Header("SpawnObj")]
-    protected GameObject preFab;
+    public GameObject preFab;
     protected int index = 0;
     protected List<GameObject> spawnPosObjList = new List<GameObject>();
     [SerializeField]
@@ -14,7 +14,6 @@ public class SpawnObj : MonoBehaviour
     protected string spawnPosTag;
     private void Awake()
     {
-        this.preFab = GameObject.Find(preFabName);
         this.preFab.SetActive(false);
     }
     public virtual void AddPosObj()

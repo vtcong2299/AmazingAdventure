@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerDameSender : DameSender
 {
     private PlayerDameReceiver playerDameReceiver;
+    private PlayerVsItem playerVsItem;
     private void Awake()
     {
         damage = 1;
+        playerVsItem = GetComponent<PlayerVsItem>();
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
     }
     public override void ColliderSendDame(Collision2D collision)
@@ -21,6 +23,8 @@ public class PlayerDameSender : DameSender
         }
         if (collision.gameObject.tag == "Spike"|| collision.gameObject.tag == "Enemy")
         {
+            playerVsItem.audioSource.clip = playerVsItem.hitClip;
+            playerVsItem.audioSource.Play();
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);

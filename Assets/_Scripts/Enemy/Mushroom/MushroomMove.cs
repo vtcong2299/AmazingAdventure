@@ -11,8 +11,8 @@ public class MushroomMove : EnemyMove
         targetPoint = new Vector3[2];
         SpeedEnemy();
         animationMushroom = GetComponent<AnimationMushroom>();
-        targetPoint[0] =new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
-        targetPoint[1] = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+        targetPoint[0] =new Vector3(transform.position.x - 1.2f, transform.position.y, transform.position.z);
+        targetPoint[1] = new Vector3(transform.position.x + 1.2f, transform.position.y, transform.position.z);
     }
     //private void Start()
     //{

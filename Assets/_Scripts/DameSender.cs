@@ -13,6 +13,7 @@ public class DameSender : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         ColliderSendDame(collision);
+        ColliderSendDamehhhh(collision);
     }
     public virtual void ColliderSendDame(Collision2D collision)
     {
@@ -24,5 +25,9 @@ public class DameSender : MonoBehaviour
         {
             return;
         }
+    }
+    public virtual void ColliderSendDamehhhh(Collision2D collision)
+    {
+        
     }
 }

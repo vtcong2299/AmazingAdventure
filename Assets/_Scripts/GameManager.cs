@@ -61,11 +61,6 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 {
-                    if (!SpawnPlan.instance.hasChild)
-                    {
-                        return;
-                    }
-                    SpawnBullet.instance.UpdateBullet();
                     break;
                 }
             case GameState.Pause:
@@ -74,7 +69,7 @@ public class GameManager : MonoBehaviour
                 }
         }        
     }
-    public void ManagerHeartUI(float hp)
+    public void ManagerPlayerHeartUI(float hp)
     {
         UIManager.instance.HeartUI(hp);
     }
@@ -102,7 +97,6 @@ public class GameManager : MonoBehaviour
         SpawnBoxRock.instance.DestroyObj();
         SpawnBat.instance.DestroyObj();
         SpawnPlan.instance.DestroyObj();
-        SpawnBullet.instance.DestroyObj();
     }
     public void SpawnObj()
     {
@@ -124,7 +118,6 @@ public class GameManager : MonoBehaviour
         SpawnBat.instance.Spawn();
         SpawnPlan.instance.AddPosObj();
         SpawnPlan.instance.Spawn();
-        SpawnBullet.instance.AddPosObj();
     }
     public void ResetObj()
     {
@@ -137,7 +130,6 @@ public class GameManager : MonoBehaviour
         SpawnBoxRock.instance.ResetObj();
         SpawnBat.instance.ResetObj();
         SpawnPlan.instance.ResetObj();
-        SpawnBullet.instance.ResetObj();
     }   
     public void UnActiveAllLevel()
     {
@@ -156,7 +148,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (map1Prefab == null)
                     {
-                        Debug.LogError("Map1 Prefab is null. Please check if the resource exists.");
                         return;
                     }
                     if (currentMap != null)
@@ -171,7 +162,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (map2Prefab == null)
                     {
-                        Debug.LogError("Map1 Prefab is null. Please check if the resource exists.");
                         return;
                     }
                     if (currentMap != null)
@@ -199,5 +189,47 @@ public class GameManager : MonoBehaviour
         {
             mainPlayer.transform.SetParent(player.transform);
         }
+    }
+    public void Level1()
+    {
+        SetBG();
+        index = 0;
+        curChapter = 0;
+        UnActiveAllLevel();
+        player.SetActive(true);
+        PlayerMove.instance.BackCheckPoint();
+        Time.timeScale = 1.0f;
+        curState = GameState.Playing;
+        PlayerMove.instance.SetStratPos();
+        SpawnObj();
+    }
+    public void Level2()
+    {
+        SetBG();
+        index = 1;
+        curChapter = 1;
+        UnActiveAllLevel();
+        player.SetActive(true);
+        PlayerMove.instance.BackCheckPoint();
+        Time.timeScale = 1.0f;
+        curState = GameState.Playing;
+        PlayerMove.instance.SetStratPos();
+        SpawnObj();
+    }
+    public void NextLevel()
+    {
+        curChapter++;
+        if (curChapter >= maxChapter)
+        {
+            curChapter = 0;
+        }        
+    }
+    public void LevelMenu()
+    {
+        index = 1000;
+        UnActiveAllLevel();
+        Time.timeScale = 1.0f;
+        curState = GameState.Pause;
+        DestroyObj();
     }
 }

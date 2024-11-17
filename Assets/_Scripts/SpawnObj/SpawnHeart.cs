@@ -8,7 +8,6 @@ public class SpawnHeart : SpawnObj
     public static SpawnHeart instance;
     private void Reset()
     {
-        preFabName = "HeartPrefab";
         spawnPosTag = "posHeart";
     }
     private void OnEnable()

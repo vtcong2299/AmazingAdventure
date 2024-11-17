@@ -8,7 +8,6 @@ public class SpawnBoxRock : SpawnObj
     public static SpawnBoxRock instance;
     private void Reset()
     {
-        preFabName = "BoxRockPrefab";
         spawnPosTag = "posBoxRock";
     }
     private void OnEnable()

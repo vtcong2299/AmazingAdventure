@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 7344812843063151887}
   - component: {fileID: 1623399696051570054}
   - component: {fileID: 1834355072151424372}
+  - component: {fileID: 5270690382567906372}
   m_Layer: 0
   m_Name: BoxRock
   m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &33587736159153060
 Transform:
   m_ObjectHideFlags: 0
@@ -166,13 +167,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: []
-  speed: 0.5
+  speed: 5
   index: 0
-  enemyFacingRight: 0
-  layerGround:
-    serializedVersion: 2
-    m_Bits: 1
-  layerWall:
-    serializedVersion: 2
-    m_Bits: 1024
-  lengthRaycast: 0.3
+  animBoxRock: {fileID: 0}
+--- !u!114 &5270690382567906372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903253904023526634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc942a077f43c3d4abc2d3e09274a27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

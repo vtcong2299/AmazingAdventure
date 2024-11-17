@@ -8,7 +8,6 @@ public class SpawnBlueBird : SpawnObj
     public static SpawnBlueBird instance;
     private void Reset()
     {
-        preFabName = "BlueBirdPrefab";
         spawnPosTag = "posBlueBird";
     }
     private void OnEnable()

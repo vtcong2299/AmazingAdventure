@@ -8,7 +8,6 @@ public class SpawnBat : SpawnObj
     public static SpawnBat instance;
     private void Reset()
     {
-        preFabName = "BatPrefab";
         spawnPosTag = "posBat";
     }
     private void OnEnable()

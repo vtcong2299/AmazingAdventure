@@ -68,12 +68,12 @@ public class PlayerVsItem : MonoBehaviour
                 playerDameReceiver.hp = 3;
             }
             collider.gameObject.SetActive(false);
-            GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
+            GameManager.instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
         }
     }     
     public void ResetItemUI()
     {          
-        GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
+        GameManager.instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
         ResetPlayerParameter();
         GameManager.instance.ManagerOnChangeCoins(coins);
         GameManager.instance.ManagerStarsUI(stars);

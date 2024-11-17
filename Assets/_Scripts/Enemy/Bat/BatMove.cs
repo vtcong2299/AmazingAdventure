@@ -5,7 +5,7 @@ using UnityEngine;
 public class BatMove : MonoBehaviour
 {
     public AnimBat animBat;
-    public Transform targetPoint;
+    public GameObject targetPoint;
     public Vector3 oldPosition;
     public Vector3 targetPos;
     [SerializeField]
@@ -23,9 +23,9 @@ public class BatMove : MonoBehaviour
     }
     public virtual void MoveEnemy()
     {
-        if ((Vector3.Distance(transform.position, targetPoint.position) <= distancePlayer)&&(targetPoint.position.y <= transform.position.y))
+        if ((Vector3.Distance(transform.position, targetPoint.transform.position) <= distancePlayer)&&(targetPoint.transform.position.y <= transform.position.y))
         {
-            targetPos = targetPoint.position;
+            targetPos = targetPoint.transform.position;
             animBat.CellOut();
         }
         else

@@ -7,11 +7,12 @@ public class PlayerMove : MonoBehaviour
     public static PlayerMove instance;
     private Rigidbody2D rb2D;
     [SerializeField]
-    private GameObject Player;
+    private GameObject player;
     private GameObject startPos;
     private PlayerDameReceiver playerDameReceiver;
     private PlayerAnimatorManager playerAnimatorManager;
     private PlayerVsItem playerVsItem;
+    [SerializeField]
     private float pressHorizontal;
     private Vector3 startTranform;
     [SerializeField]
@@ -109,6 +110,7 @@ public class PlayerMove : MonoBehaviour
         if (playerVsItem.isEnd == true)
         {
             pressHorizontal = 0f;
+            rb2D.velocity = new Vector2(0, rb2D.velocity.y); ;
             return;
         }
         if (!isBackJump)
@@ -318,16 +320,16 @@ public class PlayerMove : MonoBehaviour
     }
     public void CheckOutParent(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Flatform" && collision.gameObject.activeSelf && Player.gameObject.activeSelf)
+        if (collision.gameObject.tag == "Flatform" && collision.gameObject.activeSelf && player.gameObject.activeSelf)
         {
-            transform.SetParent(Player.transform);
+            transform.SetParent(player.transform);
         }        
     }    
     private void OnCollisionExit2D(Collision2D collision)
     {
         playerAnimatorManager.SetNotInGround(collision);
         playerAnimatorManager.SetNotInWall(collision);
-        if (Player != null && collision !=null )
+        if (player != null && collision !=null )
         {
             CheckOutParent(collision);
         }

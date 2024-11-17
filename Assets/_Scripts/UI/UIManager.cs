@@ -120,42 +120,20 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     public void PressLevel1()
-    {
-        GameManager.instance.SetBG();
-        GameManager.instance.index = 0;
-        GameManager.instance.curChapter = 0;
-        GameManager.instance.UnActiveAllLevel();
+    {        
         panelHienThiPlayGame.SetActive(true );
-        panelLevel.SetActive(false);
-        GameManager.instance.player.SetActive(true);
-        PlayerMove.instance.BackCheckPoint();
-        Time.timeScale = 1.0f;
-        GameManager.instance.curState = GameState.Playing;
-        PlayerMove.instance.SetStratPos();
-        GameManager.instance.SpawnObj();
+        panelLevel.SetActive(false);        
+        GameManager.instance.Level1();
     }
     public void PressLevel2()
-    {
-        GameManager.instance.SetBG();
-        GameManager.instance.index = 1;
-        GameManager.instance.curChapter = 1;
-        GameManager.instance.UnActiveAllLevel();
+    {        
         panelHienThiPlayGame.SetActive(true );
-        panelLevel.SetActive(false);
-        GameManager.instance.player.SetActive(true);
-        PlayerMove.instance.BackCheckPoint();
-        Time.timeScale = 1.0f;
-        GameManager.instance.curState = GameState.Playing;
-        PlayerMove.instance.SetStratPos();
-        GameManager.instance.SpawnObj();
+        panelLevel.SetActive(false);        
+        GameManager.instance.Level2();
     }
     public void PressNextLevel()
     {
-        GameManager.instance.curChapter++;
-        if (GameManager.instance.curChapter >= GameManager.instance.maxChapter)
-        {
-            GameManager.instance.curChapter = 0;
-        }
+        GameManager.instance.NextLevel();
         PressLevelMenu();
         switch (GameManager.instance.curChapter)
         {
@@ -169,19 +147,15 @@ public class UIManager : MonoBehaviour
                     Invoke("PressLevel2", 0.01f);
                     break;
                 }
-        }          
+        }
     }
     public void PressLevelMenu()
     {
-        GameManager.instance.index = 1000;
-        GameManager.instance.UnActiveAllLevel();
         panelLevel.SetActive(true);
         panelHienThiPlayGame.SetActive(false);
         panelPauseGame.SetActive(false);
         panelEndChapter.SetActive(false);
-        Time.timeScale = 1.0f;
-        GameManager.instance.curState = GameState.Pause;
-        GameManager.instance.DestroyObj();
+        GameManager.instance.LevelMenu();
     }
     public void ClickPauseButton()
     {

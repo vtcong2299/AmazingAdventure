@@ -8,7 +8,6 @@ public class SpawnStars : SpawnObj
     public static SpawnStars instance;
     private void Reset()
     {
-        preFabName = "StarsPrefab";
         spawnPosTag = "posStars";
     }
     private void OnEnable()

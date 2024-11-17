@@ -12,6 +12,6 @@ public class DameReceiver : MonoBehaviour
     }
     public virtual void Receiver(float damage)
     {
-        this.hp -= damage;
+        hp -= damage;
     }
 }

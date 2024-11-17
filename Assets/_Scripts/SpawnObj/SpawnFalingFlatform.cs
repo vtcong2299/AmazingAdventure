@@ -8,7 +8,6 @@ public class SpawnFalingFlatform : SpawnObj
     public static SpawnFalingFlatform instance;
     private void Reset()
     {
-        preFabName = "FallingFlatformPrefab";
         spawnPosTag = "posFallingFlatform";
     }
     private void OnEnable()

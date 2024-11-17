@@ -8,7 +8,6 @@ public class SpawnCoins : SpawnObj
     public static SpawnCoins instance;   
     private void Reset()
     {
-        preFabName = "CoinsPrefab";
         spawnPosTag = "posCoins";
     }
     private void OnEnable()

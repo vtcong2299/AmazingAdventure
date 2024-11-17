@@ -2,37 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBullet : SpawnObj
-{
-    [Header("SpawnBullet")]
-    public static SpawnBullet instance;
-    [SerializeField]
-    private List<GameObject> objPreFab;
-    [SerializeField]
-    private float spawnTimer = 0f;
-    [SerializeField]
-    private float spawnDelay = 1f;
-    [SerializeField]
-    private int maxObj = 4;
-    private void Reset()
+public class SpawnBullet : MonoBehaviour
+{    
+    public List<GameObject> objPreFab;
+    public GameObject preFab;
+    public float spawnTimer = 0f;
+    public float spawnDelay = 1f;
+    public int maxObj = 2;
+    public int index = 0;
+    private void Awake()
     {
-        preFabName = "BulletPrefab";
-        spawnPosTag = "posBullet";
+        this.preFab.SetActive(false);
+        this.objPreFab = new List<GameObject>();
     }
-    private void OnEnable()
-    {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
-    public void UpdateBullet()
+    void Update()
     {
         this.Spawn();
         this.CheckDead();
-    }
-    public override void Spawn()
+    }   
+    protected virtual void Spawn()
     {
         this.spawnTimer += Time.deltaTime;
         if (this.spawnTimer < spawnDelay)
@@ -44,25 +32,19 @@ public class SpawnBullet : SpawnObj
         {
             return;
         }
-        for (index = 0; index < spawnPosObjList.Count; index++)
+        GameObject obj = Instantiate(this.preFab);
+        obj.name = "Bullet " + index;
+        index++;
+        if (index >= this.maxObj)
         {
-            GameObject obj = Instantiate(preFab, spawnPosObjList[index].transform.position, Quaternion.identity);
-            obj.transform.parent = transform;
-            obj.gameObject.SetActive(true);
-            this.objPreFab.Add(obj);
-            //foreach (int i in SpawnPlan.instance.indexPlan)
-            //{
-            //    if (index == i)
-            //    {
-            //        GameObject obj = Instantiate(preFab, spawnPosObjList[index].transform.position, Quaternion.identity);
-            //        obj.transform.parent = transform;
-            //        obj.gameObject.SetActive(true);
-            //        this.objPreFab.Add(obj);
-            //    }
-            //}            
+            index = 0;
         }
+        obj.transform.position = new Vector3(transform.position.x - 0.12f, transform.position.y + 0.028f, transform.position.z);
+        obj.transform.parent = transform;
+        obj.gameObject.SetActive(true);
+        objPreFab.Add(obj);
     }
-    public void CheckDead()
+    protected virtual void CheckDead()
     {
         GameObject minion;
         for (int i = 0; i < this.objPreFab.Count; i++)
@@ -76,4 +58,4 @@ public class SpawnBullet : SpawnObj
     }
 }
 
-   
+

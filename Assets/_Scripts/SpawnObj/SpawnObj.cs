@@ -9,8 +9,6 @@ public class SpawnObj : MonoBehaviour
     protected int index = 0;
     protected List<GameObject> spawnPosObjList = new List<GameObject>();
     [SerializeField]
-    protected string preFabName;
-    [SerializeField]
     protected string spawnPosTag;
     private void Awake()
     {

@@ -91,13 +91,14 @@ GameObject:
   - component: {fileID: 5870156984125017180}
   - component: {fileID: 7814095455620589130}
   - component: {fileID: 8065327916417251868}
+  - component: {fileID: 2468769101191130082}
   m_Layer: 0
   m_Name: Plan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1088472484806299499
 Transform:
   m_ObjectHideFlags: 0
@@ -256,3 +257,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ca0373eddf05c41a27d1df4fce2f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2468769101191130082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996808749377573788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2564c69ec23c9244896fdc138d1b5e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPreFab: []
+  preFab: {fileID: 7994084207906329727, guid: 5299cfb0d8529df4eba33dd1e0552287, type: 3}
+  spawnTimer: 0
+  spawnDelay: 1
+  maxObj: 4
+  index: 0

@@ -30,6 +30,6 @@ public class PlayerDameSender : DameSender
             playerDameReceiver.Receiver(damage);
             PlayerMove.instance.JumpBackAfterHit(collision);
         }
-        GameManager.instance.ManagerHeartUI(playerDameReceiver.hp);
+        GameManager.instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
     }
 }

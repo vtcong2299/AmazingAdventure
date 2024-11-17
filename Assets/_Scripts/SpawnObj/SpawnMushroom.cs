@@ -8,7 +8,6 @@ public class SpawnMushroom : SpawnObj
     public static SpawnMushroom instance;
     private void Reset()
     {
-        preFabName = "MushroomPrefab";
         spawnPosTag = "posMushroom";
     }   
     private void OnEnable()

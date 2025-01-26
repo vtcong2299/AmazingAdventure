@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        PlayerMove.Instance.StartPlayer();
         AudioManager.Instance.StartAudio();
         SetBG();
         UnActiveAllLevel();
@@ -42,20 +43,20 @@ public class GameManager : MonoBehaviour
     }
     public void ManagerPlayerHeartUI(float hp)
     {
-        //UIManager.instance.HeartUI(hp);
+        UIManager.Instance._uiGamePlay.HeartUI(hp);
     }
     public void ManagerStarsUI(int stars)
     {
-        //UIManager.instance.StarsUI(stars);
+        UIManager.Instance._uiGamePlay.StarsUI(stars);
     }
     public void ManagerOnChangeCoins(int coins)
     {
-        //UIManager.instance.OnChangeCoins(coins);
+        UIManager.Instance._uiGamePlay.OnChangeCoins(coins);
     }
     public void ManagerEndChapter(int coins, int stars)
     {
-       //UIManager.instance.CheckEndChapter(coins);
-        //UIManager.instance.StarsUIEnd(stars);
+        //UIManager.Instance._uiFinish.CheckEndChapter(coins);
+        UIManager.Instance._uiFinish.StarsUIEnd(stars);
     }
     public void DestroyObj()
     {

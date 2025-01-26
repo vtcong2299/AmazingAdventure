@@ -36,41 +36,36 @@ public class PanelFinish : MonoBehaviour
             listStarsUIEnd[i].SetActive(false);
         }
     }
-    
-    //public void PressLevel1()
-    //{
-    //    panelHienThiPlayGame.SetActive(true);
-    //    panelLevel.SetActive(false);
-    //    GameManager.instance.Level1();
-    //}
-    //public void PressLevel2()
-    //{
-    //    panelHienThiPlayGame.SetActive(true);
-    //    panelLevel.SetActive(false);
-    //    GameManager.instance.Level2();
-    //}
+
+    void SelectLevel1()
+    {
+        UIManager.Instance.OnDisablePanelLevel();
+        GameManager.instance.Level1();
+    }
+    void SelectLevel2()
+    {
+        UIManager.Instance.OnDisablePanelLevel();
+        GameManager.instance.Level2();
+    }
     public void PressNextLevel()
     {
         GameManager.instance.NextLevel();
         PressLevelMenu();
+        UIManager.Instance.AnimPanelLoading();
         switch (GameManager.instance.curChapter)
         {
             case 0:
                 {
-                    UIManager.Instance.AnimPanelLoading();
-                    UIManager.Instance.OnDisablePanelLevel();
-                    GameManager.instance.Level1();
+                    Invoke("SelectLevel1", 0.3f);
                     break;
                 }
             case 1:
                 {
-                    UIManager.Instance.AnimPanelLoading();
-                    UIManager.Instance.OnDisablePanelLevel();
-                    GameManager.instance.Level2();
+                    Invoke("SelectLevel2", 0.3f);
                     break;
                 }
         }
-    }
+    }   
     public void PressLevelMenu()
     {
         UIManager.Instance.OnDisablePanelFinish();

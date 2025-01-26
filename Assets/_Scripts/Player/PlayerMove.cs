@@ -48,7 +48,7 @@ public class PlayerMove : Singleton<PlayerMove>
     private LayerMask layerJump;
     [SerializeField]
     private LayerMask layerWall;
-    private void Awake()
+    public void StartPlayer()
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerDameReceiver = GetComponent<PlayerDameReceiver>();

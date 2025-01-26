@@ -751,6 +751,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160859358}
   m_CullTransparentMesh: 1
+--- !u!1 &179304232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7644566537688998995, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+  m_PrefabInstance: {fileID: 8212569502825138647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &179304233 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+  m_PrefabInstance: {fileID: 8212569502825138647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &179304234 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 6895589882629688014, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+  m_PrefabInstance: {fileID: 8212569502825138647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &182764415
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,14 +811,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4cd79e7d4a30643acd57de87785c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelGamePlay: {fileID: 0}
+  panelGamePlay: {fileID: 2014307168}
   panelPauseGame: {fileID: 1835744093}
-  panelFinish: {fileID: 0}
+  panelFinish: {fileID: 213618022}
   panelLevel: {fileID: 1848305836}
-  canvasGroupGamePlay: {fileID: 0}
-  canvasGroupPauseGame: {fileID: 0}
-  canvasGroupFinish: {fileID: 0}
-  canvasGroupLevel: {fileID: 0}
+  panelLoading: {fileID: 179304232}
+  canvasGroupGamePlay: {fileID: 2014307173}
+  canvasGroupPauseGame: {fileID: 1835744098}
+  canvasGroupFinish: {fileID: 213618027}
+  canvasGroupLevel: {fileID: 1848305841}
+  canvasGroupLoading: {fileID: 179304234}
+  popupPause: {fileID: 1492366041}
+  _uiGamePlay: {fileID: 2014307172}
+  _uiFinish: {fileID: 213618026}
 --- !u!1 &206265331
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +957,7 @@ GameObject:
   - component: {fileID: 213618025}
   - component: {fileID: 213618024}
   - component: {fileID: 213618026}
+  - component: {fileID: 213618027}
   m_Layer: 0
   m_Name: PanelFinish
   m_TagString: Untagged
@@ -1027,6 +1048,18 @@ MonoBehaviour:
   homeButton: {fileID: 1217515936}
   levelButton: {fileID: 500039367}
   nextLevelButton: {fileID: 1485821302}
+--- !u!225 &213618027
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213618022}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &236759515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,9 +1997,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: PressRight
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: ClickRightButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1980,9 +2013,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: NoPressLeftRight
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: NotClickMoveButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4571,9 +4604,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: PressLeft
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: ClickLeftButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4587,9 +4620,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: NoPressLeftRight
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: NotClickMoveButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5504,7 +5537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1249778917 stripped
@@ -7457,7 +7490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -428.21585, y: 158.50774}
+  m_AnchoredPosition: {x: -411, y: 144}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610883249
@@ -8283,6 +8316,7 @@ RectTransform:
   - {fileID: 2014307169}
   - {fileID: 1835744094}
   - {fileID: 213618023}
+  - {fileID: 179304233}
   m_Father: {fileID: 182764416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8596,6 +8630,7 @@ GameObject:
   - component: {fileID: 1835744096}
   - component: {fileID: 1835744095}
   - component: {fileID: 1835744097}
+  - component: {fileID: 1835744098}
   m_Layer: 0
   m_Name: PanelPauseGame
   m_TagString: Untagged
@@ -8679,6 +8714,18 @@ MonoBehaviour:
   levelButton: {fileID: 520867505}
   bgm: {fileID: 1130333093}
   sfx: {fileID: 1206439333}
+--- !u!225 &1835744098
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835744093}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1840617640
 GameObject:
   m_ObjectHideFlags: 0
@@ -8766,6 +8813,7 @@ GameObject:
   - component: {fileID: 1848305839}
   - component: {fileID: 1848305838}
   - component: {fileID: 1848305840}
+  - component: {fileID: 1848305841}
   m_Layer: 0
   m_Name: PanelLevel
   m_TagString: Untagged
@@ -8846,6 +8894,18 @@ MonoBehaviour:
   level1Button: {fileID: 712107866}
   level2Button: {fileID: 1087104086}
   backButton: {fileID: 1610883249}
+--- !u!225 &1848305841
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848305836}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1946308152
 GameObject:
   m_ObjectHideFlags: 0
@@ -9577,6 +9637,7 @@ GameObject:
   - component: {fileID: 2014307171}
   - component: {fileID: 2014307170}
   - component: {fileID: 2014307172}
+  - component: {fileID: 2014307173}
   m_Layer: 0
   m_Name: PanelGamePlay
   m_TagString: Untagged
@@ -9675,6 +9736,18 @@ MonoBehaviour:
   jumpButton: {fileID: 2074159534}
   leftButton: {fileID: 1057231056}
   rightButton: {fileID: 399714420}
+--- !u!225 &2014307173
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014307168}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2027732427
 GameObject:
   m_ObjectHideFlags: 0
@@ -9939,9 +10012,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: ClickJump
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: ClickJumpButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -9955,9 +10028,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
-          m_MethodName: NotClickJump
+        - m_Target: {fileID: 2014307172}
+          m_TargetAssemblyTypeName: PanelGamePlay, Assembly-CSharp
+          m_MethodName: NotClickJumpButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10325,6 +10398,107 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0c5dda10b3a014c98936f3477f5576, type: 3}
+--- !u!1001 &8212569502825138647
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1701020452}
+    m_Modifications:
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321055143981887186, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644566537688998995, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_Name
+      value: Loading Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644566537688998995, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d59275c28ca77e0408b6b1ba857afdc2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

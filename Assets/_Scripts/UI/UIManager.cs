@@ -14,6 +14,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] CanvasGroup canvasGroupLevel;
     [SerializeField] CanvasGroup canvasGroupLoading;
     [SerializeField] GameObject popupPause;
+    public PanelGamePlay _uiGamePlay;
+    public PanelFinish _uiFinish;
     public void OnEnablePanelGamePlay()
     {
         Show(panelGamePlay, canvasGroupGamePlay, false);
@@ -95,7 +97,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void AnimPanelLoading()
     {
-        float time = Random.Range(1f, 3f);
+        float time = Random.Range(0.7f, 2f);
         OnEnablePanelLoading();
         DOVirtual.DelayedCall(time, () => OnDisablePanelLoading());
     }

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private GameObject mainPlayer;
     public int curChapter = 0;
     public int maxChapter = 2;
+    public bool isPlayPC;
+
     private void OnEnable()
     {
         instance = this;

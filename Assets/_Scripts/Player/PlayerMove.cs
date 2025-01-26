@@ -73,9 +73,15 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {        
-        CheckFace();        
-        PlayOnPC();
-        //PLayOnAndroid();
+        CheckFace();
+        if (GameManager.instance.isPlayPC)
+        {
+            PlayOnPC();
+        }
+        else
+        {
+            PLayOnAndroid();
+        }
         CheckDrop();
     }
     public void PlayOnPC()

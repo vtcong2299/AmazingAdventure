@@ -29,7 +29,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private int fps = 0;
     [SerializeField]
-    private float timeDelayUpdatePfs = 0f; 
+    private float timeDelayUpdatePfs = 0f;
+    [SerializeField]
+    private GameObject ctrlOnMobile;
+
     private void Awake()
     {
         panelLevel.SetActive(true);
@@ -48,6 +51,14 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         CaculateFPS();
+        if (GameManager.instance.isPlayPC)
+        {
+            ctrlOnMobile.SetActive(false);
+        }
+        else
+        {
+            ctrlOnMobile.SetActive(true);
+        }
     }
     public void OnChangeCoins(int coins)
     {

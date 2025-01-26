@@ -1,9 +1,5 @@
-﻿
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
-using System;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -11,10 +7,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject panelPauseGame;
     [SerializeField] GameObject panelFinish;
     [SerializeField] GameObject panelLevel;
+    [SerializeField] GameObject panelLoading;
     [SerializeField] CanvasGroup canvasGroupGamePlay;
     [SerializeField] CanvasGroup canvasGroupPauseGame;
     [SerializeField] CanvasGroup canvasGroupFinish;
     [SerializeField] CanvasGroup canvasGroupLevel;
+    [SerializeField] CanvasGroup canvasGroupLoading;
+    [SerializeField] GameObject popupPause;
     public void OnEnablePanelGamePlay()
     {
         Show(panelGamePlay, canvasGroupGamePlay, false);
@@ -26,12 +25,12 @@ public class UIManager : Singleton<UIManager>
     public void OnEnablePanelPauseGame()
     {
         Show(panelPauseGame, canvasGroupPauseGame, true);
-        AnimScaleOn(panelPauseGame);
+        AnimScaleOn(popupPause);
     }
     public void OnDisablePanelPauseGame()
     {
         Hide(panelPauseGame, canvasGroupPauseGame, true);
-        AnimScaleOff(panelPauseGame);
+        AnimScaleOff(popupPause);
     }
     public void OnEnablePanelFinish()
     {
@@ -53,12 +52,18 @@ public class UIManager : Singleton<UIManager>
         Hide(panelLevel, canvasGroupLevel, true);
         AnimScaleOff(panelLevel);
     }
-    public void LoadScene(string sceneName)
+    public void OnEnablePanelLoading()
     {
-        //panelLoadScene.gameObject.SetActive(true);
-        //panelLoadScene.SetSceneName(sceneName);
+        canvasGroupLoading.alpha = 0;
+        panelLoading.SetActive(true);
+        canvasGroupLoading.DOFade(1, 0.2f).SetUpdate(UpdateType.Normal, true);
     }
-
+    public void OnDisablePanelLoading()
+    {
+        canvasGroupLoading.DOFade(0, 0.3f)
+            .SetUpdate(UpdateType.Normal, true)
+            .OnComplete(() => panelLoading.SetActive(false));
+    }
     public void Show(GameObject panel, CanvasGroup canvasGroup, bool pause)
     {
         canvasGroup.alpha = 0;
@@ -66,22 +71,18 @@ public class UIManager : Singleton<UIManager>
         canvasGroup.DOFade(1, 0.5f).SetUpdate(UpdateType.Normal, true);
         if (pause)
         {
-            //GameManager.Instance.SetGameState(GameState.Pause);
+            Time.timeScale = 0;
         }
     }
     public void Hide(GameObject panel, CanvasGroup canvasGroup, bool resume)
     {
         canvasGroup.DOFade(0, 0.3f)
             .SetUpdate(UpdateType.Normal, true)
-            .OnComplete(() => DisablePanel(panel));
+            .OnComplete(() => panel.SetActive(false));
         if (resume)
         {
-            //GameManager.Instance.SetGameState(GameState.Running);
+            Time.timeScale = 1;
         }
-    }
-    void DisablePanel(GameObject panel)
-    {
-        panel.SetActive(false);
     }
     void AnimScaleOn(GameObject panel)
     {
@@ -91,6 +92,12 @@ public class UIManager : Singleton<UIManager>
     void AnimScaleOff(GameObject panel)
     {
         panel.transform.DOScale(Vector3.zero, 0.2f).SetUpdate(UpdateType.Normal, true);
+    }
+    public void AnimPanelLoading()
+    {
+        float time = Random.Range(1f, 3f);
+        OnEnablePanelLoading();
+        DOVirtual.DelayedCall(time, () => OnDisablePanelLoading());
     }
 }
 

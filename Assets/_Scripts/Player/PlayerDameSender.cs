@@ -27,7 +27,7 @@ public class PlayerDameSender : DameSender
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);
-            PlayerMove.instance.JumpBackAfterHit(collision);
+            PlayerMove.Instance.JumpBackAfterHit(collision);
         }
         GameManager.instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
     }

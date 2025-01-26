@@ -20,10 +20,12 @@ public class PanelGamePlay : MonoBehaviour
     [SerializeField] Button jumpButton;
     [SerializeField] Button leftButton;
     [SerializeField] Button rightButton;
+
     private void Awake()
     {
         pauseButton.onClick.AddListener(ClickPauseButton);
     }
+
     private void Update()
     {
         CaculateFPS();
@@ -36,40 +38,16 @@ public class PanelGamePlay : MonoBehaviour
             ctrlOnMobile.SetActive(true);
         }
     }
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (eventData.pointerPress == jumpButton.gameObject)
-        {
-            ClickJumpButton();
-        }
-        if (eventData.pointerPress == leftButton.gameObject)
-        {
-            ClickLeftButton();
-        }
-        if (eventData.pointerPress == rightButton.gameObject)
-        {
-            ClickRightButton();
-        }
-    }
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (eventData.pointerPress == jumpButton.gameObject)
-        {
-            NotClickJumpButton();
-        }
-        if (eventData.pointerPress == leftButton.gameObject || eventData.pointerPress == rightButton.gameObject)
-        {
-            NotClickMoveButton();
-        }
-    }
     public void OnChangeCoins(int coins)
     {
         txtCoins.text = "x " + coins;
     }
+
     public void OnFPS(int fps)
     {
         txtFPS.text = "FPS: " + fps;
     }
+
     public void CaculateFPS()
     {
         fps = (int)(1 / Time.unscaledDeltaTime);
@@ -80,6 +58,7 @@ public class PanelGamePlay : MonoBehaviour
             timeDelayUpdatePfs = 0f;
         }
     }
+
     public void HeartUI(float hp)
     {
         for (int i = 0; i < hp; i++)
@@ -91,6 +70,7 @@ public class PanelGamePlay : MonoBehaviour
             listHeartsUI[i].SetActive(false);
         }
     }
+
     public void StarsUI(int stars)
     {
         for (int i = 0; i < stars; i++)
@@ -102,25 +82,35 @@ public class PanelGamePlay : MonoBehaviour
             listStarsUI[i].SetActive(false);
         }
     }
+
     void ClickPauseButton()
     {
         UIManager.Instance.OnEnablePanelPauseGame();
+        Time.timeScale = 0f;
     }
-    void ClickJumpButton()
-    {
 
-    }
-    void NotClickJumpButton()
+    public void ClickJumpButton()
     {
+        PlayerMove.Instance.ClickJump();
+    }
 
-    }
-    void ClickLeftButton()
+    public void NotClickJumpButton()
     {
+        PlayerMove.Instance.NotClickJump();
     }
-    void ClickRightButton()
+
+    public void ClickLeftButton()
     {
+        PlayerMove.Instance.PressLeft();
     }
-    void NotClickMoveButton()
+
+    public void ClickRightButton()
     {
+        PlayerMove.Instance.PressRight();
+    }
+
+    public void NotClickMoveButton()
+    {
+        PlayerMove.Instance.NoPressLeftRight();
     }
 }

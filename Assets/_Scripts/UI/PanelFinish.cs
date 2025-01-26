@@ -57,12 +57,16 @@ public class PanelFinish : MonoBehaviour
         {
             case 0:
                 {
-                    Invoke("PressLevel1", 0.01f);
+                    UIManager.Instance.AnimPanelLoading();
+                    UIManager.Instance.OnDisablePanelLevel();
+                    GameManager.instance.Level1();
                     break;
                 }
             case 1:
                 {
-                    Invoke("PressLevel2", 0.01f);
+                    UIManager.Instance.AnimPanelLoading();
+                    UIManager.Instance.OnDisablePanelLevel();
+                    GameManager.instance.Level2();
                     break;
                 }
         }
@@ -75,7 +79,7 @@ public class PanelFinish : MonoBehaviour
     }
     public void ClickRePlayButton()
     {
-        PlayerMove.instance.BackCheckPoint();
+        PlayerMove.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelFinish();
         Time.timeScale = 1f;
     }

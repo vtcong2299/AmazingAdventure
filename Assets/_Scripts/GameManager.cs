@@ -168,9 +168,9 @@ public class GameManager : MonoBehaviour
         curChapter = 0;
         UnActiveAllLevel();
         player.SetActive(true);
-        PlayerMove.instance.BackCheckPoint();
+        PlayerMove.Instance.BackCheckPoint();
         Time.timeScale = 1.0f;
-        PlayerMove.instance.SetStratPos();
+        PlayerMove.Instance.SetStratPos();
         SpawnObj();
     }
     public void Level2()
@@ -180,9 +180,9 @@ public class GameManager : MonoBehaviour
         curChapter = 1;
         UnActiveAllLevel();
         player.SetActive(true);
-        PlayerMove.instance.BackCheckPoint();
+        PlayerMove.Instance.BackCheckPoint();
         Time.timeScale = 1.0f;
-        PlayerMove.instance.SetStratPos();
+        PlayerMove.Instance.SetStratPos();
         SpawnObj();
     }
     public void NextLevel()

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : Singleton<PlayerMove>
 {
-    public static PlayerMove instance;
     private Rigidbody2D rb2D;
     [SerializeField]
     private GameObject player;
@@ -62,14 +61,6 @@ public class PlayerMove : MonoBehaviour
         startPos = GameObject.Find("StartPos");
         transform.position = new Vector3(startPos.transform.position.x, startPos.transform.position.y + 0.3f, startPos.transform.position.z);
         startTranform = transform.position;
-    }
-    private void OnEnable()
-    {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
     }
     private void Update()
     {        

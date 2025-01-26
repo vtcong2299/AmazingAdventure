@@ -20,7 +20,7 @@ public class PlayerDameReceiver : DameReceiver
             AudioManager.Instance.SoundDead();
             playerAnimatorManager.SetDead();
             playerAnimatorManager.SetBackCheckPoint();
-            PlayerMove.instance.BackCheckPoint();
+            PlayerMove.Instance.BackCheckPoint();
             hp = 3;
         }
     }   

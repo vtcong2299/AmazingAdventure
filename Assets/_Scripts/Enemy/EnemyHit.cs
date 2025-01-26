@@ -9,7 +9,7 @@ public class EnemyHit : MonoBehaviour
         if ((collision.gameObject.tag == "FootPlayer"))
         {
             AnimHit();
-            PlayerMove.instance.JumpBackHitEnemy(collision);
+            PlayerMove.Instance.JumpBackHitEnemy(collision);
             StartCoroutine(DeleyDestroy());
         }
     }

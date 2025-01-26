@@ -14,9 +14,17 @@ public class PanelPauseGame : MonoBehaviour
     [SerializeField] Button levelButton;
     [SerializeField] Slider bgm;
     [SerializeField] Slider sfx;
+    private void Awake()
+    {
+        playButton.onClick.AddListener(ClickPlayButton);
+        rePlayButton.onClick.AddListener(ClickRePlayButton);
+        homeButton.onClick.AddListener(ClickHomeButton);
+        levelButton.onClick.AddListener(PressLevelMenu);
+    }
     public void PressLevelMenu()
     {
         UIManager.Instance.OnDisablePanelPauseGame();
+        UIManager.Instance.OnDisablePanelGamePlay();
         UIManager.Instance.OnEnablePanelLevel();
     }
     public void ClickPlayButton()
@@ -26,9 +34,8 @@ public class PanelPauseGame : MonoBehaviour
     }
     public void ClickRePlayButton()
     {
-        PlayerMove.instance.BackCheckPoint();
+        PlayerMove.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelPauseGame();
-        UIManager.Instance.OnDisablePanelGamePlay();
         Time.timeScale = 1f;
     }
     public void ClickHomeButton()

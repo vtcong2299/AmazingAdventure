@@ -10,14 +10,8 @@ public class PlayerVsItem : MonoBehaviour
     private int coins = 0;
     [SerializeField]
     private int stars = 0;
-    public AudioSource audioSource;
-    public AudioClip itemClip;
-    public AudioClip endClip;
-    public AudioClip hitClip;
-    public AudioClip deadClip;
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();  
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
     }
     private void Start()
@@ -28,8 +22,7 @@ public class PlayerVsItem : MonoBehaviour
     {
         if(collider.gameObject.tag == "Coins")
         {
-            audioSource.clip = itemClip;
-            audioSource.Play();
+            AudioManager.Instance.SoundGetCoin();
             coins++;
             collider.gameObject.SetActive(false);
             GameManager.instance.ManagerOnChangeCoins(coins);
@@ -39,8 +32,7 @@ public class PlayerVsItem : MonoBehaviour
     {
         if(collider.gameObject.tag == "End")
         {
-            audioSource.clip = endClip;
-            audioSource.Play();
+            AudioManager.Instance.SoundFinish();
             GameManager.instance.ManagerEndChapter(coins, stars);
             isEnd = true;
         }
@@ -49,8 +41,7 @@ public class PlayerVsItem : MonoBehaviour
     {
         if(collider.gameObject.tag == "Stars")
         {
-            audioSource.clip = itemClip;
-            audioSource.Play();
+            AudioManager.Instance.SoundStars();
             stars++;
             collider.gameObject.SetActive(false);
             GameManager.instance.ManagerStarsUI(stars);
@@ -60,8 +51,7 @@ public class PlayerVsItem : MonoBehaviour
     {
         if(collider.gameObject.tag == "Heart")
         {
-            audioSource.clip = itemClip;
-            audioSource.Play();
+            AudioManager.Instance.SoundGetHp();
             playerDameReceiver.hp++;
             if(playerDameReceiver.hp >=3)
             {

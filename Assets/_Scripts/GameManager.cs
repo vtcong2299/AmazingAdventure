@@ -3,23 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState
-{    
-    Start,
-    Playing,
-    Pause
-}
 public class GameManager : MonoBehaviour
 {
-    public GameState curState;
     public static GameManager instance;
     public int index = 1000;
     public GameObject map1Prefab;
     public GameObject map2Prefab;
     public GameObject currentMap;    
     public GameObject player;
-    public AudioSource audioSource;
-    public AudioClip clipBG;
     [SerializeField]
     private GameObject mainPlayer;
     public int curChapter = 0;
@@ -36,57 +27,35 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = clipBG;
         map1Prefab = Resources.Load<GameObject>("Map1"); 
         map2Prefab = Resources.Load<GameObject>("Map2");
     }
     private void Start()
     {
+        AudioManager.Instance.StartAudio();
         SetBG();
         UnActiveAllLevel();
-        audioSource.Play();
-        StartCoroutine(Music());
     }  
-    IEnumerator Music()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(48f);
-            audioSource.Play();
-        }
-    }
     private void Update()
     {
         SetParentOfPlayer();
-        switch (curState)
-        {
-            case GameState.Playing:
-                {
-                    break;
-                }
-            case GameState.Pause:
-                {
-                    break;
-                }
-        }        
     }
     public void ManagerPlayerHeartUI(float hp)
     {
-        UIManager.instance.HeartUI(hp);
+        //UIManager.instance.HeartUI(hp);
     }
     public void ManagerStarsUI(int stars)
     {
-        UIManager.instance.StarsUI(stars);
+        //UIManager.instance.StarsUI(stars);
     }
     public void ManagerOnChangeCoins(int coins)
     {
-        UIManager.instance.OnChangeCoins(coins);
+        //UIManager.instance.OnChangeCoins(coins);
     }
     public void ManagerEndChapter(int coins, int stars)
     {
-        UIManager.instance.CheckEndChapter(coins);
-        UIManager.instance.StarsUIEnd(stars);
+       //UIManager.instance.CheckEndChapter(coins);
+        //UIManager.instance.StarsUIEnd(stars);
     }
     public void DestroyObj()
     {
@@ -201,7 +170,6 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
         PlayerMove.instance.BackCheckPoint();
         Time.timeScale = 1.0f;
-        curState = GameState.Playing;
         PlayerMove.instance.SetStratPos();
         SpawnObj();
     }
@@ -214,7 +182,6 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
         PlayerMove.instance.BackCheckPoint();
         Time.timeScale = 1.0f;
-        curState = GameState.Playing;
         PlayerMove.instance.SetStratPos();
         SpawnObj();
     }
@@ -231,7 +198,6 @@ public class GameManager : MonoBehaviour
         index = 1000;
         UnActiveAllLevel();
         Time.timeScale = 1.0f;
-        curState = GameState.Pause;
         DestroyObj();
     }
 }

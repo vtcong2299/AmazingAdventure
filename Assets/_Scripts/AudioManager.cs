@@ -9,11 +9,13 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource audioSFX;
     [SerializeField] AudioClip clickButtonClip;
     [SerializeField] AudioClip bgmClip;
-    [SerializeField] AudioClip getDameClip;
-    [SerializeField] AudioClip gameOverClip;
-    [SerializeField] AudioClip levelUpClip;
-
-    private void Start()
+    [SerializeField] AudioClip getCoinsClip;
+    [SerializeField] AudioClip finishClip;
+    [SerializeField] AudioClip starsClip;
+    [SerializeField] AudioClip hpClip;
+    [SerializeField] AudioClip hitClip;
+    [SerializeField] AudioClip deadClip;
+    public void StartAudio()
     {
         SoundBGM();
     }
@@ -50,19 +52,34 @@ public class AudioManager : Singleton<AudioManager>
         audioBGM.loop = true;
         audioBGM.Play();
     }
-    public void SoundGetDame()
+    public void SoundGetCoin()
     {
-        audioSFX.clip = getDameClip;
+        audioSFX.clip = getCoinsClip;
         audioSFX.Play();
     }
-    public void SoundGameOver()
+    public void SoundFinish()
     {
-        audioSFX.clip = gameOverClip;
+        audioSFX.clip = finishClip;
         audioSFX.Play();
     }
-    public void SoundLevelUp()
+    public void SoundStars()
     {
-        audioSFX.clip = levelUpClip;
+        audioSFX.clip = starsClip;
+        audioSFX.Play();
+    }
+    public void SoundHit()
+    {
+        audioSFX.clip = hitClip;
+        audioSFX.Play();
+    }
+    public void SoundDead()
+    {
+        audioSFX.clip = deadClip;
+        audioSFX.Play();
+    }
+    public void SoundGetHp()
+    {
+        audioSFX.clip = hpClip;
         audioSFX.Play();
     }
 }

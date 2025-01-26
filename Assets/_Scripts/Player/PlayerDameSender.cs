@@ -23,8 +23,7 @@ public class PlayerDameSender : DameSender
         }
         if (collision.gameObject.tag == "Spike"|| collision.gameObject.tag == "Enemy")
         {
-            playerVsItem.audioSource.clip = playerVsItem.hitClip;
-            playerVsItem.audioSource.Play();
+            AudioManager.Instance.SoundHit();
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);

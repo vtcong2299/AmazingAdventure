@@ -8,7 +8,7 @@ public class PlayerAnimatorManager : MonoBehaviour
     [SerializeField] 
     private void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         animator.SetBool("Dead", false);
     }      
     public void SetHit()

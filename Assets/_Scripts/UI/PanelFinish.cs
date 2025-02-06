@@ -40,19 +40,19 @@ public class PanelFinish : MonoBehaviour
     void SelectLevel1()
     {
         UIManager.Instance.OnDisablePanelLevel();
-        GameManager.instance.Level1();
+        GameManager.Instance.Level1();
     }
     void SelectLevel2()
     {
         UIManager.Instance.OnDisablePanelLevel();
-        GameManager.instance.Level2();
+        GameManager.Instance.Level2();
     }
     public void PressNextLevel()
     {
-        GameManager.instance.NextLevel();
+        GameManager.Instance.NextLevel();
         PressLevelMenu();
         UIManager.Instance.AnimPanelLoading();
-        switch (GameManager.instance.curChapter)
+        switch (GameManager.Instance.curChapter)
         {
             case 0:
                 {
@@ -68,18 +68,18 @@ public class PanelFinish : MonoBehaviour
     }   
     public void PressLevelMenu()
     {
+        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelFinish();
         UIManager.Instance.OnEnablePanelLevel();
-        GameManager.instance.LevelMenu();
+        GameManager.Instance.LevelMenu();
     }
     public void ClickRePlayButton()
     {
-        PlayerMove.Instance.BackCheckPoint();
+        PlayerCtrl.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelFinish();
-        Time.timeScale = 1f;
     }
     public void ClickHomeButton()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(0);
     }
 }

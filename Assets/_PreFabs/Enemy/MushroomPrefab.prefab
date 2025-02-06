@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2075438780998451366}
   - component: {fileID: 8582294116124508146}
   - component: {fileID: 5007086292980469856}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MushroomPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -215,13 +215,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9048925825668048759}
   - component: {fileID: 4051034495030160525}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Head
   m_TagString: HeadEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9048925825668048759
 Transform:
   m_ObjectHideFlags: 0

@@ -19,18 +19,20 @@ public class PanelLevel : MonoBehaviour
     }
     void ClickBackButton()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(0);
     }
     public void PressLevel1()
     {
+        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelLevel();
         UIManager.Instance.OnEnablePanelGamePlay();
-        GameManager.instance.Level1();
+        GameManager.Instance.Level1();
     }
     public void PressLevel2()
     {
+        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelLevel();
         UIManager.Instance.OnEnablePanelGamePlay();
-        GameManager.instance.Level2();
+        GameManager.Instance.Level2();
     }    
 }

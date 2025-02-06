@@ -8,8 +8,7 @@ public class SpawnObj : MonoBehaviour
     public GameObject preFab;
     protected int index = 0;
     protected List<GameObject> spawnPosObjList = new List<GameObject>();
-    [SerializeField]
-    protected string spawnPosTag;
+    [SerializeField] protected string spawnPosTag;
     private void Awake()
     {
         this.preFab.SetActive(false);

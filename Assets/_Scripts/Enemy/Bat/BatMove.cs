@@ -15,7 +15,7 @@ public class BatMove : MonoBehaviour
     private void Awake()
     {
         oldPosition = transform.position;
-        animBat = GetComponent<AnimBat>();
+        targetPoint = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
     {

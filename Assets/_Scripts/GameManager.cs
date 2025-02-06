@@ -3,36 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance;
     public int index = 1000;
     public GameObject map1Prefab;
     public GameObject map2Prefab;
     public GameObject currentMap;    
     public GameObject player;
-    [SerializeField]
-    private GameObject mainPlayer;
     public int curChapter = 0;
     public int maxChapter = 2;
-    public bool isPlayPC;
+    public bool isPlayMobile;
 
-    private void OnEnable()
-    {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
-    private void Awake()
-    {
-        map1Prefab = Resources.Load<GameObject>("Map1"); 
-        map2Prefab = Resources.Load<GameObject>("Map2");
-    }
     private void Start()
     {
-        PlayerMove.Instance.StartPlayer();
+        map1Prefab = Resources.Load<GameObject>("Map1");
+        map2Prefab = Resources.Load<GameObject>("Map2");
+        PlayerCtrl.Instance.StartPlayer();
+        UIManager.Instance.StartUIManager();
+        Joystick.Instance.StartJoystick();
         AudioManager.Instance.StartAudio();
         SetBG();
         UnActiveAllLevel();
@@ -55,7 +43,8 @@ public class GameManager : MonoBehaviour
     }
     public void ManagerEndChapter(int coins, int stars)
     {
-        //UIManager.Instance._uiFinish.CheckEndChapter(coins);
+        UIManager.Instance.OnEnablePanelFinish();
+        UIManager.Instance._uiFinish.OnCoinsEnd(coins);
         UIManager.Instance._uiFinish.StarsUIEnd(stars);
     }
     public void DestroyObj()
@@ -159,7 +148,7 @@ public class GameManager : MonoBehaviour
     {
         if (!player.gameObject.activeSelf)
         {
-            mainPlayer.transform.SetParent(player.transform);
+            player.transform.SetParent(null);
         }
     }
     public void Level1()
@@ -169,9 +158,8 @@ public class GameManager : MonoBehaviour
         curChapter = 0;
         UnActiveAllLevel();
         player.SetActive(true);
-        PlayerMove.Instance.BackCheckPoint();
-        Time.timeScale = 1.0f;
-        PlayerMove.Instance.SetStratPos();
+        PlayerCtrl.Instance.BackCheckPoint();
+        PlayerCtrl.Instance.SetStartPos();
         SpawnObj();
     }
     public void Level2()
@@ -181,9 +169,8 @@ public class GameManager : MonoBehaviour
         curChapter = 1;
         UnActiveAllLevel();
         player.SetActive(true);
-        PlayerMove.Instance.BackCheckPoint();
-        Time.timeScale = 1.0f;
-        PlayerMove.Instance.SetStratPos();
+        PlayerCtrl.Instance.BackCheckPoint();
+        PlayerCtrl.Instance.SetStartPos();
         SpawnObj();
     }
     public void NextLevel()
@@ -198,7 +185,6 @@ public class GameManager : MonoBehaviour
     {
         index = 1000;
         UnActiveAllLevel();
-        Time.timeScale = 1.0f;
         DestroyObj();
     }
 }

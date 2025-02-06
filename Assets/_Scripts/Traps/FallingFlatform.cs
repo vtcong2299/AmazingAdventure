@@ -21,7 +21,8 @@ public class FallingFlatform : MonoBehaviour
     }
     public void CheckFallingFlatform(Collision2D collision)
     {
-        if (collision.gameObject.tag == "PlayerBody")
+
+        if (collision.gameObject.tag == "Player")
         {
             Invoke("Falling",delayFalling);
         }

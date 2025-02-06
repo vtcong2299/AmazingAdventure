@@ -4,28 +4,13 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    public static EnemyMove instance;
     public Vector3[] targetPoint;
-    [SerializeField]
-    protected float speed = 0.5f;
-    [SerializeField]
-    protected int index = 0;
-    [SerializeField]
-    protected bool enemyFacingRight;
-    [SerializeField]
-    protected LayerMask layerGround;
-    [SerializeField]
-    protected LayerMask layerWall;
-    [SerializeField]
-    protected float lengthRaycast = 0.3f;
-    private void OnEnable()
-    {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
+    [SerializeField]    protected float speed = 0.5f;
+    [SerializeField]    protected int index = 0;
+    [SerializeField]    protected bool enemyFacingRight;
+    [SerializeField]    protected LayerMask layerGround;
+    [SerializeField]    protected LayerMask layerWall;
+    [SerializeField]    protected float lengthRaycast = 0.3f;
     private void Update()
     {
         MoveEnemy();
@@ -78,7 +63,7 @@ public class EnemyMove : MonoBehaviour
         transform.right = curDirection;
         enemyFacingRight = !enemyFacingRight;
     }
-    public void EnemyCheckGround()
+    public virtual void EnemyCheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, lengthRaycast, layerGround);
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, -transform.right, lengthRaycast, layerWall);

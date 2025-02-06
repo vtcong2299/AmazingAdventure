@@ -29,13 +29,17 @@ public class PanelGamePlay : MonoBehaviour
     private void Update()
     {
         CaculateFPS();
-        if (GameManager.instance.isPlayPC)
+        SetActiveCtrlMobile(GameManager.Instance.isPlayMobile);        
+    }
+    void SetActiveCtrlMobile(bool onMobile)
+    {
+        if(onMobile)
         {
-            ctrlOnMobile.SetActive(false);
+            ctrlOnMobile.SetActive(true);
         }
         else
         {
-            ctrlOnMobile.SetActive(true);
+            ctrlOnMobile.SetActive(false);
         }
     }
     public void OnChangeCoins(int coins)
@@ -86,31 +90,15 @@ public class PanelGamePlay : MonoBehaviour
     void ClickPauseButton()
     {
         UIManager.Instance.OnEnablePanelPauseGame();
-        Time.timeScale = 0f;
     }
 
     public void ClickJumpButton()
     {
-        PlayerMove.Instance.ClickJump();
+        PlayerCtrl.Instance.ClickJumpButton();
     }
 
     public void NotClickJumpButton()
     {
-        PlayerMove.Instance.NotClickJump();
-    }
-
-    public void ClickLeftButton()
-    {
-        PlayerMove.Instance.PressLeft();
-    }
-
-    public void ClickRightButton()
-    {
-        PlayerMove.Instance.PressRight();
-    }
-
-    public void NotClickMoveButton()
-    {
-        PlayerMove.Instance.NoPressLeftRight();
+        PlayerCtrl.Instance.NotClickJumpButton();
     }
 }

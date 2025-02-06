@@ -18,4 +18,10 @@ public class SpawnFalingFlatform : SpawnObj
     {
         instance = null;
     }
+    public override void ResetObj()
+    {
+        DestroyObj();
+        AddPosObj();
+        Spawn();
+    }
 }

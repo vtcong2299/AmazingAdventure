@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326a8eecd1bf4604d94de77ccd746a60, type: 3}
+  m_Name: Bat
+  m_EditorClassIdentifier: 
+  _id: 0
+  _prefab: {fileID: 7514101396388466642, guid: 7b0c5dda10b3a014c98936f3477f5576, type: 3}
+  _tag: posBat

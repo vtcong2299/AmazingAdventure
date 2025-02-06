@@ -23,7 +23,7 @@ using UnityEngine;
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "PlayerBody"|| collision.gameObject.tag == "Wall")
+            if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player"|| collision.gameObject.tag == "Wall")
             {
                 Destroy(gameObject);
             }

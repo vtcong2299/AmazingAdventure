@@ -23,23 +23,25 @@ public class PanelPauseGame : MonoBehaviour
     }
     public void PressLevelMenu()
     {
+        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelPauseGame();
         UIManager.Instance.OnDisablePanelGamePlay();
         UIManager.Instance.OnEnablePanelLevel();
+        GameManager.Instance.LevelMenu();
     }
     public void ClickPlayButton()
     {
         UIManager.Instance.OnDisablePanelPauseGame();
-        Time.timeScale = 1f;
     }
     public void ClickRePlayButton()
     {
-        PlayerMove.Instance.BackCheckPoint();
+        UIManager.Instance.AnimPanelLoading();
+        PlayerCtrl.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelPauseGame();
-        Time.timeScale = 1f;
     }
     public void ClickHomeButton()
     {
-        SceneManager.LoadScene(0);
+        UIManager.Instance.AnimPanelLoading();
+        SceneManager.LoadSceneAsync(0);
     }
 }

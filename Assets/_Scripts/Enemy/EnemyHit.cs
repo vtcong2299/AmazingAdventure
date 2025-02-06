@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "FootPlayer"))
+        if ((collision.gameObject.tag == "Player") && PlayerCtrl.Instance.playerInteract.hasEnemy)
         {
             AnimHit();
-            PlayerMove.Instance.JumpBackHitEnemy(collision);
-            StartCoroutine(DeleyDestroy());
+            PlayerCtrl.Instance.JumpBack(collision);
+            Invoke("DestroyEnemy", 0.2f);
         }
     }
     public virtual void AnimHit(){}
-    IEnumerator DeleyDestroy()
+    void DestroyEnemy()
     {
-        yield return new WaitForSeconds(0.2f);
-        gameObject.SetActive(false);        
-    }
+        gameObject.SetActive(false);
+    }   
 }

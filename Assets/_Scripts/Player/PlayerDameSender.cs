@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerDameSender : DameSender
 {
     private PlayerDameReceiver playerDameReceiver;
-    private PlayerVsItem playerVsItem;
+    PlayerInteract playerInteract;
     private void Awake()
     {
         damage = 1;
-        playerVsItem = GetComponent<PlayerVsItem>();
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
+        playerInteract = GetComponent<PlayerInteract>();
     }
     public override void ColliderSendDame(Collision2D collision)
     {
@@ -21,14 +21,14 @@ public class PlayerDameSender : DameSender
             playerDameReceiver.playerAnimatorManager.SetDead();
             playerDameReceiver.Receiver(damage * 3);
         }
-        if (collision.gameObject.tag == "Spike"|| collision.gameObject.tag == "Enemy")
+        if ((collision.gameObject.tag == "Spike"|| collision.gameObject.tag == "Enemy")&& !playerInteract.hasEnemy)
         {
             AudioManager.Instance.SoundHit();
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);
-            PlayerMove.Instance.JumpBackAfterHit(collision);
+            PlayerCtrl.Instance.JumpBack(collision);
         }
-        GameManager.instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
+        GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
     }
 }

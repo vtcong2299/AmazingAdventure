@@ -13,10 +13,7 @@ TagManager:
   - Coins
   - Stars
   - Heart
-  - HeadEnemy
   - Enemy
-  - FootPlayer
-  - PlayerBody
   - Start
   - End
   - FallingFlatform
@@ -44,8 +41,8 @@ TagManager:
   - PlayerBody
   - Black
   - NotCollider
-  - 
-  - 
+  - MapLimit
+  - Enemy
   - 
   - 
   - 

@@ -16,6 +16,11 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject popupPause;
     public PanelGamePlay _uiGamePlay;
     public PanelFinish _uiFinish;
+    public void StartUIManager()
+    {
+        SetOffAllPanel();
+        panelLevel.SetActive(true);
+    }
     public void OnEnablePanelGamePlay()
     {
         Show(panelGamePlay, canvasGroupGamePlay, false);
@@ -46,12 +51,12 @@ public class UIManager : Singleton<UIManager>
     }
     public void OnEnablePanelLevel()
     {
-        Show(panelLevel, canvasGroupLevel, true);
+        Show(panelLevel, canvasGroupLevel, false);
         AnimScaleOn(panelLevel);
     }
     public void OnDisablePanelLevel()
     {
-        Hide(panelLevel, canvasGroupLevel, true);
+        Hide(panelLevel, canvasGroupLevel, false);
         AnimScaleOff(panelLevel);
     }
     public void OnEnablePanelLoading()
@@ -100,6 +105,14 @@ public class UIManager : Singleton<UIManager>
         float time = Random.Range(0.7f, 2f);
         OnEnablePanelLoading();
         DOVirtual.DelayedCall(time, () => OnDisablePanelLoading());
+    }
+    public void SetOffAllPanel()
+    {
+        panelGamePlay.SetActive(false);
+        panelPauseGame.SetActive(false);
+        panelFinish.SetActive(false);
+        panelLevel.SetActive(false);
+        panelLoading.SetActive(false);
     }
 }
 

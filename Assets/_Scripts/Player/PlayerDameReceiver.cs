@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerDameReceiver : DameReceiver
 {
     public PlayerAnimatorManager playerAnimatorManager;
-    public PlayerVsItem playerVsItem;
+    public PlayerInteract playerVsItem;
     void Awake()
     {
         hp = 3;
-        playerVsItem = GetComponent<PlayerVsItem>();
+        playerVsItem = GetComponent<PlayerInteract>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
     public override void Receiver(float damage)
@@ -18,9 +18,8 @@ public class PlayerDameReceiver : DameReceiver
         if (IsDead())
         {
             AudioManager.Instance.SoundDead();
-            playerAnimatorManager.SetDead();
-            playerAnimatorManager.SetBackCheckPoint();
-            PlayerMove.Instance.BackCheckPoint();
+            playerAnimatorManager.SetDead();            
+            PlayerCtrl.Instance.BackCheckPoint();
             hp = 3;
         }
     }   

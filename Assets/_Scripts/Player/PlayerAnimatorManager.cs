@@ -4,88 +4,56 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : MonoBehaviour
 {
-    private Animator animator;
-    [SerializeField] 
+    public Animator animator;
+    string animDead = "isDead";
+    string animHit = "isHit";
+    string animBackCheckPoint = "BackCheckPoint";
+    string animFall = "isFall";
+    string animInWall = "inWall";
+    string animRun = "isRun";
+    string animJump = "Jump";
+    string animDoubleJump = "DoubleJump";
+    string animInGround = "inGround";
+
     private void Awake()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
-        animator.SetBool("Dead", false);
     }      
     public void SetHit()
     {
-        animator.SetTrigger("isHit");
+        animator.SetTrigger(animHit);
     }
     public void SetBackCheckPoint()
     {
-        animator.SetTrigger("BackCheckPoint");
-    }
-    public void SetFall()
-    {
-        animator.SetBool("isFall",true);
-    }
-    public void SetNotFall()
-    {
-        animator.SetBool("isFall",false);
+        animator.SetTrigger(animBackCheckPoint);
     }
     public void SetDead()
     {
-        animator.SetBool("Dead",true);
+        animator.SetTrigger(animDead);
     }
-    public void SetNotDead()
+    public void SetFall(bool isFall)
     {
-        animator.SetBool("Dead",false);
-    }    
-    public void SetWallJump()
-    {
-        animator.SetBool("WallJump",true);
+        animator.SetBool(animFall, isFall);
     }
-    public void SetNotWallJump()
+    public void SetInWall(bool inWall)
     {
-        animator.SetBool("WallJump",false);
+        animator.SetBool(animInWall, inWall);
     }
-    public void SetInWall(Collision2D collision)
+    public void SetIsRun(bool isRun)
     {
-        if (collision.gameObject.tag == "Wall")
-        {
-            animator.SetBool("inWall", true);
-        }
-    }
-    public void SetNotInWall(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Wall")
-        {
-            animator.SetBool("inWall", false);
-        }
-    }
-    public void SetIsRun()
-    {
-        animator.SetBool("isRun", true);
-    }
-    public void SetNotRun()
-    {
-        animator.SetBool("isRun", false);
+        animator.SetBool(animRun, isRun);
     }
     public void SetJump()
     {
-        animator.SetTrigger("Jump");
+        animator.SetTrigger(animJump);
     }
     public void SetDoubleJump()
     {
-        animator.SetTrigger("DoubleJump");
+        animator.SetTrigger(animDoubleJump);
     }
-    public void SetInGround(Collision2D collision)
+    public void SetInGround(bool inGround)
     {
-        if (collision.gameObject.tag == "Ground"|| collision.gameObject.tag == "Start" || collision.gameObject.tag == "Flatform")
-        {
-            animator.SetBool("inGround", true);
-        }
-    }
-    public void SetNotInGround(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground"|| collision.gameObject.tag == "Start" || collision.gameObject.tag == "Flatform")
-        {
-            animator.SetBool("inGround", false);
-        }
+        animator.SetBool(animInGround, inGround);
     }
 }
 

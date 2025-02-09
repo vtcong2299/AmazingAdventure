@@ -19,6 +19,15 @@ public class StartPoint : MonoBehaviour
         if(collision.gameObject.tag=="Start")
         {
             animator.SetTrigger("pushIn");
+            PlayerCtrl.Instance.isBackPoint = true;            
         }
     }
+    public void SetPushOut(Collision2D collision)
+    {
+        if(collision.gameObject.tag=="Start")
+        {            
+            PlayerCtrl.Instance.SetIsBackPointFalse();            
+        }
+    }
+    
 }

@@ -21,10 +21,9 @@ public class FallingFlatform : MonoBehaviour
     }
     public void CheckFallingFlatform(Collision2D collision)
     {
-
         if (collision.gameObject.tag == "Player")
         {
-            Invoke("Falling",delayFalling);
+            StartCoroutine(Falling());
         }
     }
     private void Update()
@@ -35,17 +34,20 @@ public class FallingFlatform : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 isFall = false;
+                transform.position = oldTranform;
+            }
+            if(PlayerCtrl.Instance.isBackPoint)
+            {
+                isFall = false;
+                transform.position = oldTranform;
             }
             Vector3 posFalling = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, posFalling, speedFalling * Time.deltaTime);
         }
-        else
-        {
-            transform.position = oldTranform;
-        }
     }
-    public void Falling()
+    IEnumerator Falling()
     {
+        yield return new WaitForSeconds(delayFalling);
         isFall = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)

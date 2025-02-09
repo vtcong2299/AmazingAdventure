@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerDameReceiver : DameReceiver
 {
     public PlayerAnimatorManager playerAnimatorManager;
-    public PlayerInteract playerVsItem;
+    public PlayerInteract playerInteract;
     void Awake()
     {
         hp = 3;
-        playerVsItem = GetComponent<PlayerInteract>();
+        playerInteract = GetComponent<PlayerInteract>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
     public override void Receiver(float damage)

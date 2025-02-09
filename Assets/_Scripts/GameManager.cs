@@ -49,48 +49,16 @@ public class GameManager : Singleton<GameManager>
     }
     public void DestroyObj()
     {
-        SpawnMushroom.instance.DestroyObj();
-        SpawnCoins.instance.DestroyObj();
-        SpawnStars.instance.DestroyObj();
-        SpawnHeart.instance.DestroyObj();
-        SpawnFalingFlatform.instance.DestroyObj();
-        SpawnBlueBird.instance.DestroyObj();
-        SpawnBoxRock.instance.DestroyObj();
-        SpawnBat.instance.DestroyObj();
-        SpawnPlan.instance.DestroyObj();
+        SpawnObj.Instance.DestroyObj();
     }
-    public void SpawnObj()
+    public void Spawn()
     {
-        SpawnMushroom.instance.AddPosObj();
-        SpawnMushroom.instance.Spawn();
-        SpawnCoins.instance.AddPosObj();
-        SpawnCoins.instance.Spawn();
-        SpawnStars.instance.AddPosObj();
-        SpawnStars.instance.Spawn();
-        SpawnHeart.instance.AddPosObj();
-        SpawnHeart.instance.Spawn();
-        SpawnFalingFlatform.instance.AddPosObj();
-        SpawnFalingFlatform.instance.Spawn();
-        SpawnBlueBird.instance.AddPosObj();
-        SpawnBlueBird.instance.Spawn();
-        SpawnBoxRock.instance.AddPosObj();
-        SpawnBoxRock.instance.Spawn();
-        SpawnBat.instance.AddPosObj(); 
-        SpawnBat.instance.Spawn();
-        SpawnPlan.instance.AddPosObj();
-        SpawnPlan.instance.Spawn();
+        SpawnObj.Instance.AddPosObj();
+        SpawnObj.Instance.Spawn();
     }
     public void ResetObj()
     {
-        SpawnCoins.instance.ResetObj();
-        SpawnStars.instance.ResetObj();
-        SpawnHeart.instance.ResetObj();
-        SpawnMushroom.instance.ResetObj();
-        SpawnFalingFlatform.instance.ResetObj();
-        SpawnBlueBird.instance.ResetObj();  
-        SpawnBoxRock.instance.ResetObj();
-        SpawnBat.instance.ResetObj();
-        SpawnPlan.instance.ResetObj();
+        SpawnObj.Instance.ResetObj();
     }   
     public void UnActiveAllLevel()
     {
@@ -160,7 +128,7 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(true);
         PlayerCtrl.Instance.BackCheckPoint();
         PlayerCtrl.Instance.SetStartPos();
-        SpawnObj();
+        Spawn();
     }
     public void Level2()
     {
@@ -171,7 +139,7 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(true);
         PlayerCtrl.Instance.BackCheckPoint();
         PlayerCtrl.Instance.SetStartPos();
-        SpawnObj();
+        Spawn();
     }
     public void NextLevel()
     {

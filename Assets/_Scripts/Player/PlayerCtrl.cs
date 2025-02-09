@@ -12,6 +12,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] LayerMask layerGround;
     [SerializeField] LayerMask layerWall;
     GameObject startPos;
+    public PlayerDameReceiver playerDameReceiver;
     PlayerAnimatorManager playerAnimatorManager;
     public PlayerInteract playerInteract;
     Vector3 startTranform;
@@ -21,6 +22,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     bool wallJump;
     bool doubleJump;
     bool clickJump;
+    public bool isBackPoint = false;
     [SerializeField] Vector3 offsetWithStartPos;
 
     public void StartPlayer()
@@ -28,6 +30,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerInteract = GetComponent<PlayerInteract>();
+        playerDameReceiver = GetComponent<PlayerDameReceiver>();
         rb2D.freezeRotation = true;
     }
 
@@ -253,7 +256,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         playerInteract.isEnd = false;
         playerAnimatorManager.SetBackCheckPoint();
     }
-
+    public void SetIsBackPointFalse()
+    {
+        isBackPoint = false;
+    }
     public void Flip()
     {
         Vector3 curDirection = transform.right;
@@ -284,6 +290,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         {
             CheckOutParent(collision);
         }
+        StartPoint.instance.SetPushOut(collision);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -300,4 +307,5 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         EndPoint.instance.SetEnd(collision);
     }
+
 }

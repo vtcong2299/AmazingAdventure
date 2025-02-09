@@ -2,34 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnObj : MonoBehaviour
+public class SpawnObj : Singleton<SpawnObj>
 {
     [Header("SpawnObj")]
-    public GameObject preFab;
+    //public GameObject preFab;
     protected int index = 0;
-    protected List<GameObject> spawnPosObjList = new List<GameObject>();
+    //protected List<GameObject> spawnPosObjList = new List<GameObject>();
     [SerializeField] protected string spawnPosTag;
-    private void Awake()
+    [SerializeField] ConfigItem[] configItem;
+    //private void Awake()
+    //{
+    //    foreach (ConfigItem item in configItem)
+    //    {
+    //        item._prefab.SetActive(false);
+    //    }
+    //}
+    private void Start()
     {
-        this.preFab.SetActive(false);
+        ResetConfigItems();
     }
     public virtual void AddPosObj()
     {
-        GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(spawnPosTag);
-        spawnPosObjList.AddRange(foundObjects);
+        foreach (ConfigItem item in configItem)
+        {
+            GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(item._tag);
+            item.spawnPosObjList.AddRange(foundObjects);
+        }
     }
     public virtual void Spawn()
     {
-        for (index = 0; index < spawnPosObjList.Count; index++)
+        foreach (ConfigItem item in configItem) 
         {
-            GameObject obj = Instantiate(preFab, spawnPosObjList[index].transform.position, Quaternion.identity);
-            obj.transform.parent = transform;
-            obj.gameObject.SetActive(true);
+            for (item.index = 0; item.index < item.spawnPosObjList.Count; item.index++)
+            {
+                GameObject obj = Instantiate(item._prefab, item.spawnPosObjList[item.index].transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
+                obj.gameObject.SetActive(true);
+            }
         }
     }
     public virtual void DestroyObj()
     {
-        spawnPosObjList.Clear();
+        foreach (ConfigItem item in configItem)
+        {
+            item.spawnPosObjList.Clear();
+        }
         List<GameObject> children = new List<GameObject>();
         foreach (Transform child in transform)
         {
@@ -53,6 +70,13 @@ public class SpawnObj : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+        }
+    }
+    private void ResetConfigItems()
+    {
+        foreach (ConfigItem item in configItem)
+        {
+            item.ResetConfig();
         }
     }
 }

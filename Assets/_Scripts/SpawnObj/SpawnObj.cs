@@ -4,19 +4,7 @@ using UnityEngine;
 
 public class SpawnObj : Singleton<SpawnObj>
 {
-    [Header("SpawnObj")]
-    //public GameObject preFab;
-    protected int index = 0;
-    //protected List<GameObject> spawnPosObjList = new List<GameObject>();
-    [SerializeField] protected string spawnPosTag;
     [SerializeField] ConfigItem[] configItem;
-    //private void Awake()
-    //{
-    //    foreach (ConfigItem item in configItem)
-    //    {
-    //        item._prefab.SetActive(false);
-    //    }
-    //}
     private void Start()
     {
         ResetConfigItems();

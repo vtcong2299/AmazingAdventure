@@ -5,25 +5,17 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public int index = 1000;
-    public GameObject map1Prefab;
-    public GameObject map2Prefab;
-    public GameObject currentMap;    
     public GameObject player;
-    public int curChapter = 0;
-    public int maxChapter = 2;
     public bool isPlayMobile;
 
     private void Start()
     {
-        map1Prefab = Resources.Load<GameObject>("Map1");
-        map2Prefab = Resources.Load<GameObject>("Map2");
         PlayerCtrl.Instance.StartPlayer();
         UIManager.Instance.StartUIManager();
         Joystick.Instance.StartJoystick();
         AudioManager.Instance.StartAudio();
         SetBG();
-        UnActiveAllLevel();
+        SetLevel(0);
     }  
     private void Update()
     {
@@ -43,75 +35,31 @@ public class GameManager : Singleton<GameManager>
     }
     public void ManagerEndChapter(int coins, int stars)
     {
-        UIManager.Instance.OnEnablePanelFinish();
-        UIManager.Instance._uiFinish.OnCoinsEnd(coins);
-        UIManager.Instance._uiFinish.StarsUIEnd(stars);
+        UIManager.Instance.FinishChapter(coins,stars);
     }
-    public void DestroyObj()
+    public void DestroyObjInMap()
     {
         SpawnObj.Instance.DestroyObj();
     }
-    public void Spawn()
+    public void SpawnObjInMap()
     {
         SpawnObj.Instance.AddPosObj();
         SpawnObj.Instance.Spawn();
     }
-    public void ResetObj()
+    public void ResetObjInMap()
     {
         SpawnObj.Instance.ResetObj();
     }   
-    public void UnActiveAllLevel()
+    public void SetLevel(int level)
     {
         player.SetActive(false);
-        SetActiveChapter();
+        LevelManager.Instance.SelectLevel(level);
     }
     public void SetBG()
     {
         BGManager.instance.RandomBG();
     }
-    public void SetActiveChapter()
-    {       
-        switch (index)
-        {
-            case 0:
-                {
-                    if (map1Prefab == null)
-                    {
-                        return;
-                    }
-                    if (currentMap != null)
-                    {
-                        Destroy(currentMap);
-                        Resources.UnloadUnusedAssets();
-                    }
-                    currentMap = Instantiate(map1Prefab, transform.position, transform.rotation);
-                    break;
-                }
-            case 1:
-                {
-                    if (map2Prefab == null)
-                    {
-                        return;
-                    }
-                    if (currentMap != null)
-                    {
-                        Destroy(currentMap);
-                        Resources.UnloadUnusedAssets();
-                    }
-                    currentMap = Instantiate(map2Prefab, transform.position, transform.rotation);
-                    break;
-                }
-            case 1000:
-                {
-                    if (currentMap != null)
-                    {
-                        Destroy(currentMap);
-                        Resources.UnloadUnusedAssets();
-                    }
-                    break;
-                }
-        }
-    }
+
     public void SetParentOfPlayer()
     {
         if (!player.gameObject.activeSelf)
@@ -119,40 +67,31 @@ public class GameManager : Singleton<GameManager>
             player.transform.SetParent(null);
         }
     }
-    public void Level1()
+    public void SelectLevel(int level)
     {
+        UIManager.Instance.SelectLevel();
         SetBG();
-        index = 0;
-        curChapter = 0;
-        UnActiveAllLevel();
+        SetLevel(level);
         player.SetActive(true);
         PlayerCtrl.Instance.BackCheckPoint();
         PlayerCtrl.Instance.SetStartPos();
-        Spawn();
-    }
-    public void Level2()
-    {
-        SetBG();
-        index = 1;
-        curChapter = 1;
-        UnActiveAllLevel();
-        player.SetActive(true);
-        PlayerCtrl.Instance.BackCheckPoint();
-        PlayerCtrl.Instance.SetStartPos();
-        Spawn();
+        SpawnObjInMap();
     }
     public void NextLevel()
     {
-        curChapter++;
-        if (curChapter >= maxChapter)
-        {
-            curChapter = 0;
-        }        
+        LevelManager.Instance.NextLevel();     
     }
-    public void LevelMenu()
+    public void UnLoadLevel()
     {
-        index = 1000;
-        UnActiveAllLevel();
-        DestroyObj();
+        SetLevel(0);
+        DestroyObjInMap();
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+    public void Play()
+    {
+        Time.timeScale = 1;
     }
 }

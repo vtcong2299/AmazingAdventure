@@ -23,11 +23,9 @@ public class PanelPauseGame : MonoBehaviour
     }
     public void PressLevelMenu()
     {
-        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelPauseGame();
-        UIManager.Instance.OnDisablePanelGamePlay();
-        UIManager.Instance.OnEnablePanelLevel();
-        GameManager.Instance.LevelMenu();
+        UIManager.Instance.PressLevelMenu();
+        GameManager.Instance.UnLoadLevel();
     }
     public void ClickPlayButton()
     {

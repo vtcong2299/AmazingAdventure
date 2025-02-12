@@ -78,7 +78,7 @@ public class UIManager : Singleton<UIManager>
         canvasGroup.DOFade(1, 0.5f).SetUpdate(UpdateType.Normal, true);
         if (pause)
         {
-            Time.timeScale = 0;
+            GameManager.Instance.Pause();
         }
     }
     public void Hide(GameObject panel, CanvasGroup canvasGroup, bool resume)
@@ -88,7 +88,7 @@ public class UIManager : Singleton<UIManager>
             .OnComplete(() => panel.SetActive(false));
         if (resume)
         {
-            Time.timeScale = 1;
+            GameManager.Instance.Play();
         }
     }
     void AnimScaleOn(GameObject panel)
@@ -113,6 +113,25 @@ public class UIManager : Singleton<UIManager>
         panelFinish.SetActive(false);
         panelLevel.SetActive(false);
         panelLoading.SetActive(false);
+    }
+    public void FinishChapter(int coins, int stars)
+    {
+        OnEnablePanelFinish();
+        _uiFinish.OnCoinsEnd(coins);
+        _uiFinish.StarsUIEnd(stars);
+    }
+    public void SelectLevel()
+    {
+        AnimPanelLoading();
+        OnDisablePanelLevel();
+        OnEnablePanelGamePlay();
+    }
+    public void PressLevelMenu()
+    {
+        AnimPanelLoading();
+        OnDisablePanelGamePlay();
+        OnEnablePanelLevel();
+
     }
 }
 

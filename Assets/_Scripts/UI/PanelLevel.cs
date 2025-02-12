@@ -23,16 +23,10 @@ public class PanelLevel : MonoBehaviour
     }
     public void PressLevel1()
     {
-        UIManager.Instance.AnimPanelLoading();
-        UIManager.Instance.OnDisablePanelLevel();
-        UIManager.Instance.OnEnablePanelGamePlay();
-        GameManager.Instance.Level1();
+        GameManager.Instance.SelectLevel(1);
     }
     public void PressLevel2()
     {
-        UIManager.Instance.AnimPanelLoading();
-        UIManager.Instance.OnDisablePanelLevel();
-        UIManager.Instance.OnEnablePanelGamePlay();
-        GameManager.Instance.Level2();
+        GameManager.Instance.SelectLevel(2);
     }    
 }

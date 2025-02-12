@@ -10,8 +10,6 @@ public class ConfigItem : ScriptableObject
     public int index = 0;
     public List<GameObject> spawnPosObjList = new List<GameObject>();
     public string _tag;
-
-    // Phương thức để reset các giá trị của ConfigItem
     public void ResetConfig()
     {
         index = 0;

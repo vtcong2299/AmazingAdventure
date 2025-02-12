@@ -36,42 +36,23 @@ public class PanelFinish : MonoBehaviour
             listStarsUIEnd[i].SetActive(false);
         }
     }
-
-    void SelectLevel1()
+    void SelectLevel()
     {
         UIManager.Instance.OnDisablePanelLevel();
-        GameManager.Instance.Level1();
-    }
-    void SelectLevel2()
-    {
-        UIManager.Instance.OnDisablePanelLevel();
-        GameManager.Instance.Level2();
+        GameManager.Instance.NextLevel();
     }
     public void PressNextLevel()
     {
-        GameManager.Instance.NextLevel();
-        PressLevelMenu();
         UIManager.Instance.AnimPanelLoading();
-        switch (GameManager.Instance.curChapter)
-        {
-            case 0:
-                {
-                    Invoke("SelectLevel1", 0.3f);
-                    break;
-                }
-            case 1:
-                {
-                    Invoke("SelectLevel2", 0.3f);
-                    break;
-                }
-        }
+        GameManager.Instance.UnLoadLevel();
+        UIManager.Instance.OnDisablePanelFinish();
+        Invoke("SelectLevel", 0.3f);
     }   
     public void PressLevelMenu()
     {
-        UIManager.Instance.AnimPanelLoading();
         UIManager.Instance.OnDisablePanelFinish();
-        UIManager.Instance.OnEnablePanelLevel();
-        GameManager.Instance.LevelMenu();
+        UIManager.Instance.PressLevelMenu();
+        GameManager.Instance.UnLoadLevel();
     }
     public void ClickRePlayButton()
     {

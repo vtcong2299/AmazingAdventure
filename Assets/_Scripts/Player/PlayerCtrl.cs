@@ -44,6 +44,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     private void Update()
     {
         CheckFace();
+        CheckJump();
         ModeCtrl(GameManager.Instance.isPlayMobile);
         
         CheckFall();
@@ -65,7 +66,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
             MovePlayer();
             JumpOnPC();
         }
-
     }
 
     public void CheckFall()
@@ -127,20 +127,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     }
     public void JumpOnPC() // Nhảy bằng space
     {
-        Vector2 leftRayOrigin = new Vector2(transform.position.x - 0.1f, transform.position.y);
-        Vector2 rightRayOrigin = new Vector2(transform.position.x + 0.1f, transform.position.y);
-        RaycastHit2D hitGroundLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, 0.2f, layerGround);
-        RaycastHit2D hitGroundRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, 0.2f, layerGround);
-        maybeJump = hitGroundLeft.collider != null || hitGroundRight.collider != null;
-        Debug.DrawRay(leftRayOrigin, Vector2.down * 0.2f, Color.green);
-        Debug.DrawRay(rightRayOrigin, Vector2.down * 0.2f, Color.green);
-
-
-        Vector2 direction = isFacingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, 0.15f, layerWall);
-        wallJump = hitWall.collider != null;
-        Debug.DrawRay(transform.position, direction * 0.15f, Color.green);
-
         if ((maybeJump && (!Input.GetKey(KeyCode.Space))) || (wallJump && (!Input.GetKey(KeyCode.Space))))
         {
             doubleJump = false;
@@ -172,6 +158,21 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     }
 
     private void JumpOnMobile() // Nhảy bằng button
+    {        
+        if ((maybeJump && !clickJump) || wallJump && !clickJump)
+        {
+            doubleJump = false;
+        }
+        if (wallJump)
+        {
+            rb2D.drag = 10f;
+        }
+        else
+        {
+            rb2D.drag = 0f;
+        }
+    }
+    void CheckJump()
     {
         Vector2 leftRayOrigin = new Vector2(transform.position.x - 0.1f, transform.position.y);
         Vector2 rightRayOrigin = new Vector2(transform.position.x + 0.1f, transform.position.y);
@@ -186,20 +187,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, 0.15f, layerWall);
         wallJump = hitWall.collider != null;
         Debug.DrawRay(transform.position, direction * 0.15f, Color.green);
-        if ((maybeJump && !clickJump) || wallJump && !clickJump)
-        {
-            doubleJump = false;
-        }
-        if (wallJump)
-        {
-            rb2D.drag = 10f;
-        }
-        else
-        {
-            rb2D.drag = 0f;
-        }
     }
-
     public void ClickJumpButton()
     {
         clickJump = true;
@@ -251,7 +239,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         transform.position = startTranform;
         playerInteract.ResetItemUI();
-        GameManager.Instance.ResetObj();
+        GameManager.Instance.ResetObjInMap();
         CameraFollow.Instance.ResetCamera();
         playerInteract.isEnd = false;
         playerAnimatorManager.SetBackCheckPoint();
@@ -267,7 +255,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         transform.right = curDirection;
         isFacingRight = !isFacingRight;
     }
-
     public void CheckParent(Collision2D collision)
     {
         if (collision.gameObject.tag == "Flatform")
@@ -275,7 +262,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
             transform.SetParent(collision.transform);
         }
     }
-
     public void CheckOutParent(Collision2D collision)
     {
         if (collision.gameObject.tag == "Flatform" && collision.gameObject.activeSelf && player.gameObject.activeSelf)
@@ -283,7 +269,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
             transform.SetParent(null);
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (player != null && collision != null)
@@ -292,20 +277,16 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         }
         StartPoint.instance.SetPushOut(collision);
     }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         CheckParent(collision);
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         StartPoint.instance.SetPushIn(collision);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         EndPoint.instance.SetEnd(collision);
     }
-
 }

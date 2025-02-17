@@ -11,15 +11,15 @@ public class PanelGamePlay : MonoBehaviour
 {
     [SerializeField] GameObject[] listHeartsUI;
     [SerializeField] GameObject[] listStarsUI;
-    [SerializeField] Text txtCoins;
+    [SerializeField] Text txtApple;
+    [SerializeField] Text txtBanana;
+    [SerializeField] Text txtCherry;
     [SerializeField] Text txtFPS;
     [SerializeField] int fps = 0;
     float timeDelayUpdatePfs = 0f;
     [SerializeField] GameObject ctrlOnMobile;
     [SerializeField] Button pauseButton;
     [SerializeField] Button jumpButton;
-    [SerializeField] Button leftButton;
-    [SerializeField] Button rightButton;
 
     private void Awake()
     {
@@ -42,9 +42,17 @@ public class PanelGamePlay : MonoBehaviour
             ctrlOnMobile.SetActive(false);
         }
     }
-    public void OnChangeCoins(int coins)
+    public void OnChangeApple(int apple)
     {
-        txtCoins.text = "x " + coins;
+        txtApple.text = apple + "/" + LevelManager.Instance.targetApple;
+    }
+    public void OnChangeBanana(int banana)
+    {
+        txtBanana.text =banana + "/" + LevelManager.Instance.targetBanana;
+    }
+    public void OnChangeCherry(int cherry)
+    {
+        txtCherry.text =cherry + "/" + LevelManager.Instance.targetCherry;
     }
 
     public void OnFPS(int fps)

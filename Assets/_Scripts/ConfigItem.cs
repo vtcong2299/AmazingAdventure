@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItemConfig", menuName = "Config/Item")]
 public class ConfigItem : ScriptableObject
 {
-    public int _id;
     public GameObject _prefab;
     public int index = 0;
     public List<GameObject> spawnPosObjList = new List<GameObject>();

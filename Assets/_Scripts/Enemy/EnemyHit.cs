@@ -10,7 +10,7 @@ public class EnemyHit : MonoBehaviour
         {
             AnimHit();
             PlayerCtrl.Instance.JumpBack(collision);
-            Invoke("DestroyEnemy", 0.2f);
+            Invoke("DestroyEnemy", 0.25f);
         }
     }
     public virtual void AnimHit(){}

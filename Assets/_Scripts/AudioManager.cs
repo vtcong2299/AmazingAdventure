@@ -15,68 +15,73 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioClip hpClip;
     [SerializeField] AudioClip hitClip;
     [SerializeField] AudioClip deadClip;
-    public void StartAudio()
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void Start()
     {
         SoundBGM();
+        SetVolumAudioBGM(DataManager.Instance.gameData.hasBGM);
+        SetVolumAudioSFX(DataManager.Instance.gameData.hasSFX);
+
     }
+
     public void SetVolumAudioBGM(bool state)
     {
-        if (state)
-        {
-            audioBGM.volume = 0.5f;
-        }
-        else
-        {
-            audioBGM.volume = 0;
-        }
+        audioBGM.volume = state ? 0.5f : 0;
     }
+
     public void SetVolumAudioSFX(bool state)
     {
-        if (state)
-        {
-            audioSFX.volume = 1f;
-        }
-        else
-        {
-            audioSFX.volume = 0;
-        }
+        audioSFX.volume = state ? 1f : 0;
     }
+
     public void SoundClickButton()
     {
         audioSFX.clip = clickButtonClip;
         audioSFX.Play();
     }
-    public void SoundBGM()
+
+    void SoundBGM()
     {
         audioBGM.clip = bgmClip;
         audioBGM.loop = true;
         audioBGM.Play();
     }
+
     public void SoundGetCoin()
     {
         audioSFX.clip = getCoinsClip;
         audioSFX.Play();
     }
+
     public void SoundFinish()
     {
         audioSFX.clip = finishClip;
         audioSFX.Play();
     }
+
     public void SoundStars()
     {
         audioSFX.clip = starsClip;
         audioSFX.Play();
     }
+
     public void SoundHit()
     {
         audioSFX.clip = hitClip;
         audioSFX.Play();
     }
+
     public void SoundDead()
     {
         audioSFX.clip = deadClip;
         audioSFX.Play();
     }
+
     public void SoundGetHp()
     {
         audioSFX.clip = hpClip;

@@ -7,10 +7,10 @@ public class PlayerInteract : MonoBehaviour
 {
     public bool isEnd;
     private PlayerDameReceiver playerDameReceiver;
-    [SerializeField]
-    private int coins = 0;
-    [SerializeField]
-    private int stars = 0;
+    [SerializeField] int apple = 0;
+    [SerializeField] int banana = 0;
+    [SerializeField] int cherry = 0;
+    [SerializeField] int stars = 0;
     [SerializeField] LayerMask layerEnemy;
     public bool hasEnemy;
     private void Awake()
@@ -25,22 +25,52 @@ public class PlayerInteract : MonoBehaviour
     {
         CheckHitEnemy();
     }
-    public void Coins(Collider2D collider)
+    public void Apple(Collider2D collider)
     {
-        if(collider.gameObject.tag == "Coins")
+        if(collider.gameObject.tag == "Apple")
         {
             AudioManager.Instance.SoundGetCoin();
-            coins++;
-            collider.gameObject.SetActive(false);
-            GameManager.Instance.ManagerOnChangeCoins(coins);
+            apple++;            
+            collider.gameObject.GetComponent<AnimApple>().AnimHit();
+            collider.gameObject.GetComponent<Collider2D>().enabled = false;
+            StartCoroutine(UnActiveCoroutine(collider));
+            GameManager.Instance.ManagerOnChangeApple(apple);
         }
+    }
+    public void Banana(Collider2D collider)
+    {
+        if(collider.gameObject.tag == "Banana")
+        {
+            AudioManager.Instance.SoundGetCoin();
+            banana++;
+            collider.gameObject.GetComponent<AnimBanana>().AnimHit();
+            StartCoroutine(UnActiveCoroutine(collider));
+            GameManager.Instance.ManagerOnChangeBanana(banana);
+        }
+    }
+    public void Cherry(Collider2D collider)
+    {
+        if(collider.gameObject.tag == "Cherry")
+        {
+            AudioManager.Instance.SoundGetCoin();
+            cherry++;
+            collider.gameObject.GetComponent<AnimCherry>().AnimHit();
+            StartCoroutine(UnActiveCoroutine(collider));
+            GameManager.Instance.ManagerOnChangeCherry(cherry);
+        }
+    }
+    IEnumerator UnActiveCoroutine(Collider2D collider)
+    {
+        yield return new WaitForSeconds(0.25f);
+        collider.gameObject.GetComponent<Collider2D>().enabled = true;
+        collider.gameObject.SetActive(false);
     }
     public void CoinsEnd(Collider2D collider)
     {
         if(collider.gameObject.tag == "End")
         {
             AudioManager.Instance.SoundFinish();
-            GameManager.Instance.ManagerEndChapter(coins, stars);
+            GameManager.Instance.ManagerEndChapter(apple, banana, cherry, stars);
             isEnd = true;
         }
     }
@@ -50,7 +80,8 @@ public class PlayerInteract : MonoBehaviour
         {
             AudioManager.Instance.SoundStars();
             stars++;
-            collider.gameObject.SetActive(false);
+            collider.gameObject.GetComponent<AnimStar>().AnimHit();
+            StartCoroutine(UnActiveCoroutine(collider));
             GameManager.Instance.ManagerStarsUI(stars);
         }
     }
@@ -64,7 +95,8 @@ public class PlayerInteract : MonoBehaviour
             {
                 playerDameReceiver.hp = 3;
             }
-            collider.gameObject.SetActive(false);
+            collider.gameObject.GetComponent<AnimHeart>().AnimHit();
+            StartCoroutine(UnActiveCoroutine(collider));
             GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
         }
     }     
@@ -72,18 +104,24 @@ public class PlayerInteract : MonoBehaviour
     {          
         GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
         ResetPlayerParameter();
-        GameManager.Instance.ManagerOnChangeCoins(coins);
+        GameManager.Instance.ManagerOnChangeApple(apple);
+        GameManager.Instance.ManagerOnChangeBanana(banana);
+        GameManager.Instance.ManagerOnChangeCherry(cherry);
         GameManager.Instance.ManagerStarsUI(stars);
     }
     public void ResetPlayerParameter()
     {
         playerDameReceiver.hp = 3;
-        coins = 0;
+        apple = 0;
+        banana = 0;
+        cherry = 0;
         stars = 0;
     }  
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Coins(collision);
+        Apple(collision);
+        Banana(collision);
+        Cherry(collision);
         Stars(collision);
         Heart(collision);
         CoinsEnd(collision);

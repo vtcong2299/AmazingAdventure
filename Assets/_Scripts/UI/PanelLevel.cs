@@ -19,14 +19,16 @@ public class PanelLevel : MonoBehaviour
     }
     void ClickBackButton()
     {
-        SceneManager.LoadSceneAsync(0);
+        UIManager.Instance.LoadScene();
     }
     public void PressLevel1()
     {
+        UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.SelectLevel(1);
     }
     public void PressLevel2()
     {
+        UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.SelectLevel(2);
     }    
 }

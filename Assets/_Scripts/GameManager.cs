@@ -7,16 +7,17 @@ public class GameManager : Singleton<GameManager>
 {
     public GameObject player;
     public bool isPlayMobile;
-
+    [SerializeField] int idCurMap = 0;
     private void Start()
     {
         PlayerCtrl.Instance.StartPlayer();
         UIManager.Instance.StartUIManager();
         Joystick.Instance.StartJoystick();
-        AudioManager.Instance.StartAudio();
         SetBG();
         SetLevel(0);
-    }  
+        LevelManager.Instance.CheckUnLockMap();
+        LevelManager.Instance.CheckCompleteMap();
+    }
     private void Update()
     {
         SetParentOfPlayer();
@@ -29,13 +30,22 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.Instance._uiGamePlay.StarsUI(stars);
     }
-    public void ManagerOnChangeCoins(int coins)
+    public void ManagerOnChangeApple(int apple)
     {
-        UIManager.Instance._uiGamePlay.OnChangeCoins(coins);
+        UIManager.Instance._uiGamePlay.OnChangeApple(apple);
     }
-    public void ManagerEndChapter(int coins, int stars)
+    public void ManagerOnChangeBanana(int banana)
     {
-        UIManager.Instance.FinishChapter(coins,stars);
+        UIManager.Instance._uiGamePlay.OnChangeBanana(banana);
+    }
+    public void ManagerOnChangeCherry(int cherry)
+    {
+        UIManager.Instance._uiGamePlay.OnChangeCherry(cherry);
+    }
+    public void ManagerEndChapter(int apple, int banana, int cherry, int stars)
+    {
+        LevelManager.Instance.AddMapCompeleteToList(apple, banana, cherry, idCurMap, stars);
+        UIManager.Instance.FinishChapter(apple, banana,cherry,stars);
     }
     public void DestroyObjInMap()
     {
@@ -69,6 +79,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void SelectLevel(int level)
     {
+        idCurMap = level;
         UIManager.Instance.SelectLevel();
         SetBG();
         SetLevel(level);

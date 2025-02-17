@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _name: Map1
-  _prefab: {fileID: 3256128187264286527, guid: 616b0279e5a4e9f499a0603edcc92ce8, type: 3}
+  _targetApple: 3
+  _targetBanana: 3
+  _targetCherry: 3

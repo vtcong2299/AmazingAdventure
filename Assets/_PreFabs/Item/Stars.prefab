@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4608308107117241262}
   - component: {fileID: 1945163321539746667}
   - component: {fileID: 780068749377127746}
+  - component: {fileID: 1883728372704977506}
   m_Layer: 7
   m_Name: Stars
   m_TagString: Stars
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -256744087, guid: b7a239625c478364db9fc0e32d873291, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -142,3 +143,16 @@ CircleCollider2D:
   m_Offset: {x: 0.00063729286, y: 0}
   serializedVersion: 2
   m_Radius: 0.05661702
+--- !u!114 &1883728372704977506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823684042239899123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac9bd41bc01ef742bf18a15791112ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1945163321539746667}

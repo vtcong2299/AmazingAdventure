@@ -26,9 +26,12 @@ TagManager:
   - posBoxRock
   - posBat
   - posPlan
-  - posFlatform
-  - posSaw
-  - posBullet
+  - posApple
+  - posBanana
+  - posCherry
+  - Apple
+  - Banana
+  - Cherry
   layers:
   - Default
   - TransparentFX
@@ -38,12 +41,12 @@ TagManager:
   - UI
   - Wall
   - Item
-  - PlayerBody
+  - Player
   - Black
   - NotCollider
   - MapLimit
   - Enemy
-  - 
+  - Map
   - 
   - 
   - 
@@ -63,6 +66,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 3010105833
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

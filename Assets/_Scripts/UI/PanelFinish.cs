@@ -7,12 +7,14 @@ using UnityEngine.Video;
 public class PanelFinish : MonoBehaviour
 {
     public GameObject[] listStarsUIEnd;
-    [SerializeField]
-    private Text txtCoinsEnd;
+    [SerializeField] Text txtAppleEnd;
+    [SerializeField] Text txtBananaEnd;
+    [SerializeField] Text txtCherryEnd;
     [SerializeField] Button replayButton;
     [SerializeField] Button homeButton;
     [SerializeField] Button levelButton;
     [SerializeField] Button nextLevelButton;
+    [SerializeField] GameObject lockNextButton;
     private void Awake()
     {
         replayButton.onClick.AddListener(ClickRePlayButton);
@@ -20,13 +22,55 @@ public class PanelFinish : MonoBehaviour
         levelButton.onClick.AddListener(PressLevelMenu);
         nextLevelButton.onClick.AddListener(PressNextLevel);
     }
-
-    public void OnCoinsEnd(int coins)
+    private void OnEnable()
     {
-        txtCoinsEnd.text = "x " + coins;
+        lockNextButton.SetActive(false);
+    }
+    public void OnAppleEnd(int apple)
+    {
+        if (apple < LevelManager.Instance.targetApple)
+        {
+            txtAppleEnd.color = Color.red;
+            lockNextButton.SetActive(true);
+        }
+        else
+        {
+            txtAppleEnd.color = Color.blue;
+        }
+        txtAppleEnd.text = apple + "/" + LevelManager.Instance.targetApple;
+    }
+    public void OnBananaEnd(int banana)
+    {
+        if (banana < LevelManager.Instance.targetBanana)
+        {
+            lockNextButton.SetActive(true);
+            txtBananaEnd.color = Color.red;
+        }
+        else
+        {
+            txtBananaEnd.color = Color.blue;
+        }
+        txtBananaEnd.text =banana + "/" + LevelManager.Instance.targetBanana;
+    }
+    public void OnCherryEnd(int cherry)
+    {
+        if (cherry < LevelManager.Instance.targetBanana)
+        {
+            txtCherryEnd.color = Color.red;
+            lockNextButton.SetActive(true);
+        }
+        else
+        {
+            txtCherryEnd.color = Color.blue;
+        }
+        txtCherryEnd.text = cherry + "/" + LevelManager.Instance.targetCherry;
     }
     public void StarsUIEnd(int stars)
     {
+        if (stars == 0)
+        {
+            lockNextButton.SetActive(true);
+        }
         for (int i = 0; i < stars; i++)
         {
             listStarsUIEnd[i].SetActive(true);
@@ -38,7 +82,6 @@ public class PanelFinish : MonoBehaviour
     }
     void SelectLevel()
     {
-        UIManager.Instance.OnDisablePanelLevel();
         GameManager.Instance.NextLevel();
     }
     public void PressNextLevel()
@@ -50,8 +93,8 @@ public class PanelFinish : MonoBehaviour
     }   
     public void PressLevelMenu()
     {
-        UIManager.Instance.OnDisablePanelFinish();
         UIManager.Instance.PressLevelMenu();
+        UIManager.Instance.OnDisablePanelFinish();
         GameManager.Instance.UnLoadLevel();
     }
     public void ClickRePlayButton()
@@ -61,6 +104,7 @@ public class PanelFinish : MonoBehaviour
     }
     public void ClickHomeButton()
     {
-        SceneManager.LoadSceneAsync(0);
+        UIManager.Instance.OnDisablePanelFinish();
+        UIManager.Instance.LoadScene();
     }
 }

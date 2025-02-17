@@ -7,6 +7,9 @@ public class ConfigMap : ScriptableObject
 {
     public int _id;
     public string _name;
+    public int _targetApple;
+    public int _targetBanana;
+    public int _targetCherry;
 }
     
 

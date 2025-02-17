@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2709211978387492721}
   - component: {fileID: 3979587497470213953}
   - component: {fileID: 7986945190348238969}
+  - component: {fileID: 8648775550162191932}
   - component: {fileID: 1930510996822953898}
   m_Layer: 7
   m_Name: Heart
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1927639052, guid: b7a239625c478364db9fc0e32d873291, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,6 +108,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8648775550162191932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384062900662898214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a8d4398bb38b7419325f9d7ca11c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7986945190348238969}
 --- !u!58 &1930510996822953898
 CircleCollider2D:
   m_ObjectHideFlags: 0

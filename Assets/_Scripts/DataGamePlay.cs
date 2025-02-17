@@ -2,21 +2,22 @@
 using System.IO;
 using System;
 using System.Collections.Generic;
-using UnityEngine.TextCore.Text;
-using System.ComponentModel;
 
 [Serializable]
 public class GameData
 {
     public bool hasBGM;
     public bool hasSFX;
+    public List<int> idMapCompeleteOneStar = new List<int>();
+    public List<int> idMapCompeleteTwoStar = new List<int>();
+    public List<int> idMapCompeleteThreeStar = new List<int>();
+    public int idMapCompeleteMax = 0;
 }
 
 public class DataGamePlay : MonoBehaviour
 {
     private string dataPath;
-
-    public void StartDataGamePlay()
+    public void Start()
     {
         dataPath = Path.Combine(Application.persistentDataPath, "playerData.json");
         LoadData(); //load khi khởi động
@@ -37,5 +38,12 @@ public class DataGamePlay : MonoBehaviour
             return data;
         }
         return new GameData(); // Trả về dữ liệu mới nếu không tìm thấy file
+    }
+    public void ResetData()
+    {
+        if (File.Exists(dataPath))
+        {
+            File.Delete(dataPath);
+        }
     }
 }

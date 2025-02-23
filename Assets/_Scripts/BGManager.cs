@@ -5,10 +5,8 @@ using UnityEngine;
 public class BGManager : MonoBehaviour
 {
     public static BGManager instance;
-    [SerializeField]
-    private GameObject[] backGround;
-    [SerializeField]
-    private int index = 0;
+    [SerializeField] GameObject[] backGround;
+    [SerializeField] int index = 0;
     private void OnEnable()
     {
         instance = this;

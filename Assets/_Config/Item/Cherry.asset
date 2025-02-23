@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Cherry
   m_EditorClassIdentifier: 
   _prefab: {fileID: 3683152972018930792, guid: eaf3ab84a2839a4438f059c25b33221b, type: 3}
-  index: 0
-  spawnPosObjList: []
+  index: 6
+  spawnPosObjList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _tag: posCherry

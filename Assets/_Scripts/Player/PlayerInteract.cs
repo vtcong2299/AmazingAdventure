@@ -32,7 +32,6 @@ public class PlayerInteract : MonoBehaviour
             AudioManager.Instance.SoundGetCoin();
             apple++;            
             collider.gameObject.GetComponent<AnimApple>().AnimHit();
-            collider.gameObject.GetComponent<Collider2D>().enabled = false;
             StartCoroutine(UnActiveCoroutine(collider));
             GameManager.Instance.ManagerOnChangeApple(apple);
         }
@@ -61,6 +60,7 @@ public class PlayerInteract : MonoBehaviour
     }
     IEnumerator UnActiveCoroutine(Collider2D collider)
     {
+        collider.gameObject.GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(0.25f);
         collider.gameObject.GetComponent<Collider2D>().enabled = true;
         collider.gameObject.SetActive(false);
@@ -130,9 +130,9 @@ public class PlayerInteract : MonoBehaviour
     {
         Vector2 leftRayOrigin = new Vector2(transform.position.x - 0.08f, transform.position.y);
         Vector2 rightRayOrigin = new Vector2(transform.position.x + 0.08f, transform.position.y);
-        RaycastHit2D hitLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, 0.2f, layerEnemy);
-        RaycastHit2D hitRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, 0.2f, layerEnemy);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.2f, layerEnemy);
+        RaycastHit2D hitLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, 0.21f, layerEnemy);
+        RaycastHit2D hitRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, 0.21f, layerEnemy);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.21f, layerEnemy);
         if (hit.collider || hitLeft.collider || hitRight.collider)
         {
             hasEnemy = true;
@@ -141,6 +141,6 @@ public class PlayerInteract : MonoBehaviour
         {
             hasEnemy = false;
         }
-        Debug.DrawRay(transform.position, Vector2.down * 0.2f, Color.green);
+        Debug.DrawRay(transform.position, Vector2.down * 0.21f, Color.green);
     }
 }

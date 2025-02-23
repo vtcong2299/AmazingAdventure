@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,5 +39,17 @@ public class BatMove : MonoBehaviour
         }
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         float distance = Vector3.Distance(transform.position, targetPos);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Vector3 target = transform.position + new Vector3(Random.Range(-1f, 1f), 0.7f, 0);
+            if (collision.gameObject.GetComponent<PlayerDameReceiver>().hp == 1)
+            {
+                target = oldPosition;
+            }
+            transform.DOMove(target, 1f).SetEase(Ease.OutCubic);
+        }
     }
 }

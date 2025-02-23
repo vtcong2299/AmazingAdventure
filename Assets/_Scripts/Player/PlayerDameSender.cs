@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerDameSender : DameSender
 {
@@ -13,8 +14,7 @@ public class PlayerDameSender : DameSender
         playerInteract = GetComponent<PlayerInteract>();
     }
     public override void ColliderSendDame(Collision2D collision)
-    {
-        
+    {        
         if (collision.gameObject.tag == "Dead")
         {
             base.ColliderSendDame(collision);
@@ -27,7 +27,7 @@ public class PlayerDameSender : DameSender
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
             playerDameReceiver.Receiver(damage);
-            PlayerCtrl.Instance.JumpBack(collision);
+            PlayerCtrl.Instance.JumpBack(collision, false);
         }
         GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
     }

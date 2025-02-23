@@ -1,35 +1,50 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-    public class BulletMove : MonoBehaviour
+public class BulletMove : MonoBehaviour
+{
+    public Vector3 oldPosition;
+    public float speedBullet = 1f;
+    float rangeAttack = 8f;
+    private Transform parentTransform;
+
+    private void Awake()
     {
-        public Vector3 oldPosition;
-        public float speedBullet = 1f;
-        private void Awake()
+        oldPosition = transform.position;
+    }
+    private void OnEnable()
+    {
+        parentTransform = transform.parent;
+    }
+
+    private void Update()
+    {
+        MoveBullet();
+        ResetBullet();
+    }
+
+    private void ResetBullet()
+    {
+        if (Vector3.Distance(oldPosition, transform.position) >= rangeAttack)
         {
-            oldPosition = transform.position;
-        }
-        private void Update()
-        {
-            MoveBullet();
-            ResetBullet();
-        }
-        private void ResetBullet()
-        {
-            if (Vector3.Distance(oldPosition, transform.position) >= 5)
-            {
-                Destroy(gameObject);
-            }
-        }
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player"|| collision.gameObject.tag == "Wall")
-            {
-                Destroy(gameObject);
-            }
-        }
-        public void MoveBullet()
-        {
-            transform.position += new Vector3(-1f, 0f, 0f) * Time.deltaTime * speedBullet;
+            Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "Wall"
+            || collision.gameObject.tag == "Black"|| collision.gameObject.tag == "LimitMap" )
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void MoveBullet()
+    {
+        if (parentTransform != null)
+        {
+            transform.position -= parentTransform.right * Time.deltaTime * speedBullet;
+        }
+    }
+}

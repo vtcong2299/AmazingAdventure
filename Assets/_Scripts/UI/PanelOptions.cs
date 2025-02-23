@@ -10,6 +10,8 @@ public class PanelOptions : MonoBehaviour
     [SerializeField] Button rightButton;
     [SerializeField] Button musicButton;
     [SerializeField] Button soundButton;
+    [SerializeField] Button selectButton;
+    [SerializeField] Button fpsButton;
 
     [SerializeField] SettingSound settingSound;
     private void Start()
@@ -19,8 +21,14 @@ public class PanelOptions : MonoBehaviour
         rightButton.onClick.AddListener(ClickRightButton);
         musicButton.onClick.AddListener(ClickMusicButton);
         soundButton.onClick.AddListener(ClickSoundButton);
+        selectButton.onClick.AddListener(ClickSelectButton);
+        fpsButton.onClick.AddListener(ClickFPSButton);
         settingSound.SetUpIconSound(DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconMusic(DataManager.Instance.gameData.hasBGM);
+    }
+    private void OnEnable()
+    {
+        DataManager.Instance.ShowCharacterSelecting();
     }
     void ClickBackButton()
     {
@@ -32,13 +40,19 @@ public class PanelOptions : MonoBehaviour
     void ClickLeftButton()
     {
         AudioManager.Instance.SoundClickButton();
-        Debug.Log("ClickLeftButton");
+        DataManager.Instance.BackSelectCharacter();
     }
     void ClickRightButton()
     {
         AudioManager.Instance.SoundClickButton();
-        Debug.Log("ClickRightButton");
+        DataManager.Instance.NextSelectCharacter();
     }
+    public void ClickSelectButton()
+    {
+        AudioManager.Instance.SoundClickButton();
+        DataManager.Instance.UpdateSelectCharacter();
+    }
+
     void ClickMusicButton()
     {
         AudioManager.Instance.SoundClickButton();
@@ -52,5 +66,10 @@ public class PanelOptions : MonoBehaviour
         AudioManager.Instance.SetVolumAudioSFX(!DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconSound(!DataManager.Instance.gameData.hasSFX);
         DataManager.Instance.gameData.hasSFX = !DataManager.Instance.gameData.hasSFX;
+    }
+    void ClickFPSButton()
+    {
+        AudioManager.Instance.SoundClickButton();
+        UIGameMenu.Instance.OnEnablePanelFPS();
     }
 }

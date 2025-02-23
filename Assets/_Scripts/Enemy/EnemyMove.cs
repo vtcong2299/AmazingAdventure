@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public Vector3[] targetPoint;
-    [SerializeField]    protected float speed = 0.5f;
-    [SerializeField]    protected int index = 0;
-    [SerializeField]    protected bool enemyFacingRight;
-    [SerializeField]    protected LayerMask layerGround;
-    [SerializeField]    protected LayerMask layerWall;
-    [SerializeField]    protected float lengthRaycast = 0.3f;
+    [SerializeField] protected float speed = 0.5f;
+    [SerializeField] protected int index = 0;
+    public bool enemyFacingRight;
+    [SerializeField] protected LayerMask layerGround;
+    [SerializeField] protected LayerMask layerWall;
+    [SerializeField] protected float lengthRaycast = 0.3f;
+    [SerializeField] protected Vector3 offset = new Vector3(1.2f, 0, 0);
+
     private void Update()
     {
         MoveEnemy();
@@ -25,7 +27,7 @@ public class EnemyMove : MonoBehaviour
         {
             index++;
         }
-        if (index == targetPoint.Length)
+        if (index >= targetPoint.Length)
         {
             index = 0;
         }
@@ -72,10 +74,10 @@ public class EnemyMove : MonoBehaviour
             index++;
         }
     }
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, -transform.up * lengthRaycast);
-        Gizmos.DrawRay(transform.position, -transform.right * lengthRaycast);
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawRay(transform.position, -transform.up * lengthRaycast);
+    //    Gizmos.DrawRay(transform.position, -transform.right * lengthRaycast);
+    //}
 }

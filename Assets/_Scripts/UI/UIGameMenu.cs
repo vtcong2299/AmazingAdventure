@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIGameMenu : Singleton<UIGameMenu>
@@ -8,9 +9,14 @@ public class UIGameMenu : Singleton<UIGameMenu>
     [SerializeField] GameObject panelOption;
     [SerializeField] GameObject panelQuitGame;
     [SerializeField] GameObject panelLoading;
+    [SerializeField] GameObject panelFPS;
 
     [SerializeField] GameObject optionPopup;
     [SerializeField] GameObject quitGamePopup;
+    [SerializeField] GameObject fpsPopup;
+
+    [SerializeField] Image imageCharacter;
+
     public void Start()
     {
         Init();
@@ -42,6 +48,14 @@ public class UIGameMenu : Singleton<UIGameMenu>
     {
         AnimUI.Instance.AnimScaleIn(quitGamePopup, panelQuitGame);
     }
+    public void OnEnablePanelFPS()
+    {
+        AnimUI.Instance.AnimScaleOut(fpsPopup, panelFPS);
+    }
+    public void OnDisablePanelFPS()
+    {
+        AnimUI.Instance.AnimScaleIn(fpsPopup, panelFPS);
+    }
     public void OnEnablePanelStartGame()
     {
         panelStratGame.SetActive(true);
@@ -50,16 +64,12 @@ public class UIGameMenu : Singleton<UIGameMenu>
     {
         panelStratGame.SetActive(false);
     }
-    public void OnEnablePanelLoading()
-    {
-        panelLoading.SetActive(true);
-    }
-    public void OnDisablePanelLoading()
-    {
-        panelLoading.SetActive(false);
-    }
     public void LoadScene()
     {
         StartCoroutine(Scene.Instance.LoadSceneWithDelay(1, panelLoading));
+    }
+    public void ChangeImageCharaterUI(Sprite image)
+    {
+        imageCharacter.sprite = image;
     }
 }

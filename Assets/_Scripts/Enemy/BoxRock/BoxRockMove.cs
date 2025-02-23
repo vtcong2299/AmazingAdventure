@@ -5,8 +5,14 @@ using System.Reflection;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class BoxRockMove : TrapsMove
+public class BoxRockMove : MonoBehaviour
 {
+    public Vector3[] targetPoint;
+    [SerializeField]
+    protected float speed = 0.5f;
+    [SerializeField]
+    private int index = 0;
+
     public AnimBoxRock animBoxRock;
     private void Awake()
     {
@@ -18,7 +24,26 @@ public class BoxRockMove : TrapsMove
         targetPoint[3] = new Vector3(transform.position.x , transform.position.y, transform.position.z);
         animBoxRock = GetComponent<AnimBoxRock>();
     }
-    public override void AnimMove(int index)
+    private void Update()
+    {
+        Move();
+    }
+    void Move()
+    {
+        Vector3 targetPos = targetPoint[index];
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        float distance = Vector3.Distance(transform.position, targetPos);
+        if (distance <= 0.02f)
+        {
+            AnimMove(index);
+            index++;
+        }
+        if (index == targetPoint.Length)
+        {
+            index = 0;
+        }
+    }
+    public void AnimMove(int index)
     {
         switch (index)
         {

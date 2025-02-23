@@ -25,6 +25,7 @@ public class SpawnObj : Singleton<SpawnObj>
             {
                 GameObject obj = Instantiate(item._prefab, item.spawnPosObjList[item.index].transform.position, Quaternion.identity);
                 obj.transform.parent = transform;
+                obj.transform.localRotation = item.spawnPosObjList[item.index].transform.rotation;
                 obj.gameObject.SetActive(true);
             }
         }

@@ -9,13 +9,15 @@ public class EnemyHit : MonoBehaviour
         if ((collision.gameObject.tag == "Player") && PlayerCtrl.Instance.playerInteract.hasEnemy)
         {
             AnimHit();
-            PlayerCtrl.Instance.JumpBack(collision);
+            PlayerCtrl.Instance.JumpBack(collision, true);
+            gameObject.GetComponent<Collider2D>().enabled = false;
             Invoke("DestroyEnemy", 0.25f);
         }
     }
     public virtual void AnimHit(){}
     void DestroyEnemy()
     {
+        gameObject.GetComponent<Collider2D>().enabled = true;
         gameObject.SetActive(false);
     }   
 }

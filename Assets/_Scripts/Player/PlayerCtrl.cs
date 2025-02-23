@@ -11,19 +11,28 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] float backJumps = 3f;
     [SerializeField] LayerMask layerGround;
     [SerializeField] LayerMask layerWall;
-    GameObject startPos;
+    [SerializeField] GameObject startPos;
+    [SerializeField] GameObject endPos;
     public PlayerDameReceiver playerDameReceiver;
     PlayerAnimatorManager playerAnimatorManager;
     public PlayerInteract playerInteract;
     Vector3 startTranform;
     [SerializeField] bool isBackJump;
-    bool isFacingRight = true;
+    public bool isFacingRight = true;
     bool maybeJump;
     bool wallJump;
     bool doubleJump;
     bool clickJump;
     public bool isBackPoint = false;
     [SerializeField] Vector3 offsetWithStartPos;
+
+    private Transform currentPlatform;
+    private Vector3 lastPlatformPosition;
+
+    public GameObject ninjaFrog;
+    public GameObject maskDude;
+    public GameObject pinkMan;
+    public GameObject virtualGuy;
 
     public void StartPlayer()
     {
@@ -45,11 +54,13 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         CheckFace();
         CheckJump();
-        ModeCtrl(GameManager.Instance.isPlayMobile);
-        
+        ModeCtrl(DataManager.Instance.gameData.isPlayOnMobile);
+
         CheckFall();
         playerAnimatorManager.SetInGround(maybeJump);
         playerAnimatorManager.SetInWall(wallJump);
+
+        SetPositionInPlatform();
     }
 
     public void ModeCtrl(bool onMobile)
@@ -97,10 +108,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         isBackJump = false;
     }
 
-    public void JumpBack(Collision2D collision)
+    public void JumpBack(Collision2D collision, bool enemy)
     {
         isBackJump = true;
-        if (rb2D.velocity.y > 0f)
+        if (enemy)
+        {
+            Vector2 knockbackDirection = new Vector2(0f, 4f).normalized;
+            rb2D.AddForce(knockbackDirection * backJumps, ForceMode2D.Impulse);
+        }
+        else if (rb2D.velocity.y > 0f)
         {
             Vector2 knockbackDirection = new Vector2(0f, -3f).normalized;
             rb2D.AddForce(knockbackDirection * backJumps, ForceMode2D.Impulse);
@@ -109,12 +125,12 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         {
             if (isFacingRight)
             {
-                Vector2 knockbackDirection = new Vector2(0, 2f).normalized;
+                Vector2 knockbackDirection = new Vector2(-1, 3f).normalized;
                 rb2D.AddForce(knockbackDirection * backJumps, ForceMode2D.Impulse);
             }
             else
             {
-                Vector2 knockbackDirection = new Vector2(0, 2f).normalized;
+                Vector2 knockbackDirection = new Vector2(1, 3f).normalized;
                 rb2D.AddForce(knockbackDirection * backJumps, ForceMode2D.Impulse);
             }
         }
@@ -158,7 +174,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     }
 
     private void JumpOnMobile() // Nhảy bằng button
-    {        
+    {
         if ((maybeJump && !clickJump) || wallJump && !clickJump)
         {
             doubleJump = false;
@@ -240,9 +256,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         transform.position = startTranform;
         playerInteract.ResetItemUI();
         GameManager.Instance.ResetObjInMap();
-        CameraFollow.Instance.ResetCamera();
         playerInteract.isEnd = false;
         playerAnimatorManager.SetBackCheckPoint();
+        PlayerLookEndPoint();
     }
     public void SetIsBackPointFalse()
     {
@@ -259,14 +275,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         if (collision.gameObject.tag == "Flatform")
         {
-            transform.SetParent(collision.transform);
+            currentPlatform = collision.transform;
+            lastPlatformPosition = currentPlatform.position;
         }
     }
     public void CheckOutParent(Collision2D collision)
     {
         if (collision.gameObject.tag == "Flatform" && collision.gameObject.activeSelf && player.gameObject.activeSelf)
         {
-            transform.SetParent(null);
+            currentPlatform = null;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -288,5 +305,20 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         EndPoint.instance.SetEnd(collision);
+    }
+    void SetPositionInPlatform()
+    {
+        if (currentPlatform != null)
+        {
+            Vector3 deltaPosition = currentPlatform.position - lastPlatformPosition;
+            transform.position += deltaPosition;
+            lastPlatformPosition = currentPlatform.position;
+        }
+    }
+    void PlayerLookEndPoint()
+    {
+        endPos = GameObject.Find("EndPos");
+        if (transform.position.x < endPos.transform.position.x) return;
+        Flip();
     }
 }

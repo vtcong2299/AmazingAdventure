@@ -9,6 +9,8 @@ public class PanelStartGame : MonoBehaviour
     [SerializeField] Button optionsButton;
     [SerializeField] Button exitButton;
     [SerializeField] Button resetDataButton;
+    [SerializeField] Button ctrlButton;
+    [SerializeField] Text txtCtrl;
 
     private void Start()
     {
@@ -16,8 +18,12 @@ public class PanelStartGame : MonoBehaviour
         optionsButton.onClick.AddListener(ClickOptionsButton);
         exitButton.onClick.AddListener(ClickExitButton);
         resetDataButton.onClick.AddListener(ClickResetDataButton);
+        ctrlButton.onClick.AddListener(ClickCtrlButton);
     }
-
+    private void Update()
+    {
+        CheckTextCtrlButton();
+    }
     void ClickStartButton()
     {
         AudioManager.Instance.SoundClickButton();
@@ -42,5 +48,23 @@ public class PanelStartGame : MonoBehaviour
     {
         AudioManager.Instance.SoundClickButton();
         DataManager.Instance.ResetData();
+    }
+    void ClickCtrlButton()
+    {
+        AudioManager.Instance.SoundClickButton();
+        DataManager.Instance.gameData.isPlayOnMobile = !DataManager.Instance.gameData.isPlayOnMobile;
+        CheckTextCtrlButton();
+        DataManager.Instance.SaveData();
+    }
+    void CheckTextCtrlButton()
+    {
+        if (DataManager.Instance.gameData.isPlayOnMobile)
+        {
+            txtCtrl.text = "Mobile";
+        }
+        else
+        {
+            txtCtrl.text = "PC";
+        }
     }
 }

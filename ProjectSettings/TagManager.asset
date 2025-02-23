@@ -32,6 +32,9 @@ TagManager:
   - Apple
   - Banana
   - Cherry
+  - Bat
+  - Black
+  - LimitMap
   layers:
   - Default
   - TransparentFX
@@ -47,7 +50,7 @@ TagManager:
   - MapLimit
   - Enemy
   - Map
-  - 
+  - Bullet
   - 
   - 
   - 

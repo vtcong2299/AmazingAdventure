@@ -15,7 +15,7 @@ public class PlayerAnimatorManager : MonoBehaviour
     string animDoubleJump = "DoubleJump";
     string animInGround = "inGround";
 
-    private void Awake()
+    private void OnEnable()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
     }      

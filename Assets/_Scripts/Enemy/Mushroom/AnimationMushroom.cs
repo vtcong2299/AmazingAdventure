@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class AnimationMushroom : MonoBehaviour
 {
-    private Animator animator;
-    private void Awake()
+    [SerializeField] Animator animator;
+
+    public void MushroomRun()
     {
-        animator = gameObject.GetComponent<Animator>();
+        animator.SetBool("isRun", true);
     }
-    //public void MushroomRun()
-    //{
-    //    animator.SetBool("isRun", true);
-    //}
-    //public void MushroomNotRun()
-    //{
-    //    animator.SetBool("isRun", false);
-    //}
+    public void MushroomNotRun()
+    {
+        animator.SetBool("isRun", false);
+    }
     public void MushroomHit()
     {
         animator.SetTrigger("isHit");

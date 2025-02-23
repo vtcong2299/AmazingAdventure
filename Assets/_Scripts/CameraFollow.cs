@@ -5,25 +5,48 @@ using UnityEngine;
 public class CameraFollow : Singleton<CameraFollow>
 {
     [SerializeField] float speedFollow = 5f;
-    [SerializeField] float lengthRaycastY = 1.35f;
-    [SerializeField] float lengthRaycastX = 2.7f;
+    [SerializeField] float lengthRaycastY = 1.27f;
+    [SerializeField] float lengthRaycastX = 2.6f;
     [SerializeField] LayerMask blackLayer;
     [SerializeField] Transform target;
-    [SerializeField] Vector3 startPosCamera;
-    //[SerializeField] Vector3 endPosCamera;
     [SerializeField] LayerMask lockCameraLayer;
+
+    private void Start()
+    {
+        Camera mainCamera = Camera.main;
+        float orthographicSize = mainCamera.orthographicSize;
+        float screenHeightInUnits = 2 * orthographicSize;
+        float aspectRatio = (float)Screen.width / Screen.height;
+        float screenWidthInUnits = screenHeightInUnits * aspectRatio;
+
+        lengthRaycastY = screenHeightInUnits / 2;
+        lengthRaycastX = screenWidthInUnits / 2;
+    }
     private void Update()
     {
         FollowPlayer();
     }
+
     void FollowPlayer()
-    {   
+    {
         Vector3 posCamera = transform.position;
         RaycastHit2D hitX1 = Physics2D.Raycast(target.position, -target.right, lengthRaycastX, lockCameraLayer);
         RaycastHit2D hitX2 = Physics2D.Raycast(target.position, target.right, lengthRaycastX, lockCameraLayer);
-        if ( hitX1.collider || hitX2.collider)
+        if (hitX1.collider && PlayerCtrl.Instance.isFacingRight)
         {
-            posCamera.x = transform.position.x;
+            posCamera.x = hitX1.point.x + lengthRaycastX;
+        }
+        else if (hitX2.collider && !PlayerCtrl.Instance.isFacingRight)
+        {
+            posCamera.x = hitX2.point.x + lengthRaycastX;
+        }
+        else if (hitX1.collider && !PlayerCtrl.Instance.isFacingRight)
+        {
+            posCamera.x = hitX1.point.x - lengthRaycastX;
+        }
+        else if (hitX2.collider && PlayerCtrl.Instance.isFacingRight)
+        {
+            posCamera.x = hitX2.point.x - lengthRaycastX;
         }
         else
         {
@@ -34,27 +57,20 @@ public class CameraFollow : Singleton<CameraFollow>
         {
             posCamera.y = hitY.point.y + lengthRaycastY;
         }
-        else if (target.position.y <= startPosCamera.y && target.position.y >= 0)
-        {
-            posCamera.y = startPosCamera.y;
-        }
-        else 
+        else
         {
             posCamera.y = target.position.y;
         }
 
-        Vector3 newPos = new Vector3(posCamera.x, posCamera.y,-10f);
-        transform.position = Vector3.Slerp(transform.position, newPos, speedFollow*Time.deltaTime);
+        Vector3 newPos = new Vector3(posCamera.x, posCamera.y, -10f);
+        transform.position = Vector3.Slerp(transform.position, newPos, speedFollow * Time.deltaTime);
     }
-    void OnDrawGizmos()
-    {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawRay(target.position, -target.up * lengthRaycastY);
-        //Gizmos.DrawRay(target.position, -target.right * lengthRaycastX);
-        //Gizmos.DrawRay(target.position, target.right * lengthRaycastX);
-    }
-    public void ResetCamera()
-    {
-        transform.position = startPosCamera;
-    }
+
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawRay(target.position, -target.up * lengthRaycastY);
+    //    Gizmos.DrawRay(target.position, -target.right * lengthRaycastX);
+    //    Gizmos.DrawRay(target.position, target.right * lengthRaycastX);
+    //}
 }

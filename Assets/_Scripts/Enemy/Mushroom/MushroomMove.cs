@@ -8,31 +8,27 @@ public class MushroomMove : EnemyMove
     private void Awake()
     {
         targetPoint = new Vector3[2];
-        SpeedEnemy();
         animationMushroom = GetComponent<AnimationMushroom>();
-        targetPoint[0] =new Vector3(transform.position.x - 1.2f, transform.position.y, transform.position.z);
-        targetPoint[1] = new Vector3(transform.position.x + 1.2f, transform.position.y, transform.position.z);
+        targetPoint[0] =new Vector3(transform.position.x - offset.x, transform.position.y, transform.position.z);
+        targetPoint[1] = new Vector3(transform.position.x + offset.x, transform.position.y, transform.position.z);
     }
-    //private void Start()
-    //{
-    //    StartMushroom();
-    //}
-    //public void StartMushroom()
-    //{
-    //    StartCoroutine(ExampleCoroutine());
-    //    animationMushroom.MushroomRun();
-    //}        
-    //IEnumerator ExampleCoroutine()
-    //{        
-    //        while (true)
-    //        {
-    //            yield return new WaitForSeconds(6f);
-    //            speed = 0;
-    //            animationMushroom.MushroomNotRun();
-    //            yield return new WaitForSeconds(4f);
-    //            speed = 0.5f;
-    //            animationMushroom.MushroomRun();
-    //        }
-    //}
+    void OnEnable()
+    {
+        StartCoroutine(ExampleCoroutine());
+        animationMushroom.MushroomRun();
+        speed = 0.5f;
+    }
+    IEnumerator ExampleCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(5,8));
+            speed = 0;
+            animationMushroom.MushroomNotRun();
+            yield return new WaitForSeconds(Random.Range(4,6));
+            speed = 0.5f;
+            animationMushroom.MushroomRun();
+        }
+    }
 }
 

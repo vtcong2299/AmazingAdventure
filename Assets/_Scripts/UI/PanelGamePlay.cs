@@ -29,7 +29,7 @@ public class PanelGamePlay : MonoBehaviour
     private void Update()
     {
         CaculateFPS();
-        SetActiveCtrlMobile(GameManager.Instance.isPlayMobile);        
+        SetActiveCtrlMobile(DataManager.Instance.gameData.isPlayOnMobile);        
     }
     void SetActiveCtrlMobile(bool onMobile)
     {

@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public GameObject player;
-    public bool isPlayMobile;
     [SerializeField] int idCurMap = 0;
     private void Start()
     {
@@ -17,10 +16,12 @@ public class GameManager : Singleton<GameManager>
         SetLevel(0);
         LevelManager.Instance.CheckUnLockMap();
         LevelManager.Instance.CheckCompleteMap();
+        DataManager.Instance.CheckInterfacePlayer();
     }
-    private void Update()
+    private void OnEnable()
     {
-        SetParentOfPlayer();
+        DataManager.Instance.SetFPS();
+
     }
     public void ManagerPlayerHeartUI(float hp)
     {
@@ -70,13 +71,6 @@ public class GameManager : Singleton<GameManager>
         BGManager.instance.RandomBG();
     }
 
-    public void SetParentOfPlayer()
-    {
-        if (!player.gameObject.activeSelf)
-        {
-            player.transform.SetParent(null);
-        }
-    }
     public void SelectLevel(int level)
     {
         idCurMap = level;

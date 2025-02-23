@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewItemConfig", menuName = "Config/Item")]
+[CreateAssetMenu(fileName = "NewConfig", menuName = "Config/Item")]
 public class ConfigItem : ScriptableObject
 {
     public GameObject _prefab;

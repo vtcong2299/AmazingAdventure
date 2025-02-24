@@ -17,36 +17,55 @@ public class GameData
     public bool isPlayOnMobile;
 }
 
+
 public class DataGamePlay : MonoBehaviour
 {
-    private string dataPath;
-    public void Start()
+    private const string GameDataKey = "GameData";
+    //private string dataPath;
+
+    private void Start()
     {
-        dataPath = Path.Combine(Application.persistentDataPath, "playerData.json");
-        LoadData(); //load khi khởi động
+        //dataPath = Path.Combine(Application.persistentDataPath, "playerData.json");
+        LoadData(); // Load khi khởi động
     }
 
     public void SaveData(GameData data)
     {
-        string json = JsonUtility.ToJson(data); //chuyển data thành chuỗi json
-        File.WriteAllText(dataPath, json); //tạo file nếu chưa tồn tại
+        string json = JsonUtility.ToJson(data); // Chuyển data thành chuỗi JSON
+        PlayerPrefs.SetString(GameDataKey, json); // Lưu chuỗi JSON vào PlayerPrefs
+        PlayerPrefs.Save(); // Lưu ngay lập tức
+
+        // Lưu dữ liệu vào file hệ thống
+        //File.WriteAllText(dataPath, json);
     }
 
     public GameData LoadData()
     {
-        if (File.Exists(dataPath))
+        if (PlayerPrefs.HasKey(GameDataKey))
         {
-            string json = File.ReadAllText(dataPath);
+            string json = PlayerPrefs.GetString(GameDataKey);
             GameData data = JsonUtility.FromJson<GameData>(json);
             return data;
         }
-        return new GameData(); // Trả về dữ liệu mới nếu không tìm thấy file
+        //else if (File.Exists(dataPath))
+        //{
+        //    string json = File.ReadAllText(dataPath);
+        //    GameData data = JsonUtility.FromJson<GameData>(json);
+        //    return data;
+        //}
+        return new GameData(); // Trả về dữ liệu mới nếu không tìm thấy dữ liệu
     }
+
     public void ResetData()
     {
-        if (File.Exists(dataPath))
+        if (PlayerPrefs.HasKey(GameDataKey))
         {
-            File.Delete(dataPath);
+            PlayerPrefs.DeleteKey(GameDataKey);
         }
+
+        //if (File.Exists(dataPath))
+        //{
+        //    File.Delete(dataPath);
+        //}
     }
 }

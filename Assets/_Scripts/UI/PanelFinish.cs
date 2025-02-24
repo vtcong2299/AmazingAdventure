@@ -10,6 +10,7 @@ public class PanelFinish : MonoBehaviour
     [SerializeField] Text txtAppleEnd;
     [SerializeField] Text txtBananaEnd;
     [SerializeField] Text txtCherryEnd;
+    [SerializeField] Text txtComplete;
     [SerializeField] Button replayButton;
     [SerializeField] Button homeButton;
     [SerializeField] Button levelButton;
@@ -26,12 +27,24 @@ public class PanelFinish : MonoBehaviour
     {
         lockNextButton.SetActive(false);
     }
+    public void SetTxtComplete(int apple, int banana,int cherry, int stars)
+    {
+        if (apple < LevelManager.Instance.targetApple || banana < LevelManager.Instance.targetBanana
+            || cherry < LevelManager.Instance.targetCherry || stars == 0)
+        {
+            txtComplete.text = "Level Fail";
+        }
+        else
+        {
+            txtComplete.text = "Level Compelete";
+        }
+    }
     public void OnAppleEnd(int apple)
     {
         if (apple < LevelManager.Instance.targetApple)
         {
-            txtAppleEnd.color = Color.red;
             lockNextButton.SetActive(true);
+            txtAppleEnd.color = Color.red;
         }
         else
         {
@@ -56,8 +69,8 @@ public class PanelFinish : MonoBehaviour
     {
         if (cherry < LevelManager.Instance.targetBanana)
         {
-            txtCherryEnd.color = Color.red;
             lockNextButton.SetActive(true);
+            txtCherryEnd.color = Color.red;
         }
         else
         {

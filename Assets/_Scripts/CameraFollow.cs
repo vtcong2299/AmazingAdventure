@@ -32,7 +32,11 @@ public class CameraFollow : Singleton<CameraFollow>
         Vector3 posCamera = transform.position;
         RaycastHit2D hitX1 = Physics2D.Raycast(target.position, -target.right, lengthRaycastX, lockCameraLayer);
         RaycastHit2D hitX2 = Physics2D.Raycast(target.position, target.right, lengthRaycastX, lockCameraLayer);
-        if (hitX1.collider && PlayerCtrl.Instance.isFacingRight)
+        if (hitX1.collider && hitX2.collider)
+        {
+            posCamera.x = target.position.x;
+        }
+        else if (hitX1.collider && PlayerCtrl.Instance.isFacingRight)
         {
             posCamera.x = hitX1.point.x + lengthRaycastX;
         }

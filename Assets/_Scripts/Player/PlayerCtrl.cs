@@ -34,6 +34,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     public GameObject pinkMan;
     public GameObject virtualGuy;
 
+    [SerializeField] float lengRaycastX = 0.12f;
+    [SerializeField] float lengRaycastY = 0.2f;
+
     public void StartPlayer()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -192,17 +195,17 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         Vector2 leftRayOrigin = new Vector2(transform.position.x - 0.1f, transform.position.y);
         Vector2 rightRayOrigin = new Vector2(transform.position.x + 0.1f, transform.position.y);
-        RaycastHit2D hitGroundLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, 0.2f, layerGround);
-        RaycastHit2D hitGroundRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, 0.2f, layerGround);
+        RaycastHit2D hitGroundLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, lengRaycastY, layerGround);
+        RaycastHit2D hitGroundRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, lengRaycastY, layerGround);
         maybeJump = hitGroundLeft.collider != null || hitGroundRight.collider != null;
-        Debug.DrawRay(leftRayOrigin, Vector2.down * 0.2f, Color.green);
-        Debug.DrawRay(rightRayOrigin, Vector2.down * 0.2f, Color.green);
+        Debug.DrawRay(leftRayOrigin, Vector2.down * lengRaycastY, Color.green);
+        Debug.DrawRay(rightRayOrigin, Vector2.down * lengRaycastY, Color.green);
 
 
         Vector2 direction = isFacingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, 0.15f, layerWall);
+        RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, lengRaycastX, layerWall);
         wallJump = hitWall.collider != null;
-        Debug.DrawRay(transform.position, direction * 0.15f, Color.green);
+        Debug.DrawRay(transform.position, direction * lengRaycastX, Color.green);
     }
     public void ClickJumpButton()
     {

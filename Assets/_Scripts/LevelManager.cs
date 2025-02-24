@@ -88,7 +88,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             if (map._id == idCurMap)
             {
-                DataManager.Instance.gameData.idMapCompeleteMax = map._id;
+                if (DataManager.Instance.gameData.idMapCompeleteMax < map._id)
+                {
+                    DataManager.Instance.gameData.idMapCompeleteMax = map._id;
+                }
                 if (star == 3)
                 {
                     DataManager.Instance.gameData.idMapCompeleteThreeStar.Add(map._id);

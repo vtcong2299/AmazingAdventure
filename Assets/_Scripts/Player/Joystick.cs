@@ -18,10 +18,10 @@ public class Joystick : Singleton<Joystick>, IDragHandler, IPointerUpHandler, IP
         {
             pos.x = (pos.x / background.sizeDelta.x);
 
-            inputVector = new Vector2(pos.x * 2, 0);
+            inputVector = new Vector2(pos.x * 3f, 0);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
-            handle.anchoredPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 2), 7);
+            handle.anchoredPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 3f), 7);
         }
     }
     public void OnPointerDown(PointerEventData eventData) 

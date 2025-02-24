@@ -5,7 +5,7 @@ public class BulletMove : MonoBehaviour
 {
     public Vector3 oldPosition;
     public float speedBullet = 1f;
-    float rangeAttack = 8f;
+    float rangeAttack = 5f;
     private Transform parentTransform;
 
     private void Awake()

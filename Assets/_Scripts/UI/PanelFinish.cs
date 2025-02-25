@@ -99,6 +99,7 @@ public class PanelFinish : MonoBehaviour
     }
     public void PressNextLevel()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.UnLoadLevel();
         UIManager.Instance.OnDisablePanelFinish();
@@ -106,17 +107,20 @@ public class PanelFinish : MonoBehaviour
     }   
     public void PressLevelMenu()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.PressLevelMenu();
         UIManager.Instance.OnDisablePanelFinish();
         GameManager.Instance.UnLoadLevel();
     }
     public void ClickRePlayButton()
     {
+        AudioManager.Instance.SoundClickButton();
         PlayerCtrl.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelFinish();
     }
     public void ClickHomeButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.OnDisablePanelFinish();
         UIManager.Instance.LoadScene();
     }

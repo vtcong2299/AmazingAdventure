@@ -14,6 +14,7 @@ public class PanelPauseGame : MonoBehaviour
     [SerializeField] Button levelButton;
     [SerializeField] Button musicButton;
     [SerializeField] Button soundButton;
+    [SerializeField] Button ctrlButton;
 
     [SerializeField] SettingSound settingSound;
     private void Start()
@@ -24,21 +25,25 @@ public class PanelPauseGame : MonoBehaviour
         levelButton.onClick.AddListener(PressLevelMenu);
         musicButton.onClick.AddListener(ClickMusicButton);
         soundButton.onClick.AddListener(ClickSoundButton);
+        ctrlButton.onClick.AddListener(ClickCtrlButton);
         settingSound.SetUpIconSound(DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconMusic(DataManager.Instance.gameData.hasBGM);
     }
     public void PressLevelMenu()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.OnDisablePanelPauseGame();
         GameManager.Instance.UnLoadLevel();
     }
     public void ClickPlayButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.OnDisablePanelPauseGame();
         DataManager.Instance.SaveData();
     }
     public void ClickRePlayButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.AnimPanelLoading();
         PlayerCtrl.Instance.BackCheckPoint();
         UIManager.Instance.OnDisablePanelPauseGame();
@@ -46,6 +51,7 @@ public class PanelPauseGame : MonoBehaviour
     }
     public void ClickHomeButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.OnDisablePanelPauseGame();
         UIManager.Instance.LoadScene();
     }
@@ -62,5 +68,10 @@ public class PanelPauseGame : MonoBehaviour
         AudioManager.Instance.SetVolumAudioSFX(!DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconSound(!DataManager.Instance.gameData.hasSFX);
         DataManager.Instance.gameData.hasSFX = !DataManager.Instance.gameData.hasSFX;
+    }
+    void ClickCtrlButton()
+    {
+        AudioManager.Instance.SoundClickButton();
+        UIManager.Instance.OnEnablePanelGuide();
     }
 }

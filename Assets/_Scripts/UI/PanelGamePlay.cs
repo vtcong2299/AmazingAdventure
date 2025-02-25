@@ -19,7 +19,6 @@ public class PanelGamePlay : MonoBehaviour
     float timeDelayUpdatePfs = 0f;
     [SerializeField] GameObject ctrlOnMobile;
     [SerializeField] Button pauseButton;
-    [SerializeField] Button jumpButton;
 
     private void Awake()
     {
@@ -29,30 +28,27 @@ public class PanelGamePlay : MonoBehaviour
     private void Update()
     {
         CaculateFPS();
-        SetActiveCtrlMobile(DataManager.Instance.gameData.isPlayOnMobile);        
+        SetActiveCtrlMobile(DataManager.Instance.gameData.isPlayOnMobile);
     }
+
     void SetActiveCtrlMobile(bool onMobile)
     {
-        if(onMobile)
-        {
-            ctrlOnMobile.SetActive(true);
-        }
-        else
-        {
-            ctrlOnMobile.SetActive(false);
-        }
+        ctrlOnMobile.SetActive(onMobile);
     }
+
     public void OnChangeApple(int apple)
     {
         txtApple.text = apple + "/" + LevelManager.Instance.targetApple;
     }
+
     public void OnChangeBanana(int banana)
     {
-        txtBanana.text =banana + "/" + LevelManager.Instance.targetBanana;
+        txtBanana.text = banana + "/" + LevelManager.Instance.targetBanana;
     }
+
     public void OnChangeCherry(int cherry)
     {
-        txtCherry.text =cherry + "/" + LevelManager.Instance.targetCherry;
+        txtCherry.text = cherry + "/" + LevelManager.Instance.targetCherry;
     }
 
     public void OnFPS(int fps)
@@ -97,16 +93,7 @@ public class PanelGamePlay : MonoBehaviour
 
     void ClickPauseButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.OnEnablePanelPauseGame();
-    }
-
-    public void ClickJumpButton()
-    {
-        PlayerCtrl.Instance.ClickJumpButton();
-    }
-
-    public void NotClickJumpButton()
-    {
-        PlayerCtrl.Instance.NotClickJumpButton();
     }
 }

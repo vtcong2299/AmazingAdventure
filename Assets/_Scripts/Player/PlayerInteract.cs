@@ -141,6 +141,5 @@ public class PlayerInteract : MonoBehaviour
         {
             hasEnemy = false;
         }
-        Debug.DrawRay(transform.position, Vector2.down * 0.21f, Color.green);
     }
 }

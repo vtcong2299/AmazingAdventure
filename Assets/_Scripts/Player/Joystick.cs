@@ -21,7 +21,7 @@ public class Joystick : Singleton<Joystick>, IDragHandler, IPointerUpHandler, IP
             inputVector = new Vector2(pos.x * 3f, 0);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
-            handle.anchoredPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 3f), 7);
+            handle.anchoredPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 3f), 1);
         }
     }
     public void OnPointerDown(PointerEventData eventData) 
@@ -31,7 +31,7 @@ public class Joystick : Singleton<Joystick>, IDragHandler, IPointerUpHandler, IP
     public void OnPointerUp(PointerEventData eventData)
     {
         inputVector = Vector2.zero;
-        handle.anchoredPosition = new Vector2(0, 7);
+        handle.anchoredPosition = new Vector2(0, 1);
     }
     public float Horizontal()
     {

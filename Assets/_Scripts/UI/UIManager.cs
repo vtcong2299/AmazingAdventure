@@ -10,11 +10,14 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject panelFinish;
     [SerializeField] GameObject panelLevel;
     [SerializeField] GameObject panelLoading;
+    [SerializeField] GameObject panelGuide;
+
     [SerializeField] CanvasGroup canvasGroupGamePlay;
     [SerializeField] CanvasGroup canvasGroupPauseGame;
     [SerializeField] CanvasGroup canvasGroupFinish;
     [SerializeField] CanvasGroup canvasGroupLevel;
     [SerializeField] CanvasGroup canvasGroupLoading;
+
     [SerializeField] GameObject popupPause;
     [SerializeField] GameObject popupFinish;
     public PanelGamePlay _uiGamePlay;
@@ -57,6 +60,15 @@ public class UIManager : Singleton<UIManager>
     {
         HideFade(panelLevel, canvasGroupLevel, false);
     }
+    public void OnEnablePanelGuide()
+    {
+        ShowScale(panelGuide, panelGuide, false);
+    }
+    public void OnDisablePanelGuide()
+    {
+        HideScale(panelGuide, panelGuide, false);
+    }
+
     public void ShowFade(GameObject panel, CanvasGroup canvasGroup, bool pause)
     {
         AnimUI.Instance.AnimFadeOut(canvasGroup, panel);

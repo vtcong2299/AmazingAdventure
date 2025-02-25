@@ -8,8 +8,8 @@ public class PanelStartGame : MonoBehaviour
     [SerializeField] Button playButton;
     [SerializeField] Button optionsButton;
     [SerializeField] Button exitButton;
-    [SerializeField] Button resetDataButton;
     [SerializeField] Button ctrlButton;
+    [SerializeField] Button guideButton;
     [SerializeField] Text txtCtrl;
 
     private void Start()
@@ -17,8 +17,8 @@ public class PanelStartGame : MonoBehaviour
         playButton.onClick.AddListener(ClickStartButton);
         optionsButton.onClick.AddListener(ClickOptionsButton);
         exitButton.onClick.AddListener(ClickExitButton);
-        resetDataButton.onClick.AddListener(ClickResetDataButton);
         ctrlButton.onClick.AddListener(ClickCtrlButton);
+        guideButton.onClick.AddListener(ClickGuideButton);
     }
     private void Update()
     {
@@ -43,18 +43,17 @@ public class PanelStartGame : MonoBehaviour
         AudioManager.Instance.SoundClickButton();
         UIGameMenu.Instance.OnEnablePanelQuitGame();
     }
-
-    void ClickResetDataButton()
-    {
-        AudioManager.Instance.SoundClickButton();
-        DataManager.Instance.ResetData();
-    }
     void ClickCtrlButton()
     {
         AudioManager.Instance.SoundClickButton();
         DataManager.Instance.gameData.isPlayOnMobile = !DataManager.Instance.gameData.isPlayOnMobile;
         CheckTextCtrlButton();
         DataManager.Instance.SaveData();
+    }
+    void ClickGuideButton()
+    {
+        AudioManager.Instance.SoundClickButton();
+        UIGameMenu.Instance.OnEnablePanelGuide();
     }
     void CheckTextCtrlButton()
     {

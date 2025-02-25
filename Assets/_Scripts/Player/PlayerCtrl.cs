@@ -37,6 +37,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] float lengRaycastX = 0.12f;
     [SerializeField] float lengRaycastY = 0.2f;
 
+    [SerializeField] LayerMask layerPlatform;
     public void StartPlayer()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -64,22 +65,23 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         playerAnimatorManager.SetInWall(wallJump);
 
         SetPositionInPlatform();
+        CheckGroundForPlatform();
     }
 
     public void ModeCtrl(bool onMobile)
     {
         if (onMobile)
         {
+            CheckTouchInput();
             MoveByButton();
-            MovePlayer();
             JumpOnMobile();
         }
         else
         {
             CtrlPC();
-            MovePlayer();
             JumpOnPC();
         }
+        MovePlayer();
     }
 
     public void CheckFall()
@@ -198,14 +200,37 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         RaycastHit2D hitGroundLeft = Physics2D.Raycast(leftRayOrigin, Vector2.down, lengRaycastY, layerGround);
         RaycastHit2D hitGroundRight = Physics2D.Raycast(rightRayOrigin, Vector2.down, lengRaycastY, layerGround);
         maybeJump = hitGroundLeft.collider != null || hitGroundRight.collider != null;
-        Debug.DrawRay(leftRayOrigin, Vector2.down * lengRaycastY, Color.green);
-        Debug.DrawRay(rightRayOrigin, Vector2.down * lengRaycastY, Color.green);
 
 
         Vector2 direction = isFacingRight ? Vector2.right : Vector2.left;
         RaycastHit2D hitWall = Physics2D.Raycast(transform.position, direction, lengRaycastX, layerWall);
         wallJump = hitWall.collider != null;
-        Debug.DrawRay(transform.position, direction * lengRaycastX, Color.green);
+    }
+    void CheckGroundForPlatform()
+    {
+        Vector2 leftRayOrigin = new Vector2(transform.position.x - 0.1f, transform.position.y);
+        Vector2 rightRayOrigin = new Vector2(transform.position.x + 0.1f, transform.position.y);
+        RaycastHit2D hit1 = Physics2D.Raycast(leftRayOrigin, Vector2.down, 0.5f, layerPlatform);
+        RaycastHit2D hit2 = Physics2D.Raycast(rightRayOrigin, Vector2.down, 0.5f, layerPlatform);
+        RaycastHit2D hit3 = Physics2D.Raycast(leftRayOrigin, Vector2.up, 0.5f, layerPlatform);
+        RaycastHit2D hit4 = Physics2D.Raycast(rightRayOrigin, Vector2.up, 0.5f, layerPlatform);
+        if (hit1.collider)
+        {
+            hit1.collider.gameObject.layer = LayerMask.NameToLayer("Platform");
+        }
+        if (hit2.collider)
+        {
+            hit2.collider.gameObject.layer = LayerMask.NameToLayer("Platform");
+        }
+        if (hit3.collider)
+        {
+            hit3.collider.gameObject.layer = LayerMask.NameToLayer("NotCollider");
+        }
+        if (hit4.collider)
+        {
+            hit4.collider.gameObject.layer = LayerMask.NameToLayer("NotCollider");
+        }
+
     }
     public void ClickJumpButton()
     {
@@ -224,7 +249,24 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
             doubleJump = !doubleJump;
         }
     }
-
+    private void CheckTouchInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (touch.position.x > Screen.width * 2 / 3)
+                {
+                    ClickJumpButton();
+                }
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                NotClickJumpButton();
+            }
+        }
+    }
     public void NotClickJumpButton()
     {
         clickJump = false;

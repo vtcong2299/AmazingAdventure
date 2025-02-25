@@ -21,20 +21,24 @@ public class PanelLevel : MonoBehaviour
     }
     void ClickBackButton()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.LoadScene();
     }
     public void PressLevel1()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.SelectLevel(1);
     }
     public void PressLevel2()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.SelectLevel(2);
     }    
     public void PressLevel3()
     {
+        AudioManager.Instance.SoundClickButton();
         UIManager.Instance.AnimPanelLoading();
         GameManager.Instance.SelectLevel(3);
     }    

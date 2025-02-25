@@ -1388,7 +1388,7 @@ TextureImporter:
         serializedVersion: 2
         x: 97
         y: 241
-        width: 190
+        width: 62
         height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3776,6 +3776,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Ram Buttons_174
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 241
+        width: 62
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c355a63c1f6497941ac326c22d61f087
+      internalID: 425028170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ram Buttons_175
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 241
+        width: 62
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e443916a5d2cb1d419fe8a8878effe52
+      internalID: -1533690791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3871,6 +3913,8 @@ TextureImporter:
       Ram Buttons_171: -1274844354
       Ram Buttons_172: 1672198196
       Ram Buttons_173: -14966147
+      Ram Buttons_174: 425028170
+      Ram Buttons_175: -1533690791
       Ram Buttons_18: -257308842
       Ram Buttons_19: 865063848
       Ram Buttons_2: 997095935

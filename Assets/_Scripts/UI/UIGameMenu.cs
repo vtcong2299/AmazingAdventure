@@ -10,6 +10,7 @@ public class UIGameMenu : Singleton<UIGameMenu>
     [SerializeField] GameObject panelQuitGame;
     [SerializeField] GameObject panelLoading;
     [SerializeField] GameObject panelFPS;
+    [SerializeField] GameObject panelGuide;
 
     [SerializeField] GameObject optionPopup;
     [SerializeField] GameObject quitGamePopup;
@@ -47,6 +48,14 @@ public class UIGameMenu : Singleton<UIGameMenu>
     public void OnDisablePanelQuitGame()
     {
         AnimUI.Instance.AnimScaleIn(quitGamePopup, panelQuitGame);
+    }
+    public void OnEnablePanelGuide()
+    {
+        AnimUI.Instance.AnimScaleOut(panelGuide, panelGuide);
+    }
+    public void OnDisablePanelGuide()
+    {
+        AnimUI.Instance.AnimScaleIn(panelGuide, panelGuide);
     }
     public void OnEnablePanelFPS()
     {

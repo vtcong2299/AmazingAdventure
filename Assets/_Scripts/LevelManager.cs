@@ -7,7 +7,6 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     int curID;
-    int maxLevel = 2;
     [SerializeField] ConfigMap[] configMap;
     [SerializeField] GameObject currentMap;
     [SerializeField] GameObject waitMap;
@@ -50,7 +49,7 @@ public class LevelManager : Singleton<LevelManager>
     public void NextLevel()
     {
         curID++;
-        if (curID > maxLevel)
+        if (curID > configMap.Length)
         {
             curID = 1;
         }

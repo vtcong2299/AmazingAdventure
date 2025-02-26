@@ -251,9 +251,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     }
     private void CheckTouchInput()
     {
-        if (Input.touchCount > 0)
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(i);
             if (touch.phase == TouchPhase.Began)
             {
                 if (touch.position.x > Screen.width * 2 / 3)
@@ -267,6 +267,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
             }
         }
     }
+
+    
     public void NotClickJumpButton()
     {
         clickJump = false;

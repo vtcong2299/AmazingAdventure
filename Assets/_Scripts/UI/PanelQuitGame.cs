@@ -8,7 +8,7 @@ public class PanelQuitGame : MonoBehaviour
     [SerializeField] Button yesButton;
     [SerializeField] Button noButton;
 
-    private void Start()
+    private void Awake()
     {
         yesButton.onClick.AddListener(QuitGame);
         noButton.onClick.AddListener(DisablePanelQuitGame);

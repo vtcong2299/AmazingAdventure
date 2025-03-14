@@ -11,7 +11,11 @@ public class CameraFollow : Singleton<CameraFollow>
     [SerializeField] Transform target;
     [SerializeField] LayerMask lockCameraLayer;
 
-    private void Start()
+    protected override void Awake()
+    {
+        InitSizeScreen();
+    }
+    void InitSizeScreen()
     {
         Camera mainCamera = Camera.main;
         float orthographicSize = mainCamera.orthographicSize;
@@ -26,7 +30,6 @@ public class CameraFollow : Singleton<CameraFollow>
     {
         FollowPlayer();
     }
-
     void FollowPlayer()
     {
         Vector3 posCamera = transform.position;

@@ -39,15 +39,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] float lengRaycastY = 0.2f;
 
     [SerializeField] LayerMask layerPlatform;
-    public void StartPlayer()
+    protected override void Awake()
     {
+        base.Awake();
         rb2D = GetComponent<Rigidbody2D>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerInteract = GetComponent<PlayerInteract>();
         playerDameReceiver = GetComponent<PlayerDameReceiver>();
         rb2D.freezeRotation = true;
     }
-
     public void SetStartPos()
     {
         startPos = GameObject.Find("StartPos");

@@ -101,13 +101,9 @@ public class PlayerInteract : MonoBehaviour
         }
     }     
     public void ResetItemUI()
-    {          
-        GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
+    {
         ResetPlayerParameter();
-        GameManager.Instance.ManagerOnChangeApple(apple);
-        GameManager.Instance.ManagerOnChangeBanana(banana);
-        GameManager.Instance.ManagerOnChangeCherry(cherry);
-        GameManager.Instance.ManagerStarsUI(stars);
+        GameManager.Instance.ResetUI(apple,banana,cherry,stars,playerDameReceiver.hp);
     }
     public void ResetPlayerParameter()
     {

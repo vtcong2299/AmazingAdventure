@@ -5,16 +5,11 @@ using UnityEngine;
 
 public class FallingFlatform : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 oldTranform;
-    [SerializeField]
-    private float distanceDestroy = 3.0f;
-    [SerializeField] 
-    private float speedFalling = 1.5f;
-    [SerializeField] 
-    private float delayFalling = 0.75f;    
-    [SerializeField] 
-    private bool isFall;
+    [SerializeField] Vector3 oldTranform;
+    [SerializeField] float distanceDestroy = 3.0f;
+    [SerializeField] float speedFalling = 1.5f;
+    [SerializeField] float delayFalling = 0.75f;    
+    [SerializeField] bool isFall;
     private void Awake()
     {
         oldTranform = transform.position;

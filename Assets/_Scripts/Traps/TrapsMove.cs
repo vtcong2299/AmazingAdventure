@@ -7,7 +7,7 @@ public class TrapsMove : MonoBehaviour
 {
     [SerializeField] Vector3 target;
     [SerializeField] float time = 10;
-    private void Start()
+    private void Awake()
     {
         TrapMove();
     }

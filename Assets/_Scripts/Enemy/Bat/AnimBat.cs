@@ -9,13 +9,9 @@ public class AnimBat : MonoBehaviour
     {
         animator = gameObject.GetComponent<Animator>();
     }
-    public void CellOut()
+    public void SetCell(bool state)
     {
-        animator.SetBool("cellOut",true);
-    }
-    public void CellIn()
-    {
-        animator.SetBool("cellOut",false);
+        animator.SetBool("cellOut", state);
     }
     public void BatHit()
     {

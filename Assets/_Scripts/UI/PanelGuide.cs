@@ -8,7 +8,7 @@ public class PanelGuide : MonoBehaviour
 {
     [SerializeField] Button backButton;
 
-    private void Start()
+    private void Awake()
     {
         backButton.onClick.AddListener(ClickBackButton);
     }

@@ -6,13 +6,9 @@ public class AnimationMushroom : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    public void MushroomRun()
+    public void MushroomRun(bool state)
     {
-        animator.SetBool("isRun", true);
-    }
-    public void MushroomNotRun()
-    {
-        animator.SetBool("isRun", false);
+        animator.SetBool("isRun", state);
     }
     public void MushroomHit()
     {

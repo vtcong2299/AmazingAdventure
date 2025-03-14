@@ -6,7 +6,7 @@ public class DameSender : MonoBehaviour
 {
     private DameReceiver dameReceiver;
     public float damage = 1f;
-    private void Awake()
+    private void Start()
     {
         dameReceiver = GetComponent<DameReceiver>();
     }

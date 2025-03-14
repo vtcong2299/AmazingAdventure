@@ -2,19 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BGManager : MonoBehaviour
+public class BGManager : Singleton<BGManager>
 {
-    public static BGManager instance;
     [SerializeField] GameObject[] backGround;
     [SerializeField] int index = 0;
-    private void OnEnable()
-    {
-        instance = this;
-    }
-    private void OnDisable()
-    {
-        instance = null;
-    }
     public void RandomBG()
     {
         index = Random.Range(0, backGround.Length);

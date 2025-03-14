@@ -17,7 +17,7 @@ public class PanelPauseGame : MonoBehaviour
     [SerializeField] Button ctrlButton;
 
     [SerializeField] SettingSound settingSound;
-    private void Start()
+    private void Awake()
     {
         playButton.onClick.AddListener(ClickPlayButton);
         rePlayButton.onClick.AddListener(ClickRePlayButton);
@@ -26,6 +26,10 @@ public class PanelPauseGame : MonoBehaviour
         musicButton.onClick.AddListener(ClickMusicButton);
         soundButton.onClick.AddListener(ClickSoundButton);
         ctrlButton.onClick.AddListener(ClickCtrlButton);
+    }
+
+    private void Start()
+    {
         settingSound.SetUpIconSound(DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconMusic(DataManager.Instance.gameData.hasBGM);
     }

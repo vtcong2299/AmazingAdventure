@@ -19,14 +19,13 @@ public class AudioManager : Singleton<AudioManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
+        SoundBGM();
     }
 
     public void Start()
     {
-        SoundBGM();
         SetVolumAudioBGM(DataManager.Instance.gameData.hasBGM);
         SetVolumAudioSFX(DataManager.Instance.gameData.hasSFX);
-
     }
 
     public void SetVolumAudioBGM(bool state)

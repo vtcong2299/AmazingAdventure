@@ -14,7 +14,7 @@ public class PanelOptions : MonoBehaviour
     [SerializeField] Button fpsButton;
 
     [SerializeField] SettingSound settingSound;
-    private void Start()
+    private void Awake()
     {
         backButton.onClick.AddListener(ClickBackButton);
         leftButton.onClick.AddListener(ClickLeftButton);
@@ -23,6 +23,9 @@ public class PanelOptions : MonoBehaviour
         soundButton.onClick.AddListener(ClickSoundButton);
         selectButton.onClick.AddListener(ClickSelectButton);
         fpsButton.onClick.AddListener(ClickFPSButton);
+    }
+    private void Start()
+    {
         settingSound.SetUpIconSound(DataManager.Instance.gameData.hasSFX);
         settingSound.SetUpIconMusic(DataManager.Instance.gameData.hasBGM);
     }

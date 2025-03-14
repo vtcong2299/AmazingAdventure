@@ -30,14 +30,14 @@ public class BatMove : MonoBehaviour
         if ((distance <= distancePlayer)&&(targetPoint.transform.position.y <= transform.position.y))
         {
             targetPos = targetPoint.transform.position;
-            animBat.CellOut();
+            animBat.SetCell(true);
         }
         else
         {
             targetPos = oldPosition;            
             if((Vector3.Distance(transform.position, oldPosition) == 0f))
             {
-                animBat.CellIn();
+                animBat.SetCell(false);
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);        

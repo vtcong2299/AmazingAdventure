@@ -16,7 +16,7 @@ public class MushroomMove : EnemyBaseMove
     void OnEnable()
     {
         StartCoroutine(ExampleCoroutine());
-        animationMushroom.MushroomRun();
+        animationMushroom.MushroomRun(true);
         speed = 0.5f;
     }
     IEnumerator ExampleCoroutine()
@@ -25,10 +25,10 @@ public class MushroomMove : EnemyBaseMove
         {
             yield return new WaitForSeconds(Random.Range(5,8));
             speed = 0;
-            animationMushroom.MushroomNotRun();
+            animationMushroom.MushroomRun(false);
             yield return new WaitForSeconds(Random.Range(4,6));
             speed = 0.5f;
-            animationMushroom.MushroomRun();
+            animationMushroom.MushroomRun(true);
         }
     }
 }

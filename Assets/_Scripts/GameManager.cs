@@ -7,13 +7,14 @@ public class GameManager : Singleton<GameManager>
 {
     public GameObject player;
     [SerializeField] int idCurMap = 0;
-    private void Start()
+    protected override void Awake()
     {
-        PlayerCtrl.Instance.StartPlayer();
-        UIManager.Instance.StartUIManager();
-        Joystick.Instance.StartJoystick();
+        base.Awake();
         SetBG();
         SetLevel(0);
+    }
+    private void Start()
+    {
         LevelManager.Instance.CheckUnLockMap();
         LevelManager.Instance.CheckCompleteMap();
         DataManager.Instance.CheckInterfacePlayer();
@@ -21,7 +22,6 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         DataManager.Instance.SetFPS();
-
     }
     public void ManagerPlayerHeartUI(float hp)
     {
@@ -42,6 +42,14 @@ public class GameManager : Singleton<GameManager>
     public void ManagerOnChangeCherry(int cherry)
     {
         UIManager.Instance._uiGamePlay.OnChangeCherry(cherry);
+    }
+    public void ResetUI(int apple, int banana, int cherry, int stars, float hp)
+    {
+        ManagerPlayerHeartUI(hp);
+        ManagerOnChangeApple(apple);
+        ManagerOnChangeBanana(banana);
+        ManagerOnChangeCherry(cherry);
+        ManagerStarsUI(stars);
     }
     public void ManagerEndChapter(int apple, int banana, int cherry, int stars)
     {
@@ -67,7 +75,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void SetBG()
     {
-        BGManager.instance.RandomBG();
+        BGManager.Instance.RandomBG();
     }
 
     public void SelectLevel(int level)

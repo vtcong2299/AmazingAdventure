@@ -22,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject popupFinish;
     public PanelGamePlay _uiGamePlay;
     public PanelFinish _uiFinish;
-    public void StartUIManager()
+    protected override void Awake()
     {
         SetOffAllPanel();
         panelLevel.SetActive(true);

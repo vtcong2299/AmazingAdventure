@@ -6,7 +6,7 @@ public class Joystick : Singleton<Joystick>, IDragHandler, IPointerUpHandler, IP
     private RectTransform background;
     private RectTransform handle;
     private Vector2 inputVector;
-    public void StartJoystick()
+    protected override void Awake()
     {
         background = GetComponent<RectTransform>();
         handle = transform.GetChild(0).GetComponent<RectTransform>();

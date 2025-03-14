@@ -10,7 +10,7 @@ public class PanelFPS : MonoBehaviour
     [SerializeField] Button button60;
     [SerializeField] Button button90;
 
-    private void Start()
+    private void Awake()
     {
         button30.onClick.AddListener(CLickButton30);
         button45.onClick.AddListener(CLickButton45);

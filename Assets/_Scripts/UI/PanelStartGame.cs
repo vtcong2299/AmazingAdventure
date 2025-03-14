@@ -12,7 +12,7 @@ public class PanelStartGame : MonoBehaviour
     [SerializeField] Button guideButton;
     [SerializeField] Text txtCtrl;
 
-    private void Start()
+    private void Awake()
     {
         playButton.onClick.AddListener(ClickStartButton);
         optionsButton.onClick.AddListener(ClickOptionsButton);

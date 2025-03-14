@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartPoint : MonoBehaviour
+public class StartPoint : Singleton<StartPoint>
 {
-    public static StartPoint instance;
     private Animator animator;
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         animator = gameObject.GetComponent<Animator>();
     }
-    private void OnEnable()
-    {
-        instance = this;
-    }    
     public void SetPushIn(Collision2D collision)
     {
         if(collision.gameObject.tag=="Start")

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326a8eecd1bf4604d94de77ccd746a60, type: 3}
   m_Name: Banana
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 4133067703053000363, guid: 82e9f53b4c60b774e9f9fe2e0dfa8d83, type: 3}
   index: 0
   spawnPosObjList: []
-  _tag: posBanana
+  _tag: Banana

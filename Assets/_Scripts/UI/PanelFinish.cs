@@ -23,9 +23,13 @@ public class PanelFinish : MonoBehaviour
         levelButton.onClick.AddListener(PressLevelMenu);
         nextLevelButton.onClick.AddListener(PressNextLevel);
     }
-    private void OnEnable()
+    public void SetTextFinishPanel(int apple, int banana, int cherry, int stars)
     {
-        lockNextButton.SetActive(false);
+        SetTxtComplete(apple, banana, cherry, stars);
+        TxtAppleEnd(apple);
+        TxtBananaEnd(banana);
+        TxtCherryEnd(cherry);
+        StarsUIEnd(stars);
     }
     public void SetTxtComplete(int apple, int banana,int cherry, int stars)
     {
@@ -33,17 +37,18 @@ public class PanelFinish : MonoBehaviour
             || cherry < LevelManager.Instance.targetCherry || stars == 0)
         {
             txtComplete.text = "Level Fail";
+            lockNextButton.SetActive(true);
         }
         else
         {
-            txtComplete.text = "Level Compelete";
+            txtComplete.text = "Level Complete";
+            lockNextButton.SetActive(false);
         }
     }
-    public void OnAppleEnd(int apple)
+    public void TxtAppleEnd(int apple)
     {
         if (apple < LevelManager.Instance.targetApple)
         {
-            lockNextButton.SetActive(true);
             txtAppleEnd.color = Color.red;
         }
         else
@@ -52,11 +57,10 @@ public class PanelFinish : MonoBehaviour
         }
         txtAppleEnd.text = apple + "/" + LevelManager.Instance.targetApple;
     }
-    public void OnBananaEnd(int banana)
+    public void TxtBananaEnd(int banana)
     {
         if (banana < LevelManager.Instance.targetBanana)
         {
-            lockNextButton.SetActive(true);
             txtBananaEnd.color = Color.red;
         }
         else
@@ -65,11 +69,10 @@ public class PanelFinish : MonoBehaviour
         }
         txtBananaEnd.text =banana + "/" + LevelManager.Instance.targetBanana;
     }
-    public void OnCherryEnd(int cherry)
+    public void TxtCherryEnd(int cherry)
     {
         if (cherry < LevelManager.Instance.targetBanana)
         {
-            lockNextButton.SetActive(true);
             txtCherryEnd.color = Color.red;
         }
         else
@@ -80,10 +83,6 @@ public class PanelFinish : MonoBehaviour
     }
     public void StarsUIEnd(int stars)
     {
-        if (stars == 0)
-        {
-            lockNextButton.SetActive(true);
-        }
         for (int i = 0; i < stars; i++)
         {
             listStarsUIEnd[i].SetActive(true);

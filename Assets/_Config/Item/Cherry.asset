@@ -12,13 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326a8eecd1bf4604d94de77ccd746a60, type: 3}
   m_Name: Cherry
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3683152972018930792, guid: eaf3ab84a2839a4438f059c25b33221b, type: 3}
-  index: 6
-  spawnPosObjList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _tag: posCherry
+  index: 0
+  spawnPosObjList: []
+  _tag: Cherry

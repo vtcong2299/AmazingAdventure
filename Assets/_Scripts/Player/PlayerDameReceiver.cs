@@ -17,6 +17,7 @@ public class PlayerDameReceiver : DameReceiver
         base.Receiver(damage);
         if (IsDead())
         {
+            PlayerCtrl.Instance.isDead = true;
             AudioManager.Instance.SoundDead();
             playerAnimatorManager.SetDead();            
             PlayerCtrl.Instance.BackCheckPoint();

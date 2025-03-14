@@ -118,11 +118,7 @@ public class UIManager : Singleton<UIManager>
     public void FinishChapter(int apple,int banana, int cherry, int stars)
     {
         OnEnablePanelFinish();
-        _uiFinish.SetTxtComplete(apple, banana, cherry, stars);
-        _uiFinish.OnAppleEnd(apple);
-        _uiFinish.OnBananaEnd(banana);
-        _uiFinish.OnCherryEnd(cherry);
-        _uiFinish.StarsUIEnd(stars);
+        _uiFinish.SetTextFinishPanel(apple, banana, cherry, stars);
     }
     public void SelectLevel()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class EnemyBaseMove : MonoBehaviour
 {
     public Vector3[] targetPoint;
     [SerializeField] protected float speed = 0.5f;
@@ -74,10 +74,4 @@ public class EnemyMove : MonoBehaviour
             index++;
         }
     }
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawRay(transform.position, -transform.up * lengthRaycast);
-    //    Gizmos.DrawRay(transform.position, -transform.right * lengthRaycast);
-    //}
 }

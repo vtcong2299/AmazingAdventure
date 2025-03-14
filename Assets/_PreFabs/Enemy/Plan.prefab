@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1088472484806299499
 Transform:
   m_ObjectHideFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5996808749377573788}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.689, y: 2.006, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,9 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2564c69ec23c9244896fdc138d1b5e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objPreFab: []
   preFab: {fileID: 7994084207906329727, guid: 5299cfb0d8529df4eba33dd1e0552287, type: 3}
   spawnTimer: 0
-  spawnDelay: 1
-  maxObj: 4
-  index: 0
+  offset: {x: 0, y: 0, z: 0}

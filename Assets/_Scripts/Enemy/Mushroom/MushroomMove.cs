@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MushroomMove : EnemyMove
+public class MushroomMove : EnemyBaseMove
 {
     private AnimationMushroom animationMushroom;
+    
     private void Awake()
     {
         targetPoint = new Vector3[2];

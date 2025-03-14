@@ -48,14 +48,13 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.AddMapCompeleteToList(apple, banana, cherry, idCurMap, stars);
         UIManager.Instance.FinishChapter(apple, banana,cherry,stars);
     }
-    public void DestroyObjInMap()
+    public void ClearListObj()
     {
-        SpawnObj.Instance.DestroyObj();
+        SpawnObj.Instance.ClearListObj();
     }
-    public void SpawnObjInMap()
+    public void AddToListObj()
     {
-        SpawnObj.Instance.AddPosObj();
-        SpawnObj.Instance.Spawn();
+        SpawnObj.Instance.AddToListObj();
     }
     public void ResetObjInMap()
     {
@@ -80,7 +79,7 @@ public class GameManager : Singleton<GameManager>
         player.SetActive(true);
         PlayerCtrl.Instance.BackCheckPoint();
         PlayerCtrl.Instance.SetStartPos();
-        SpawnObjInMap();
+        AddToListObj();
     }
     public void NextLevel()
     {
@@ -89,7 +88,7 @@ public class GameManager : Singleton<GameManager>
     public void UnLoadLevel()
     {
         SetLevel(0);
-        DestroyObjInMap();
+        ClearListObj();
     }
     public void Pause()
     {

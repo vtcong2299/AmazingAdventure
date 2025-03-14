@@ -15,4 +15,4 @@ MonoBehaviour:
   _prefab: {fileID: 4632925521134966826, guid: b50e16a7553516a4aafe0e6c6417155c, type: 3}
   index: 0
   spawnPosObjList: []
-  _tag: posApple
+  _tag: Apple

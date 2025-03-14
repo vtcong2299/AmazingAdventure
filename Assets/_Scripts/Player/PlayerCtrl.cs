@@ -23,6 +23,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     bool wallJump;
     bool doubleJump;
     bool clickJump;
+    public bool isDead;
     public bool isBackPoint = false;
     [SerializeField] Vector3 offsetWithStartPos;
 
@@ -96,7 +97,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
 
     public void MovePlayer()
     {
-        if (playerInteract.isEnd == true)
+        if (playerInteract.isEnd ||  isDead)
         {
             pressHorizontal = 0f;
             rb2D.velocity = new Vector2(0, rb2D.velocity.y); ;
@@ -139,7 +140,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
                 rb2D.AddForce(knockbackDirection * backJumps, ForceMode2D.Impulse);
             }
         }
-        Invoke("SetIsBackJumpFalse", 0.5f);
+        Invoke("SetIsBackJumpFalse", 0.2f);
     }
 
     public void MoveByButton()
@@ -306,6 +307,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         playerInteract.isEnd = false;
         playerAnimatorManager.SetBackCheckPoint();
         PlayerLookEndPoint();
+        isDead = false;
     }
     public void SetIsBackPointFalse()
     {
@@ -339,7 +341,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         {
             CheckOutParent(collision);
         }
-        StartPoint.instance.SetPushOut(collision);
+        StartPoint.Instance.SetPushOut(collision);
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -347,11 +349,11 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        StartPoint.instance.SetPushIn(collision);
+        StartPoint.Instance.SetPushIn(collision);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EndPoint.instance.SetEnd(collision);
+        EndPoint.Instance.SetEnd(collision);
     }
     void SetPositionInPlatform()
     {

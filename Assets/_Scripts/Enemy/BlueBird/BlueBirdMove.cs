@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class BlueBirdMove : EnemyMove
-{
+public class BlueBirdMove : EnemyBaseMove
+{   
     private void Awake()
     {
         targetPoint = new Vector3[2];

@@ -6769,6 +6769,7 @@ MonoBehaviour:
   playerInteract: {fileID: 0}
   isBackJump: 0
   isFacingRight: 1
+  isDead: 0
   isBackPoint: 0
   offsetWithStartPos: {x: 0, y: 0.3, z: 0}
   ninjaFrog: {fileID: 1093298036}
@@ -13340,9 +13341,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configItem:
   - {fileID: 11400000, guid: 078bd64beca8e6f469f21374ff5bb7c8, type: 2}
-  - {fileID: 11400000, guid: f4e736fdfecaf7840b3f56f39398f4bd, type: 2}
-  - {fileID: 11400000, guid: 1585c330e01ae96459d8c37b2fc55770, type: 2}
-  - {fileID: 11400000, guid: 5617cb3bc01805148bc656b8ba1bb239, type: 2}
   - {fileID: 11400000, guid: 653ae93d460644841bc50e391e8673e9, type: 2}
   - {fileID: 11400000, guid: f11042f594fa69941b342c9598629810, type: 2}
   - {fileID: 11400000, guid: 12a494c90b200c045bcca2752f29932c, type: 2}

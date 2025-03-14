@@ -8,10 +8,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class BoxRockMove : MonoBehaviour
 {
     public Vector3[] targetPoint;
-    [SerializeField]
-    protected float speed = 0.5f;
-    [SerializeField]
-    private int index = 0;
+    [SerializeField] float speed = 0.5f;
+    [SerializeField] int index = 0;
 
     public AnimBoxRock animBoxRock;
     private void Awake()

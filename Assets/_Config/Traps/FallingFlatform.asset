@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326a8eecd1bf4604d94de77ccd746a60, type: 3}
   m_Name: FallingFlatform
   m_EditorClassIdentifier: Assembly-CSharp::ConfigTrap
-  _id: 8
-  _prefab: {fileID: 8076862506941235221, guid: 799ce43513bdf064ab6a41c37d899140, type: 3}
-  _tag: posFallingFlatform
+  index: 0
+  spawnPosObjList: []
+  _tag: FallingFlatform

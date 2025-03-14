@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326a8eecd1bf4604d94de77ccd746a60, type: 3}
   m_Name: Stars
   m_EditorClassIdentifier: Assembly-CSharp::ConfigItem
-  _id: 6
-  _prefab: {fileID: 7823684042239899123, guid: e3f6cea00e7fb6d44b0a8597d9438167, type: 3}
-  _tag: posStars
+  index: 0
+  spawnPosObjList: []
+  _tag: Stars

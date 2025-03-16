@@ -17,7 +17,6 @@ public class PlayerDameSender : DameSender
     {
         if (collision.gameObject.tag == "Dead")
         {
-            base.ColliderSendDame(collision);
             playerDameReceiver.playerAnimatorManager.SetDead();
             playerDameReceiver.Receiver(damage * 3);
         }
@@ -25,8 +24,7 @@ public class PlayerDameSender : DameSender
         {
             AudioManager.Instance.SoundHit();
             playerDameReceiver.playerAnimatorManager.SetHit();
-            base.ColliderSendDame(collision);
-            //playerDameReceiver.Receiver(damage);
+            playerDameReceiver.Receiver(damage);
             PlayerCtrl.Instance.JumpBack(collision, false);
         }
         GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);

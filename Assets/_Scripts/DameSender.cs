@@ -16,13 +16,6 @@ public class DameSender : MonoBehaviour
     }
     public virtual void ColliderSendDame(Collision2D collision)
     {
-        if (dameReceiver != null)
-        {
-            dameReceiver.Receiver(damage);
-        }
-        else
-        {
-            return;
-        }
+        
     }
 }

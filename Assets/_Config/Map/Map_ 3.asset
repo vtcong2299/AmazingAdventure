@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _name: Map3
-  _targetApple: 13
-  _targetBanana: 10
-  _targetCherry: 12
+  _targetApple: 9
+  _targetBanana: 8
+  _targetCherry: 9

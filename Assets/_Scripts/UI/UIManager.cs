@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     public PanelFinish _uiFinish;
     protected override void Awake()
     {
+        base.Awake();
         SetOffAllPanel();
         panelLevel.SetActive(true);
     }

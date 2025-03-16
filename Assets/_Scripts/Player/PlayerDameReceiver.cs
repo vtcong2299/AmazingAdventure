@@ -14,6 +14,7 @@ public class PlayerDameReceiver : DameReceiver
     }
     public override void Receiver(float damage)
     {
+        Debug.Log("PlayerDameReceiver");
         base.Receiver(damage);
         if (IsDead())
         {

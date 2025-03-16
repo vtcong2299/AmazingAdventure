@@ -5805,7 +5805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configMap:
   - {fileID: 11400000, guid: 2e9390864e468b242a3aefefb923a65b, type: 2}
+  - {fileID: 11400000, guid: d2af12bab23675b428301ab75ffe5571, type: 2}
   - {fileID: 11400000, guid: a17ade9f30261c6478ebd4ccd804239d, type: 2}
+  - {fileID: 11400000, guid: 05200839d2efce64e926262bab5db94f, type: 2}
   - {fileID: 11400000, guid: 2ac45a074c525c14f81981765c11735a, type: 2}
   currentMap: {fileID: 0}
   waitMap: {fileID: 0}
@@ -14938,6 +14940,8 @@ MonoBehaviour:
   level1Button: {fileID: 498531456}
   level2Button: {fileID: 292906975}
   level3Button: {fileID: 380192711}
+  level4Button: {fileID: 927759163}
+  level5Button: {fileID: 371627100}
   backButton: {fileID: 1610883249}
 --- !u!225 &1848305841
 CanvasGroup:

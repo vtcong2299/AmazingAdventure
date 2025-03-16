@@ -14,7 +14,7 @@ public class PlayerDameSender : DameSender
         playerInteract = GetComponent<PlayerInteract>();
     }
     public override void ColliderSendDame(Collision2D collision)
-    {        
+    {
         if (collision.gameObject.tag == "Dead")
         {
             base.ColliderSendDame(collision);
@@ -26,7 +26,7 @@ public class PlayerDameSender : DameSender
             AudioManager.Instance.SoundHit();
             playerDameReceiver.playerAnimatorManager.SetHit();
             base.ColliderSendDame(collision);
-            playerDameReceiver.Receiver(damage);
+            //playerDameReceiver.Receiver(damage);
             PlayerCtrl.Instance.JumpBack(collision, false);
         }
         GameManager.Instance.ManagerPlayerHeartUI(playerDameReceiver.hp);
